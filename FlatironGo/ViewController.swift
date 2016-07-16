@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
             print("xxxxxxxxxxxxxx")
             print("quaternionX = \(quaternionX)")
             print("pokemon.center.x = \(pokemon.center.x)")
-            pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width) * 3.0
+            pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width) * 2.5
             print("NEW pokemon.center.x = \(pokemon.center.x)")
             print("xxxxxxxxxxxxxx\n\n\n")
         }
@@ -31,7 +31,7 @@ final class ViewController: UIViewController {
             print("yyyyyyyyyyyyyy")
             print("quaternionY = \(quaternionY)")
             print("pokemon.center.y = \(pokemon.center.y)")
-            pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height) * 3.0
+            pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height) * 2.5
             print("NEW pokemon.center.y = \(pokemon.center.y)")
             print("yyyyyyyyyyyyyy\n\n\n")
         }

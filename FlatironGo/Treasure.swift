@@ -7,3 +7,24 @@
 //
 
 import Foundation
+import UIKit
+
+struct Treasure: CustomStringConvertible {
+    let location: GPSLocation
+    let item = CALayer()
+    var description: String { return makeDescription() }
+    
+    init(location: GPSLocation) {
+        self.location = location
+    }
+    
+    func makeDescription() -> String {
+        return "\(location.latitude), \(location.longitude)"
+    }
+    
+}
+
+struct GPSLocation {
+    var latitude: Float
+    var longitude: Float
+}
