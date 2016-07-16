@@ -108,19 +108,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("Flatiron")
         
         if annotationImage == nil {
-            // Leaning Tower of Pisa by Stefan Spieler from the Noun Project.
-            var image = UIImage(named: "FlatironLogo")!
-            
-            // The anchor point of an annotation is currently always the center. To
-            // shift the anchor point to the bottom of the annotation, the image
-            // asset includes transparent bottom padding equal to the original image
-            // height.
-            //
-            // To make this padding non-interactive, we create another image object
-            // with a custom alignment rect that excludes the padding.
-//            image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
-            
-            // Initialize the ‘pisa’ annotation image with the UIImage we just loaded.
+
+            let image = UIImage(named: "FlatironLogo")!
+
             annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: "Flatiron")
         }
         
@@ -150,8 +140,8 @@ class CustomAnnotationView: MGLAnnotationView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // Force the annotation view to maintain a constant size when the map is tilted.
-        scalesWithViewingDistance = false
+        // (NO LONGER) Force the annotation view to maintain a constant size when the map is tilted.
+        scalesWithViewingDistance = true
         
         // Use CALayer’s corner radius to turn this view into a circle.
         //layer.cornerRadius = frame.width / 2
