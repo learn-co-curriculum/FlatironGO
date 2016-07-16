@@ -14,9 +14,16 @@ import GeoFire
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    
+    
+    //var mapViewController = MapViewController()
+    var navBarController: UINavigationController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        setupMapView()
         
         // Firebase Initialization
         FIRApp.configure()
@@ -55,6 +62,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         return true
+    }
+    
+    func setupMapView(){
+//        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        navBarController = UINavigationController()
+//        window!.rootViewController = navBarController
+//        navBarController.view.backgroundColor = UIColor.whiteColor();
+//        window!.makeKeyAndVisible()
+//        
+//        navBarController.viewControllers = [MapViewController()]
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
