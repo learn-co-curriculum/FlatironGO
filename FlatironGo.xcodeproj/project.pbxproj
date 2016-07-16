@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		14DABE94405B58B3F93E24D2 /* Pods_FlatironGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */; };
-		2B89B0321D39C08E000F463B /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89B0311D39C08E000F463B /* Treasure.swift */; };
+		5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983B81D39D6A000E5819C /* MapViewController.swift */; };
+		5B4983BB1D39D6A600E5819C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BA1D39D6A600E5819C /* Constants.swift */; };
 		5D6443111D39AB3500D17A2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */; };
+		5D6443141D39B87C00D17A2E /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443121D39B87C00D17A2E /* GeoFire.framework */; };
+		5D6443151D39B87C00D17A2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443131D39B87C00D17A2E /* CoreLocation.framework */; };
 		7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9128C1D37155E00331CF3 /* AppDelegate.swift */; };
 		7DD9128F1D37155E00331CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9128E1D37155E00331CF3 /* ViewController.swift */; };
 		7DD912921D37155E00331CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912901D37155E00331CF3 /* Main.storyboard */; };
 		7DD912941D37155E00331CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912931D37155E00331CF3 /* Assets.xcassets */; };
 		7DD912971D37155E00331CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912951D37155E00331CF3 /* LaunchScreen.storyboard */; };
-		7DD912A21D37155F00331CF3 /* FlatironGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */; };
 		FEE9D5DF699DE281F7904AE6 /* Pods_FlatironGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A935E3B47AAAE3FC0E6BBAF /* Pods_FlatironGoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,8 +35,11 @@
 		0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		233D6158F5C6619D29953E36 /* Pods-FlatironGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.debug.xcconfig"; sourceTree = "<group>"; };
 		28A832C2049CC00D4A25D7FC /* Pods-FlatironGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.release.xcconfig"; sourceTree = "<group>"; };
-		2B89B0311D39C08E000F463B /* Treasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
+		5B4983B81D39D6A000E5819C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5B4983BA1D39D6A600E5819C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5D6443121D39B87C00D17A2E /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GeoFire.framework; path = "Pods/../build/Debug-iphoneos/GeoFire/GeoFire.framework"; sourceTree = "<group>"; };
+		5D6443131D39B87C00D17A2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7DD912891D37155E00331CF3 /* FlatironGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlatironGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD9128C1D37155E00331CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DD9128E1D37155E00331CF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +48,6 @@
 		7DD912961D37155E00331CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DD912981D37155E00331CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD9129D1D37155F00331CF3 /* FlatironGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlatironGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatironGoTests.swift; sourceTree = "<group>"; };
 		7DD912A31D37155F00331CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F4FA2C2FA446ABBC7EF9883 /* Pods-FlatironGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A935E3B47AAAE3FC0E6BBAF /* Pods_FlatironGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6443141D39B87C00D17A2E /* GeoFire.framework in Frameworks */,
+				5D6443151D39B87C00D17A2E /* CoreLocation.framework in Frameworks */,
 				14DABE94405B58B3F93E24D2 /* Pods_FlatironGo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +79,8 @@
 		0C290D7D975167AB2BE90991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5D6443121D39B87C00D17A2E /* GeoFire.framework */,
+				5D6443131D39B87C00D17A2E /* CoreLocation.framework */,
 				0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */,
 				9A935E3B47AAAE3FC0E6BBAF /* Pods_FlatironGoTests.framework */,
 			);
@@ -115,7 +123,8 @@
 			children = (
 				7DD9128C1D37155E00331CF3 /* AppDelegate.swift */,
 				7DD9128E1D37155E00331CF3 /* ViewController.swift */,
-				2B89B0311D39C08E000F463B /* Treasure.swift */,
+				5B4983B81D39D6A000E5819C /* MapViewController.swift */,
+				5B4983BA1D39D6A600E5819C /* Constants.swift */,
 				7DD912901D37155E00331CF3 /* Main.storyboard */,
 				7DD912931D37155E00331CF3 /* Assets.xcassets */,
 				7DD912951D37155E00331CF3 /* LaunchScreen.storyboard */,
@@ -128,7 +137,6 @@
 		7DD912A01D37155F00331CF3 /* FlatironGoTests */ = {
 			isa = PBXGroup;
 			children = (
-				7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */,
 				7DD912A31D37155F00331CF3 /* Info.plist */,
 			);
 			path = FlatironGoTests;
@@ -141,12 +149,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A61D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGo" */;
 			buildPhases = (
-				9CB50B8E4604D884C94B86E7 /* 📦 Check Pods Manifest.lock */,
+				9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */,
 				7DD912851D37155E00331CF3 /* Sources */,
 				7DD912861D37155E00331CF3 /* Frameworks */,
 				7DD912871D37155E00331CF3 /* Resources */,
-				9BC68C01D30264D63CD8E6B0 /* 📦 Embed Pods Frameworks */,
-				160EAA9CBB4D881EC1FECC10 /* 📦 Copy Pods Resources */,
+				9BC68C01D30264D63CD8E6B0 /* [CP] Embed Pods Frameworks */,
+				160EAA9CBB4D881EC1FECC10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,12 +169,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A91D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGoTests" */;
 			buildPhases = (
-				971A7E065AE5C2F5858026D9 /* 📦 Check Pods Manifest.lock */,
+				971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */,
 				7DD912991D37155F00331CF3 /* Sources */,
 				7DD9129A1D37155F00331CF3 /* Frameworks */,
 				7DD9129B1D37155F00331CF3 /* Resources */,
-				4DAC94406E284F20C9D2DE05 /* 📦 Embed Pods Frameworks */,
-				6FB2E98775064127678BF0EB /* 📦 Copy Pods Resources */,
+				4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */,
+				6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,14 +247,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		160EAA9CBB4D881EC1FECC10 /* 📦 Copy Pods Resources */ = {
+		160EAA9CBB4D881EC1FECC10 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,14 +262,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4DAC94406E284F20C9D2DE05 /* 📦 Embed Pods Frameworks */ = {
+		4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,14 +277,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6FB2E98775064127678BF0EB /* 📦 Copy Pods Resources */ = {
+		6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,14 +292,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		971A7E065AE5C2F5858026D9 /* 📦 Check Pods Manifest.lock */ = {
+		971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,14 +307,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		9BC68C01D30264D63CD8E6B0 /* 📦 Embed Pods Frameworks */ = {
+		9BC68C01D30264D63CD8E6B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,14 +322,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9CB50B8E4604D884C94B86E7 /* 📦 Check Pods Manifest.lock */ = {
+		9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,8 +345,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DD9128F1D37155E00331CF3 /* ViewController.swift in Sources */,
+				5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */,
 				7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */,
-				2B89B0321D39C08E000F463B /* Treasure.swift in Sources */,
+				5B4983BB1D39D6A600E5819C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +355,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DD912A21D37155F00331CF3 /* FlatironGoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +477,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GeoFire",
+				);
 				INFOPLIST_FILE = FlatironGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gamesmith.Swift.FlatironGo;
@@ -482,6 +494,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GeoFire",
+				);
 				INFOPLIST_FILE = FlatironGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gamesmith.Swift.FlatironGo;

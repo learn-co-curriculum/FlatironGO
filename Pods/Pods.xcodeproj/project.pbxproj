@@ -7,54 +7,166 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F3F2AD2CB6A5E8CEC88C00A32FA6EAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		6483E31B6AA8F538D0990CB69C00D7D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		7D224CBB3A75997485EB391378C7118A /* Pods-FlatironGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 069A100AECFBE9C6F362B2CE3B187D75 /* Pods-FlatironGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A3BF266D99AE7D196240963F9F1FDDE /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B912133DBFB60E0D2E9FFFB89205DF /* ConstraintDescription.swift */; };
+		13A6A0400ACB6873428B3A5C5925FA68 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3EC5EDEA906AEB7F8755129E1D786 /* EdgeInsets.swift */; };
+		1F3F2AD2CB6A5E8CEC88C00A32FA6EAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */; };
+		2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44634998610F2D086949FCEE0406D66 /* CoreLocation.framework */; };
+		23BAD0E5445B192185F698EB19059566 /* Pods-FlatironGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 069A100AECFBE9C6F362B2CE3B187D75 /* Pods-FlatironGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29731F92555225566D2388BB660A1AAB /* GeoFire+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = AB936A236F4912D79613220839438E07 /* GeoFire+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29D126E3FD88F7F75DCC7B80385A9434 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D2580728BA5C19C8122A017118A9024F /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2ABCD61FD7F427BD3806C92902AB042E /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA6A577685DAB4C39C8F0B633005393 /* GFQuery.m */; };
+		3F01E96EBA0175E8C6B1F82B71F8B2A1 /* ViewController+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F2562E687824B4AABDD4E5D1F349C4 /* ViewController+SnapKit.swift */; };
+		3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD76FADFBFFE2AE946E2FF1296AC57D /* GeoFire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BCEE687B5A297B740EAC53CAE25441A /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7402A10B7D257B7FA6DE3C0643C0B5 /* ConstraintRelation.swift */; };
+		53178E9784D1A8411B8763DF925DE57E /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 248BF69CE7E9E55939A81B2FA782CA4F /* SnapKit-dummy.m */; };
+		5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CF178686ECBD7045E8F2D7EB8BDF6B /* GeoFire-dummy.m */; };
+		5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EF0E4529CB9E5B355D1820FB49AD538 /* GFGeoHashQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B4983BC1D39D7F000E5819C /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */; };
+		62296067F265B733469FF7944EABB8CF /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BC251D89F3701EF1328B1B1E4D40D /* Debugging.swift */; };
+		6B3E2DF75A61A858C3DDCB65B0D56DE8 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35640F51B88D14323CCCDE078868 /* Constraint.swift */; };
+		7440C9B87F0A2B9ADA528240D4EC2B69 /* GFGeoHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC9FD2BEE5559E0AC73A762ABA5CA1A /* GFGeoHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		746B890F1CECD5326ADD05028FC0FC5C /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6E28AEB6CED118A698CFA7FCA2A7A0 /* GFGeoHash.m */; };
+		75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 665F5D946D6E3BD49DBB8E3B3510A4BC /* GFGeoHashQuery.m */; };
+		7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = F448FB733BE943EFD291162FF4119B8B /* GFBase32Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9185FA425E2ADC0C96E233B3C3284246 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079B3364E0BC4467B30811F00FD377B4 /* LayoutConstraint.swift */; };
+		964D481C6E9281081727048D7C9DA7BA /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073251B7577E2F627A42B0877F64C60B /* ConstraintItem.swift */; };
+		9B8FEC707269B27CA0CD40A36B647186 /* GFCircleQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D32B320173307CDAE8E30C7EC2E6E83 /* GFCircleQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E01CC755A2E4C78ED34F348066C34B /* Pods-FlatironGoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC74BB76FDB93F2EEAB0E43E75B1DACF /* Pods-FlatironGoTests-dummy.m */; };
-		DF23DB0C39DC06A57E65DBDC87E57C85 /* Pods-FlatironGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB11DD047D73207DEC74F09A36A9AE1 /* Pods-FlatironGo-dummy.m */; };
+		A4656AA37096D90C796730F3A274FA91 /* GeoFire.h in Headers */ = {isa = PBXBuildFile; fileRef = E15DC602421ADB0E6FE18FBAA75DE9DF /* GeoFire.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */; };
+		C8AD4450CDBD10F4E3633C9B3079B1AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */; };
+		C907E0702671C4AC6180F4B15053F3A6 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D5F89A08A47210419A81FFE4D803EA /* ConstraintMaker.swift */; };
+		CA5D63EFDBD5B43AC4BE3CC2D3DF2186 /* GFQuery+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D9A44AB9774C9C4458FF1B08E64F62 /* GFQuery+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA29110975CE78D1075653F2FE5C8CAA /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D5D7B8A44114A92987BB02F9B7228 /* SnapKit.swift */; };
+		DBEC634131BE520BB9A546F9BD92F0AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */; };
+		E772F9F57312C064C87C25657F3C3A6A /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FFD7E73C25DAF7197416502470EDDF /* GeoFire.m */; };
+		EBFB7368FE58CDF7041F02355AEAEE9C /* Pods-FlatironGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB11DD047D73207DEC74F09A36A9AE1 /* Pods-FlatironGo-dummy.m */; };
+		EC4A2955A3BAAF97E097272642BDE9B9 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7CD1E8490D33E1E9200435813140E1 /* GFBase32Utils.m */; };
+		EF051B7D858569A1831C0417A81205FC /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B27148D128CB78E43FBF1157F2A74 /* ConstraintAttributes.swift */; };
+		FA3AE11E9D5667875C0187496C6538DC /* View+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEBCEA2FBE08D7EF9A9C0B15E510D94 /* View+SnapKit.swift */; };
+		FB96A79AA75E84306AE7C36318712D0D /* GFQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 54CE5EE845A12CD7936C14070D715B59 /* GFQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC26F1C5E160E273551EF613124A1323 /* Pods-FlatironGoTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2323530F1CD25198DEDD4E647385AB92 /* Pods-FlatironGoTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FEB3E1C8892B8A55BDBECEA29187DCAE /* GFRegionQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = B571F746E3B880AB678EEDF647E42FEB /* GFRegionQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A807457CBF6363CED413A56015540163 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B4D7664B216FCCD24EB76C8AD3FBDF32;
+			remoteInfo = SnapKit;
+		};
+		EA418AF02CC9BDE0E85F08005FFBDCC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7908849B370564D3342427B24CCD92B7;
+			remoteInfo = GeoFire;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		03840A1F5802273186BFD578DC473734 /* Pods-FlatironGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FlatironGo.debug.xcconfig"; sourceTree = "<group>"; };
 		069A100AECFBE9C6F362B2CE3B187D75 /* Pods-FlatironGo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FlatironGo-umbrella.h"; sourceTree = "<group>"; };
+		073251B7577E2F627A42B0877F64C60B /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Source/ConstraintItem.swift; sourceTree = "<group>"; };
+		079B3364E0BC4467B30811F00FD377B4 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
 		0AD035CB9FEAB0EFA20287BFEF972340 /* Pods-FlatironGo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FlatironGo.modulemap"; sourceTree = "<group>"; };
+		0B48DB1BABE5BBE6316A8A508F261495 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		0B7B07FEF329ECEB112AB259308E6641 /* GeoFire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GeoFire-prefix.pch"; sourceTree = "<group>"; };
+		105BA4D486676C92A4DB408C4044D0C6 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 		1A78F30C01A599B00A5F1C0A8CFF320C /* Pods-FlatironGoTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FlatironGoTests-resources.sh"; sourceTree = "<group>"; };
-		219603845216F3E24B767B2A50F80DBE /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		2057515EA0B75823FC9D204F8B5CEF1A /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Headers/Firebase.h; sourceTree = "<group>"; };
 		2323530F1CD25198DEDD4E647385AB92 /* Pods-FlatironGoTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FlatironGoTests-umbrella.h"; sourceTree = "<group>"; };
+		248BF69CE7E9E55939A81B2FA782CA4F /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
 		2B1371E9CCD4EB856312FE9F97CA3DCA /* Pods-FlatironGo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FlatironGo-acknowledgements.markdown"; sourceTree = "<group>"; };
 		33918EB5FD995CFF8B314574740CF64D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		46125234FA90BBCFFD2918F619C9F94B /* Pods_FlatironGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35C5032123E794D795709791F2D079F1 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		3C7402A10B7D257B7FA6DE3C0643C0B5 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
+		3EAF2CB594FE88D1E79C251F0B6DFABD /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Headers/Public/FIRInstanceID.h; sourceTree = "<group>"; };
+		46D5F89A08A47210419A81FFE4D803EA /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
+		4D6D35640F51B88D14323CCCDE078868 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Source/Constraint.swift; sourceTree = "<group>"; };
+		54CE5EE845A12CD7936C14070D715B59 /* GFQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFQuery.h; path = GeoFire/API/GFQuery.h; sourceTree = "<group>"; };
 		55B8E8BC24A70A2EFBD5AE4663272382 /* Pods-FlatironGoTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FlatironGoTests.modulemap"; sourceTree = "<group>"; };
-		5DE7A2AF81CDA39555CDD1D32393D49C /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		5EF0E4529CB9E5B355D1820FB49AD538 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFGeoHashQuery.h; path = GeoFire/Implementation/GFGeoHashQuery.h; sourceTree = "<group>"; };
 		6140786955C37EF0DB229A6C4D3EDEC9 /* Pods-FlatironGoTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FlatironGoTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		62D9A44AB9774C9C4458FF1B08E64F62 /* GFQuery+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GFQuery+Private.h"; path = "GeoFire/Implementation/GFQuery+Private.h"; sourceTree = "<group>"; };
 		638E0EC4D0CCD8ADA08B0366F9D16A57 /* Pods-FlatironGoTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FlatironGoTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		78AA5DF552E6422D8F195E1E35FDF1B5 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		665F5D946D6E3BD49DBB8E3B3510A4BC /* GFGeoHashQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GFGeoHashQuery.m; path = GeoFire/Implementation/GFGeoHashQuery.m; sourceTree = "<group>"; };
+		6863BCC5617BA519629D95D6DC50CA0F /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
+		6B1611DE6F338EA09D91B85B3B371501 /* GeoFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GeoFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BFB4F8B1F4C9C0EC10A0BFBAFF2F6B9 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D32B320173307CDAE8E30C7EC2E6E83 /* GFCircleQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFCircleQuery.h; path = GeoFire/API/GFCircleQuery.h; sourceTree = "<group>"; };
+		6DEBCEA2FBE08D7EF9A9C0B15E510D94 /* View+SnapKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "View+SnapKit.swift"; path = "Source/View+SnapKit.swift"; sourceTree = "<group>"; };
+		77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7A0BC251D89F3701EF1328B1B1E4D40D /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
 		7A98EA78B6BD6E16F18F15B1FC4B8F9C /* Pods-FlatironGoTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FlatironGoTests-frameworks.sh"; sourceTree = "<group>"; };
+		7AC9FD2BEE5559E0AC73A762ABA5CA1A /* GFGeoHash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFGeoHash.h; path = GeoFire/Implementation/GFGeoHash.h; sourceTree = "<group>"; };
+		7AF9902BA020B3691EE1FF3249F8D57A /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SnapKit.modulemap; sourceTree = "<group>"; };
+		7CD76FADFBFFE2AE946E2FF1296AC57D /* GeoFire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GeoFire-umbrella.h"; sourceTree = "<group>"; };
+		8188FC1F8901E213EE24D8A81F8DC879 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		87B912133DBFB60E0D2E9FFFB89205DF /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
+		88CF178686ECBD7045E8F2D7EB8BDF6B /* GeoFire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GeoFire-dummy.m"; sourceTree = "<group>"; };
+		88F2562E687824B4AABDD4E5D1F349C4 /* ViewController+SnapKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ViewController+SnapKit.swift"; path = "Source/ViewController+SnapKit.swift"; sourceTree = "<group>"; };
+		8E79CB6FCC0CA4FF05459D57C42F9188 /* GeoFire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GeoFire.xcconfig; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94C3EC5EDEA906AEB7F8755129E1D786 /* EdgeInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EdgeInsets.swift; path = Source/EdgeInsets.swift; sourceTree = "<group>"; };
+		97FFD7E73C25DAF7197416502470EDDF /* GeoFire.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GeoFire.m; path = GeoFire/Implementation/GeoFire.m; sourceTree = "<group>"; };
+		9A7CD1E8490D33E1E9200435813140E1 /* GFBase32Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GFBase32Utils.m; path = GeoFire/Implementation/GFBase32Utils.m; sourceTree = "<group>"; };
 		9E8558B346F89F3CE7759442AB44CD2B /* Pods-FlatironGo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FlatironGo-frameworks.sh"; sourceTree = "<group>"; };
+		A013E8516EB4661DC47E86720617E238 /* GeoFire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = GeoFire.modulemap; sourceTree = "<group>"; };
+		A44634998610F2D086949FCEE0406D66 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		A63DA51B06104A7D73C23BA2E6261E24 /* Pods_FlatironGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93D006A298B8271D5C34D3C4F7758B5 /* Pods-FlatironGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FlatironGoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB936A236F4912D79613220839438E07 /* GeoFire+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GeoFire+Private.h"; path = "GeoFire/Implementation/GeoFire+Private.h"; sourceTree = "<group>"; };
 		ACD34FC65DA56F7AB979FA9E7069B2E4 /* Pods-FlatironGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FlatironGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		B55D5D7B8A44114A92987BB02F9B7228 /* SnapKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SnapKit.swift; path = Source/SnapKit.swift; sourceTree = "<group>"; };
+		B571F746E3B880AB678EEDF647E42FEB /* GFRegionQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFRegionQuery.h; path = GeoFire/API/GFRegionQuery.h; sourceTree = "<group>"; };
 		B5E4568C639E0560221F509545B51649 /* Pods-FlatironGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FlatironGo.release.xcconfig"; sourceTree = "<group>"; };
-		CD269DAE7323C35FBA875732B3F0D111 /* Pods_FlatironGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B998630140185DDEE9423DF5C9DC773C /* Pods_FlatironGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FF134132D68B5171C0EDAB4DBA2FF9 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		BAA6A577685DAB4C39C8F0B633005393 /* GFQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GFQuery.m; path = GeoFire/Implementation/GFQuery.m; sourceTree = "<group>"; };
+		C631D8DC10A1F0C834EEDB91293BA490 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
+		CD458802D5CA2A7DE1F81CA26F87EF6F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2580728BA5C19C8122A017118A9024F /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
 		DAB11DD047D73207DEC74F09A36A9AE1 /* Pods-FlatironGo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FlatironGo-dummy.m"; sourceTree = "<group>"; };
-		DB0C6218955B23214F1D039504530F55 /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Headers/Public/FIRInstanceID.h; sourceTree = "<group>"; };
 		DC74BB76FDB93F2EEAB0E43E75B1DACF /* Pods-FlatironGoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FlatironGoTests-dummy.m"; sourceTree = "<group>"; };
-		DF275361F137FFFAC95E10B9F0BAE4E5 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
+		E15DC602421ADB0E6FE18FBAA75DE9DF /* GeoFire.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GeoFire.h; path = GeoFire/API/GeoFire.h; sourceTree = "<group>"; };
 		EC5D7FDB265F4BD013DC3ADFABD768DF /* Pods-FlatironGo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FlatironGo-resources.sh"; sourceTree = "<group>"; };
-		F1E5620A0289885D1A7BE12952288620 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Headers/Firebase.h; sourceTree = "<group>"; };
+		F113B01011908ACBF5C7F8ACA41FE057 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = dynamic/Mapbox.framework; sourceTree = "<group>"; };
 		F348E35AFB487F438C1EA2598C7AAD0F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F447883EB9E652B0CC542C9477EAAEA8 /* Pods-FlatironGo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FlatironGo-acknowledgements.plist"; sourceTree = "<group>"; };
-		FAF822D2C02C424982832435D7291DB1 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		F448FB733BE943EFD291162FF4119B8B /* GFBase32Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GFBase32Utils.h; path = GeoFire/Implementation/GFBase32Utils.h; sourceTree = "<group>"; };
+		FA00090C032C853FFF97AAF8742B5316 /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
+		FD9B27148D128CB78E43FBF1157F2A74 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
+		FF6E28AEB6CED118A698CFA7FCA2A7A0 /* GFGeoHash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GFGeoHash.m; path = GeoFire/Implementation/GFGeoHash.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2F07C2B35F3F1CA1D68BCCEC19E681A6 /* Frameworks */ = {
+		0C3A74E26847CE2D0A1332DA924AD3C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6483E31B6AA8F538D0990CB69C00D7D8 /* Foundation.framework in Frameworks */,
+				5B4983BC1D39D7F000E5819C /* FirebaseDatabase.framework in Frameworks */,
+				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
+				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3447C7A31E1FCD762834716D4F5672A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBEC634131BE520BB9A546F9BD92F0AA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41E438CC937CF67D7716AB7CDD0C4739 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8AD4450CDBD10F4E3633C9B3079B1AD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,41 +199,50 @@
 			path = "Target Support Files/Pods-FlatironGo";
 			sourceTree = "<group>";
 		};
-		056B7FB4565C8F6CFBC262FDCD790C0C /* Frameworks */ = {
+		03A2BDBE4D98F08DDA408989A03BD654 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				78AA5DF552E6422D8F195E1E35FDF1B5 /* GoogleSymbolUtilities.framework */,
+				CD458802D5CA2A7DE1F81CA26F87EF6F /* Info.plist */,
+				7AF9902BA020B3691EE1FF3249F8D57A /* SnapKit.modulemap */,
+				FA00090C032C853FFF97AAF8742B5316 /* SnapKit.xcconfig */,
+				248BF69CE7E9E55939A81B2FA782CA4F /* SnapKit-dummy.m */,
+				6863BCC5617BA519629D95D6DC50CA0F /* SnapKit-prefix.pch */,
+				D2580728BA5C19C8122A017118A9024F /* SnapKit-umbrella.h */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/SnapKit";
 			sourceTree = "<group>";
 		};
-		0B8CEF19337FA4DFF56EC7EF36B16C09 /* Pods */ = {
+		0E9AB5588B4C4257BFDE540F2D714734 /* FirebaseDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				E87E635A8BA23B6FDD7AFF5F5F24DCFC /* Firebase */,
-				17E963AC9EA7E429C37DA8FEEA72526B /* FirebaseAnalytics */,
-				C12C91F2C4C694776425E40592AE1113 /* FirebaseInstanceID */,
-				AEFF8F1B6621E9AFD02CAB76FC73388F /* GoogleInterchangeUtilities */,
-				D227E2B6883501EB56EEE7DB33608B01 /* GoogleSymbolUtilities */,
-				1FE7E728519B8C441DC0979AF90877D4 /* GoogleUtilities */,
+				E36016D5062E98EFD3819F953BC197CB /* Frameworks */,
 			);
-			name = Pods;
+			path = FirebaseDatabase;
 			sourceTree = "<group>";
 		};
-		122442F85AC0EEF686F286D9DE35D0A1 /* Frameworks */ = {
+		12EFAD0A45E1E849E95E4A834BDE492B /* FirebaseAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				FAF822D2C02C424982832435D7291DB1 /* FirebaseAnalytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		17E963AC9EA7E429C37DA8FEEA72526B /* FirebaseAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				122442F85AC0EEF686F286D9DE35D0A1 /* Frameworks */,
+				39C2EF1C8B78D4188FE66CDBB0ADA0E8 /* Frameworks */,
 			);
 			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
+		156FED7D1BBCC19B0861FA91BC066AE0 /* GoogleSymbolUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				172518A88ECF2A109C1E4F289472AAF8 /* Frameworks */,
+			);
+			path = GoogleSymbolUtilities;
+			sourceTree = "<group>";
+		};
+		172518A88ECF2A109C1E4F289472AAF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8188FC1F8901E213EE24D8A81F8DC879 /* GoogleSymbolUtilities.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1903E1BFE838E3FCF89DAE12A8EE09A5 /* Pods-FlatironGoTests */ = {
@@ -142,63 +263,163 @@
 			path = "Target Support Files/Pods-FlatironGoTests";
 			sourceTree = "<group>";
 		};
-		1FE7E728519B8C441DC0979AF90877D4 /* GoogleUtilities */ = {
+		39C2EF1C8B78D4188FE66CDBB0ADA0E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A09B82FC34DC854CBB4A7D6B7C35C65 /* Frameworks */,
-			);
-			path = GoogleUtilities;
-			sourceTree = "<group>";
-		};
-		324E2F645E937130BB4D82B195447ABD /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				F1E5620A0289885D1A7BE12952288620 /* Firebase.h */,
-			);
-			name = Analytics;
-			sourceTree = "<group>";
-		};
-		3A09B82FC34DC854CBB4A7D6B7C35C65 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DF275361F137FFFAC95E10B9F0BAE4E5 /* GoogleUtilities.framework */,
+				35C5032123E794D795709791F2D079F1 /* FirebaseAnalytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */,
+				452C4D672353D86A5CE7A15C4A984B2D /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		452C4D672353D86A5CE7A15C4A984B2D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A44634998610F2D086949FCEE0406D66 /* CoreLocation.framework */,
+				77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		4BBD3A82F8DA03E4079FBC10139FFB48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B48DB1BABE5BBE6316A8A508F261495 /* GoogleInterchangeUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50A5FB103B35D13264232441980AFD90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				105BA4D486676C92A4DB408C4044D0C6 /* GoogleUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50B03B34C9E8E2234110A524E3F42211 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				2057515EA0B75823FC9D204F8B5CEF1A /* Firebase.h */,
+			);
+			name = Analytics;
+			sourceTree = "<group>";
+		};
+		52AB62C7584CDCC0017A2721E95DDBC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B1611DE6F338EA09D91B85B3B371501 /* GeoFire.framework */,
+				A63DA51B06104A7D73C23BA2E6261E24 /* Pods_FlatironGo.framework */,
+				B998630140185DDEE9423DF5C9DC773C /* Pods_FlatironGoTests.framework */,
+				6BFB4F8B1F4C9C0EC10A0BFBAFF2F6B9 /* SnapKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6364A43E6FC8FB7BF25B8DD59C811C42 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				4D6D35640F51B88D14323CCCDE078868 /* Constraint.swift */,
+				FD9B27148D128CB78E43FBF1157F2A74 /* ConstraintAttributes.swift */,
+				87B912133DBFB60E0D2E9FFFB89205DF /* ConstraintDescription.swift */,
+				073251B7577E2F627A42B0877F64C60B /* ConstraintItem.swift */,
+				46D5F89A08A47210419A81FFE4D803EA /* ConstraintMaker.swift */,
+				3C7402A10B7D257B7FA6DE3C0643C0B5 /* ConstraintRelation.swift */,
+				7A0BC251D89F3701EF1328B1B1E4D40D /* Debugging.swift */,
+				94C3EC5EDEA906AEB7F8755129E1D786 /* EdgeInsets.swift */,
+				079B3364E0BC4467B30811F00FD377B4 /* LayoutConstraint.swift */,
+				B55D5D7B8A44114A92987BB02F9B7228 /* SnapKit.swift */,
+				6DEBCEA2FBE08D7EF9A9C0B15E510D94 /* View+SnapKit.swift */,
+				88F2562E687824B4AABDD4E5D1F349C4 /* ViewController+SnapKit.swift */,
+				03A2BDBE4D98F08DDA408989A03BD654 /* Support Files */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		645F1DCBAD09447C5187364A1E015CEC /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				4BBD3A82F8DA03E4079FBC10139FFB48 /* Frameworks */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		68B9E7EF03794A5504D1F3FCEB8503E2 /* GoogleUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				50A5FB103B35D13264232441980AFD90 /* Frameworks */,
+			);
+			path = GoogleUtilities;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				0B8CEF19337FA4DFF56EC7EF36B16C09 /* Pods */,
-				FCBA09B430F7C127EDD7B298E9A7B4CA /* Products */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				C43CCE86731D4A459F492E1D369F70AD /* Pods */,
+				52AB62C7584CDCC0017A2721E95DDBC7 /* Products */,
 				BB6BEC20E9E2333E6B3071E957B63E5E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8D816FB6035310E52D6DA53786BA4F67 /* Frameworks */ = {
+		8E8C2D806D66CE68329A684131C3F3CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5DE7A2AF81CDA39555CDD1D32393D49C /* FirebaseInstanceID.framework */,
+				F113B01011908ACBF5C7F8ACA41FE057 /* Mapbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AEFF8F1B6621E9AFD02CAB76FC73388F /* GoogleInterchangeUtilities */ = {
+		9A11526A9BD4338EBA89552CE5237696 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				F38FA45BD3E1C0E58BF4D98B0F38646B /* Frameworks */,
+				A013E8516EB4661DC47E86720617E238 /* GeoFire.modulemap */,
+				8E79CB6FCC0CA4FF05459D57C42F9188 /* GeoFire.xcconfig */,
+				88CF178686ECBD7045E8F2D7EB8BDF6B /* GeoFire-dummy.m */,
+				0B7B07FEF329ECEB112AB259308E6641 /* GeoFire-prefix.pch */,
+				7CD76FADFBFFE2AE946E2FF1296AC57D /* GeoFire-umbrella.h */,
+				C631D8DC10A1F0C834EEDB91293BA490 /* Info.plist */,
 			);
-			path = GoogleInterchangeUtilities;
+			name = "Support Files";
+			path = "../Target Support Files/GeoFire";
+			sourceTree = "<group>";
+		};
+		A36EF76F4305FA01933063D4EBF78274 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				E15DC602421ADB0E6FE18FBAA75DE9DF /* GeoFire.h */,
+				97FFD7E73C25DAF7197416502470EDDF /* GeoFire.m */,
+				AB936A236F4912D79613220839438E07 /* GeoFire+Private.h */,
+				F448FB733BE943EFD291162FF4119B8B /* GFBase32Utils.h */,
+				9A7CD1E8490D33E1E9200435813140E1 /* GFBase32Utils.m */,
+				6D32B320173307CDAE8E30C7EC2E6E83 /* GFCircleQuery.h */,
+				7AC9FD2BEE5559E0AC73A762ABA5CA1A /* GFGeoHash.h */,
+				FF6E28AEB6CED118A698CFA7FCA2A7A0 /* GFGeoHash.m */,
+				5EF0E4529CB9E5B355D1820FB49AD538 /* GFGeoHashQuery.h */,
+				665F5D946D6E3BD49DBB8E3B3510A4BC /* GFGeoHashQuery.m */,
+				54CE5EE845A12CD7936C14070D715B59 /* GFQuery.h */,
+				BAA6A577685DAB4C39C8F0B633005393 /* GFQuery.m */,
+				62D9A44AB9774C9C4458FF1B08E64F62 /* GFQuery+Private.h */,
+				B571F746E3B880AB678EEDF647E42FEB /* GFRegionQuery.h */,
+				9A11526A9BD4338EBA89552CE5237696 /* Support Files */,
+			);
+			path = GeoFire;
+			sourceTree = "<group>";
+		};
+		B76C42AA25E4BA36CB5317185161B053 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				50B03B34C9E8E2234110A524E3F42211 /* Analytics */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		BB6BEC20E9E2333E6B3071E957B63E5E /* Targets Support Files */ = {
@@ -210,59 +431,75 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		BD36CA077CCE50847E8352BA5324F2D3 /* FirebaseInstanceID */ = {
 			isa = PBXGroup;
 			children = (
-				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C12C91F2C4C694776425E40592AE1113 /* FirebaseInstanceID */ = {
-			isa = PBXGroup;
-			children = (
-				DB0C6218955B23214F1D039504530F55 /* FIRInstanceID.h */,
-				8D816FB6035310E52D6DA53786BA4F67 /* Frameworks */,
+				3EAF2CB594FE88D1E79C251F0B6DFABD /* FIRInstanceID.h */,
+				E257311C319811598A5F3F8D29E22F52 /* Frameworks */,
 			);
 			path = FirebaseInstanceID;
 			sourceTree = "<group>";
 		};
-		D227E2B6883501EB56EEE7DB33608B01 /* GoogleSymbolUtilities */ = {
+		C43CCE86731D4A459F492E1D369F70AD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				056B7FB4565C8F6CFBC262FDCD790C0C /* Frameworks */,
+				B76C42AA25E4BA36CB5317185161B053 /* Firebase */,
+				12EFAD0A45E1E849E95E4A834BDE492B /* FirebaseAnalytics */,
+				0E9AB5588B4C4257BFDE540F2D714734 /* FirebaseDatabase */,
+				BD36CA077CCE50847E8352BA5324F2D3 /* FirebaseInstanceID */,
+				A36EF76F4305FA01933063D4EBF78274 /* GeoFire */,
+				645F1DCBAD09447C5187364A1E015CEC /* GoogleInterchangeUtilities */,
+				156FED7D1BBCC19B0861FA91BC066AE0 /* GoogleSymbolUtilities */,
+				68B9E7EF03794A5504D1F3FCEB8503E2 /* GoogleUtilities */,
+				D113FE8BD74248493794810B19A26EBE /* Mapbox-iOS-SDK */,
+				6364A43E6FC8FB7BF25B8DD59C811C42 /* SnapKit */,
 			);
-			path = GoogleSymbolUtilities;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		E87E635A8BA23B6FDD7AFF5F5F24DCFC /* Firebase */ = {
+		D113FE8BD74248493794810B19A26EBE /* Mapbox-iOS-SDK */ = {
 			isa = PBXGroup;
 			children = (
-				324E2F645E937130BB4D82B195447ABD /* Analytics */,
+				8E8C2D806D66CE68329A684131C3F3CE /* Frameworks */,
 			);
-			path = Firebase;
+			path = "Mapbox-iOS-SDK";
 			sourceTree = "<group>";
 		};
-		F38FA45BD3E1C0E58BF4D98B0F38646B /* Frameworks */ = {
+		E257311C319811598A5F3F8D29E22F52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				219603845216F3E24B767B2A50F80DBE /* GoogleInterchangeUtilities.framework */,
+				B9FF134132D68B5171C0EDAB4DBA2FF9 /* FirebaseInstanceID.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FCBA09B430F7C127EDD7B298E9A7B4CA /* Products */ = {
+		E36016D5062E98EFD3819F953BC197CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				46125234FA90BBCFFD2918F619C9F94B /* Pods_FlatironGo.framework */,
-				CD269DAE7323C35FBA875732B3F0D111 /* Pods_FlatironGoTests.framework */,
+				CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */,
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		470492284A07AAFD886D9146CD2EF4FA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23BAD0E5445B192185F698EB19059566 /* Pods-FlatironGo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51FDD3B264EDFE3490880DDB51E7FDAB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D126E3FD88F7F75DCC7B80385A9434 /* SnapKit-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		719B47D0A56E859FD2D62C15B2031223 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,32 +508,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CCC1271A9234767D3158A2B481E709AC /* Headers */ = {
+		94330F83ED3F2178C3E743C52713B2A7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D224CBB3A75997485EB391378C7118A /* Pods-FlatironGo-umbrella.h in Headers */,
+				29731F92555225566D2388BB660A1AAB /* GeoFire+Private.h in Headers */,
+				3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */,
+				A4656AA37096D90C796730F3A274FA91 /* GeoFire.h in Headers */,
+				7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */,
+				9B8FEC707269B27CA0CD40A36B647186 /* GFCircleQuery.h in Headers */,
+				7440C9B87F0A2B9ADA528240D4EC2B69 /* GFGeoHash.h in Headers */,
+				5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */,
+				CA5D63EFDBD5B43AC4BE3CC2D3DF2186 /* GFQuery+Private.h in Headers */,
+				FB96A79AA75E84306AE7C36318712D0D /* GFQuery.h in Headers */,
+				FEB3E1C8892B8A55BDBECEA29187DCAE /* GFRegionQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		32FC8629C3608FC5DE9954E8629B91A3 /* Pods-FlatironGo */ = {
+		7908849B370564D3342427B24CCD92B7 /* GeoFire */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1D5827350220489353EED4C2C9F1197 /* Build configuration list for PBXNativeTarget "Pods-FlatironGo" */;
+			buildConfigurationList = ED06398B681E114325F3F3C31F1B696F /* Build configuration list for PBXNativeTarget "GeoFire" */;
 			buildPhases = (
-				E934846F14C54F2272889A646E5E5C55 /* Sources */,
-				2F07C2B35F3F1CA1D68BCCEC19E681A6 /* Frameworks */,
-				CCC1271A9234767D3158A2B481E709AC /* Headers */,
+				16F67A0947C02901EC58F17F693A809C /* Sources */,
+				0C3A74E26847CE2D0A1332DA924AD3C8 /* Frameworks */,
+				94330F83ED3F2178C3E743C52713B2A7 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-FlatironGo";
-			productName = "Pods-FlatironGo";
-			productReference = 46125234FA90BBCFFD2918F619C9F94B /* Pods_FlatironGo.framework */;
+			name = GeoFire;
+			productName = GeoFire;
+			productReference = 6B1611DE6F338EA09D91B85B3B371501 /* GeoFire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7C1B8A524C8215C12840ABBE658AA31E /* Pods-FlatironGoTests */ = {
@@ -313,7 +559,43 @@
 			);
 			name = "Pods-FlatironGoTests";
 			productName = "Pods-FlatironGoTests";
-			productReference = CD269DAE7323C35FBA875732B3F0D111 /* Pods_FlatironGoTests.framework */;
+			productReference = B998630140185DDEE9423DF5C9DC773C /* Pods_FlatironGoTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		90D994DC15B6829BBB82F5BFAFB44898 /* Pods-FlatironGo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0DC2145BF535FF060227FF051DDDE00 /* Build configuration list for PBXNativeTarget "Pods-FlatironGo" */;
+			buildPhases = (
+				D88A80629F6815FBF5A9568E2751983E /* Sources */,
+				3447C7A31E1FCD762834716D4F5672A8 /* Frameworks */,
+				470492284A07AAFD886D9146CD2EF4FA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A4FC9369209BFC5FAB6334067A66C78 /* PBXTargetDependency */,
+				3C95AC0669040E74BF28F09B6468A201 /* PBXTargetDependency */,
+			);
+			name = "Pods-FlatironGo";
+			productName = "Pods-FlatironGo";
+			productReference = A63DA51B06104A7D73C23BA2E6261E24 /* Pods_FlatironGo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B4D7664B216FCCD24EB76C8AD3FBDF32 /* SnapKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2EE0773A7FE842668C8943A5537B9B3 /* Build configuration list for PBXNativeTarget "SnapKit" */;
+			buildPhases = (
+				550A91431D17F889D08DC44A43349CC6 /* Sources */,
+				41E438CC937CF67D7716AB7CDD0C4739 /* Frameworks */,
+				51FDD3B264EDFE3490880DDB51E7FDAB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SnapKit;
+			productName = SnapKit;
+			productReference = 6BFB4F8B1F4C9C0EC10A0BFBAFF2F6B9 /* SnapKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -333,17 +615,32 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = FCBA09B430F7C127EDD7B298E9A7B4CA /* Products */;
+			productRefGroup = 52AB62C7584CDCC0017A2721E95DDBC7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32FC8629C3608FC5DE9954E8629B91A3 /* Pods-FlatironGo */,
+				7908849B370564D3342427B24CCD92B7 /* GeoFire */,
+				90D994DC15B6829BBB82F5BFAFB44898 /* Pods-FlatironGo */,
 				7C1B8A524C8215C12840ABBE658AA31E /* Pods-FlatironGoTests */,
+				B4D7664B216FCCD24EB76C8AD3FBDF32 /* SnapKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		16F67A0947C02901EC58F17F693A809C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */,
+				E772F9F57312C064C87C25657F3C3A6A /* GeoFire.m in Sources */,
+				EC4A2955A3BAAF97E097272642BDE9B9 /* GFBase32Utils.m in Sources */,
+				746B890F1CECD5326ADD05028FC0FC5C /* GFGeoHash.m in Sources */,
+				75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */,
+				2ABCD61FD7F427BD3806C92902AB042E /* GFQuery.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3824262AE6894BBC26E0FC56A87E55B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,17 +649,81 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E934846F14C54F2272889A646E5E5C55 /* Sources */ = {
+		550A91431D17F889D08DC44A43349CC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF23DB0C39DC06A57E65DBDC87E57C85 /* Pods-FlatironGo-dummy.m in Sources */,
+				6B3E2DF75A61A858C3DDCB65B0D56DE8 /* Constraint.swift in Sources */,
+				EF051B7D858569A1831C0417A81205FC /* ConstraintAttributes.swift in Sources */,
+				0A3BF266D99AE7D196240963F9F1FDDE /* ConstraintDescription.swift in Sources */,
+				964D481C6E9281081727048D7C9DA7BA /* ConstraintItem.swift in Sources */,
+				C907E0702671C4AC6180F4B15053F3A6 /* ConstraintMaker.swift in Sources */,
+				4BCEE687B5A297B740EAC53CAE25441A /* ConstraintRelation.swift in Sources */,
+				62296067F265B733469FF7944EABB8CF /* Debugging.swift in Sources */,
+				13A6A0400ACB6873428B3A5C5925FA68 /* EdgeInsets.swift in Sources */,
+				9185FA425E2ADC0C96E233B3C3284246 /* LayoutConstraint.swift in Sources */,
+				53178E9784D1A8411B8763DF925DE57E /* SnapKit-dummy.m in Sources */,
+				DA29110975CE78D1075653F2FE5C8CAA /* SnapKit.swift in Sources */,
+				FA3AE11E9D5667875C0187496C6538DC /* View+SnapKit.swift in Sources */,
+				3F01E96EBA0175E8C6B1F82B71F8B2A1 /* ViewController+SnapKit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D88A80629F6815FBF5A9568E2751983E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBFB7368FE58CDF7041F02355AEAEE9C /* Pods-FlatironGo-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3A4FC9369209BFC5FAB6334067A66C78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GeoFire;
+			target = 7908849B370564D3342427B24CCD92B7 /* GeoFire */;
+			targetProxy = EA418AF02CC9BDE0E85F08005FFBDCC9 /* PBXContainerItemProxy */;
+		};
+		3C95AC0669040E74BF28F09B6468A201 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SnapKit;
+			target = B4D7664B216FCCD24EB76C8AD3FBDF32 /* SnapKit */;
+			targetProxy = A807457CBF6363CED413A56015540163 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1CD9A1FED4BDD4754A067AC53C7EE2BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA00090C032C853FFF97AAF8742B5316 /* SnapKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SnapKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SnapKit/SnapKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SnapKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3FA451D268613890FA8A5A03801E11D5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -443,7 +804,7 @@
 			};
 			name = Debug;
 		};
-		5E67941F9A4A077E251AA4C7C0CA542B /* Debug */ = {
+		5F5BDBBDC0CF2F0F9C3AFB321765D3A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03840A1F5802273186BFD578DC473734 /* Pods-FlatironGo.debug.xcconfig */;
 			buildSettings = {
@@ -468,6 +829,40 @@
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Pods_FlatironGo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6C6B90D1ECA27A79327DA6896560A4B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E79CB6FCC0CA4FF05459D57C42F9188 /* GeoFire.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GeoFire/GeoFire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GeoFire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GeoFire/GeoFire.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GeoFire;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -509,7 +904,70 @@
 			};
 			name = Debug;
 		};
-		DBF4603495B3521C3767773687698E9D /* Release */ = {
+		A42AFE8719BD5D6172CB1F71F6A5030D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA00090C032C853FFF97AAF8742B5316 /* SnapKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SnapKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SnapKit/SnapKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SnapKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E038053FA7D94339D66B976E0D479887 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E79CB6FCC0CA4FF05459D57C42F9188 /* GeoFire.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GeoFire/GeoFire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GeoFire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GeoFire/GeoFire.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GeoFire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E16C2366D8602DD491B6F6C0CB36256F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5E4568C639E0560221F509545B51649 /* Pods-FlatironGo.release.xcconfig */;
 			buildSettings = {
@@ -596,11 +1054,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1D5827350220489353EED4C2C9F1197 /* Build configuration list for PBXNativeTarget "Pods-FlatironGo" */ = {
+		B0DC2145BF535FF060227FF051DDDE00 /* Build configuration list for PBXNativeTarget "Pods-FlatironGo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5E67941F9A4A077E251AA4C7C0CA542B /* Debug */,
-				DBF4603495B3521C3767773687698E9D /* Release */,
+				5F5BDBBDC0CF2F0F9C3AFB321765D3A1 /* Debug */,
+				E16C2366D8602DD491B6F6C0CB36256F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2EE0773A7FE842668C8943A5537B9B3 /* Build configuration list for PBXNativeTarget "SnapKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A42AFE8719BD5D6172CB1F71F6A5030D /* Debug */,
+				1CD9A1FED4BDD4754A067AC53C7EE2BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED06398B681E114325F3F3C31F1B696F /* Build configuration list for PBXNativeTarget "GeoFire" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C6B90D1ECA27A79327DA6896560A4B8 /* Debug */,
+				E038053FA7D94339D66B976E0D479887 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
