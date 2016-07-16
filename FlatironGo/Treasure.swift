@@ -15,8 +15,10 @@ struct Treasure: CustomStringConvertible {
     var description: String { return makeDescription() }
     var image: UIImage
     
-    init(location: GPSLocation, image: UIImage) {
+    init(location: GPSLocation, imageURLString: String) {
         self.location = location
+        guard let imageURL = NSURL(string: imageURLString) else { print("Error getting the image. Fix this later yo"); return }
+        let image = UIImage()
         self.image = image
         createItem()
     }
