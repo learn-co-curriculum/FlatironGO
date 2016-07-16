@@ -54,7 +54,7 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        let image = UIImage(named: "FlatironLogo")
+        let image = UIImage(named: "BuzzLightyear")
         pokemon.contents = image?.CGImage
         pokemon.bounds = CGRectMake(100.0, 100.0, 100.0, 200.0)
         pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
@@ -107,13 +107,15 @@ extension ViewController {
         guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
         
         let xRange = topLeftX...topRightX
-        let yRange = topLeftX...bottomLeftY
+        let yRange = topLeftY...bottomLeftY
         
-        
+        checkForRange(xRange, yRange, withLocation: location)
+    }
+    
+    private func checkForRange(xRange: Range<Int>, _ yRange: Range<Int>, withLocation location: CGPoint) {
         if xRange.contains(Int(location.x)) && yRange.contains(Int(location.y)) {
             motionManager.stopDeviceMotionUpdates()
             captureSession.stopRunning()
-            
             
             foundTreasure = true
             
@@ -131,32 +133,26 @@ extension ViewController {
             springY.duration = 2.5
             pokemon.addAnimation(springY, forKey: nil)
             
-            
             pokemon.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: CGRectGetMidY(self.view.frame))
             
-            let animation = CABasicAnimation(keyPath: "opacity")
-            animation.beginTime = 2
-            animation.duration = 10
-            animation.fromValue = 1
-            animation.toValue = 0
-            animation.removedOnCompletion = false
-            animation.fillMode = kCAFillModeBoth
-            animation.additive = false
-            previewLayer.addAnimation(animation, forKey: "opacityOUT")
-            
-//            animation.beginTime = CMTimeGetSeconds(CMTimeAdd(img.passTimeRange.start, img.passTimeRange.duration));
-//            animation.duration = CMTimeGetSeconds(_timeline.transitionDuration);
-//            animation.fromValue = [NSNumber numberWithFloat:1.0f];
-//            animation.toValue = [NSNumber numberWithFloat:0.0f];
-//            animation.removedOnCompletion = NO;
-//            animation.fillMode = kCAFillModeBoth;
-//            animation.additive = NO;
-//            [animtingLayer addAnimation:animation forKey:@"opacityOUT"];
+            let fadeOut = CABasicAnimation(keyPath: "opacity")
+            fadeOut.delegate = self
+            fadeOut.duration = 5.0
+            fadeOut.autoreverses = false
+            fadeOut.fromValue = 1.0
+            fadeOut.toValue = 0.0
+            fadeOut.fillMode = kCAFillModeBoth
+            fadeOut.removedOnCompletion = false
+            previewLayer.addAnimation(fadeOut, forKey: "myanimation")
         }
         
     }
     
 }
+
+
+
+
 
 
 
