@@ -16,7 +16,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
     var locationManager = CLLocationManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,33 +24,33 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
+        mapView.delegate = self
+        
         let point = MGLPointAnnotation()
         point.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
         point.title = "Flatiron School"
         point.subtitle = "Learn Love Code"
-        mapView.addAnnotation(point)
+        //mapView.addAnnotation(point)
         //self.mapView.pitchEnabled = true
+        mapView.addAnnotation(point)
         mapView.userTrackingMode = .Follow
         print("lanching")
+        mapView.delegate = self
         
         print(getUserLocation())
-        // Do any additional setup after loading the view.
-        
         
         mapView.snp_makeConstraints{(make) -> Void in
             mapView.addAnnotation(point)
             mapView.pitchEnabled = true
             
-            
-            // Optionally set a starting point.
             mapView.setCenterCoordinate(point.coordinate, zoomLevel: 15, direction: 0, animated: false)
-            
             
             view.addSubview(mapView)
             
             mapView.snp_makeConstraints{(make) -> Void in
                 make.edges.equalTo(self.view)
             }
+            
         }
     }
    
@@ -69,17 +68,47 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 return (latitude,longitude)
             }
             
-            
-        } else{
+        } else {
             
         }
         
         return (0,0)
     }
     
+    func mapView(mapView: MGLMapView, viewForAnnotation annotation: MGLAnnotation) -> MGLAnnotationView? {
+        // This example is only concerned with point annotations.
+        guard annotation is MGLPointAnnotation else {
+            return nil
+        }
+        
+        // Use the point annotation’s longitude value (as a string) as the reuse identifier for its view.
+        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        
+        // For better performance, always try to reuse existing annotations.
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
+        
+        // If there’s no reusable annotation view available, initialize a new one.
+        if annotationView == nil {
+            annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView!.frame = CGRectMake(0, 0, 40, 40)
+            
+            // Set the annotation view’s background color to a value determined by its longitude.
+            let hue = CGFloat(annotation.coordinate.longitude) / 100
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+        }
+        
+        return annotationView
+    }
+    
+    func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
+    }
+
     
     
-        func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
+    
+    
+    func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
             // Wait for the map to load before initiating the first camera movement.
             
             // Create a camera that rotates around the same center point, rotating 180°.
@@ -88,11 +117,35 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             
             // Animate the camera movement over 5 seconds.
             mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-        }
+    }
+    
         
-        func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-            // Always try to show a callout when an annotation is tapped.
-            return true
-        }
+}
+
+
+
+//
+// MGLAnnotationView subclass
+class CustomAnnotationView: MGLAnnotationView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
+        // Force the annotation view to maintain a constant size when the map is tilted.
+        scalesWithViewingDistance = false
+        
+        // Use CALayer’s corner radius to turn this view into a circle.
+        //layer.cornerRadius = frame.width / 2
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Animate the border width in/out, creating an iris effect.
+        let animation = CABasicAnimation(keyPath: "borderWidth")
+        animation.duration = 0.1
+        layer.borderWidth = selected ? frame.width / 4 : 2
+        layer.addAnimation(animation, forKey: "borderWidth")
+    }
 }

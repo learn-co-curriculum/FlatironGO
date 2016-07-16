@@ -23,7 +23,6 @@
 		2299A54995CC565A9ADC5E6763EFED0C /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = D1BC69FD87C88F14F583050B67C4419A /* NSData+ImageContentType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29731F92555225566D2388BB660A1AAB /* GeoFire+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A0413C0F1892142AFC0B7914E5059CE3 /* GeoFire+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ABCD61FD7F427BD3806C92902AB042E /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C4AAEC77E2AAE44D45C616456B58CE /* GFQuery.m */; };
-		2B89B0361D39E0E6000F463B /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		2CB476A2BB4C89FC2FB92A7373CF8BA6 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = 765E79CF39EB76F801AE600B4D00BF67 /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FF9AF198034061CE411FA18F7E74B9F /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BC5318BB39A8B5650C5A813A8A2BA /* ConstraintAttributes.swift */; };
 		34BDAD3791F3263EAFBBC8E4B81795F1 /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 83CD075A4AEF7A355816ED821B6A6F1F /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +34,7 @@
 		515424A127715254A7219178C3627C6A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0EF155D10D770A92FCDB9946E35CD /* UIImage+GIF.m */; };
 		5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A0311C6F307A792C1FABC481F571A /* GeoFire-dummy.m */; };
 		5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6229BE2EA1D03410C9FB1F2034D8F599 /* GFGeoHashQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B4983BF1D39E9B400E5819C /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		635D0793F0F3860B74CD5DFE70B4D942 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DE8313B99CB6776D8F1EBD29E0F3544 /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		640E5EEA3965B393563B5CA9445986C6 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C654DB488FD44E3813F9AEB186ABF /* ConstraintRelation.swift */; };
 		6CAD4FE11C56FE3CE515AB67C46292A9 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 671B92A1AF53E1775D008CEFDAD4BA21 /* SnapKit-dummy.m */; };
@@ -225,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B89B0361D39E0E6000F463B /* FirebaseDatabase.framework in Frameworks */,
+				5B4983BF1D39E9B400E5819C /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);
