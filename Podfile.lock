@@ -16,9 +16,13 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - Mapbox-iOS-SDK (3.3.0)
+  - SnapKit (0.21.1)
 
 DEPENDENCIES:
   - Firebase
+  - Mapbox-iOS-SDK (~> 3.3)
+  - SnapKit (~> 0.21)
 
 SPEC CHECKSUMS:
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
@@ -27,7 +31,9 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
+  Mapbox-iOS-SDK: 88171e67d043af5ba80f52bcbf5dd31478652c18
+  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
 
-PODFILE CHECKSUM: b2b1e61967857033d053529f9161c50b9abc2a42
+PODFILE CHECKSUM: 97ea14a72182469a41e43eac47e768798a3d3d3c
 
 COCOAPODS: 1.0.1

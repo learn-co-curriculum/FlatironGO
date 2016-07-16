@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		57DA21675CADA14CE9CEF66B /* Pods_FlatironGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06118444AE3495A658EB2681 /* Pods_FlatironGoTests.framework */; };
+		5B8299FE1D39CC4500CFE919 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B8299FD1D39CC4500CFE919 /* GoogleService-Info.plist */; };
 		6E4175C93DA2DA04E570D8CE /* Pods_FlatironGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD32EAF7AB2E450CD16AB1CC /* Pods_FlatironGo.framework */; };
 		7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9128C1D37155E00331CF3 /* AppDelegate.swift */; };
 		7DD9128F1D37155E00331CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9128E1D37155E00331CF3 /* ViewController.swift */; };
 		7DD912921D37155E00331CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912901D37155E00331CF3 /* Main.storyboard */; };
 		7DD912941D37155E00331CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912931D37155E00331CF3 /* Assets.xcassets */; };
 		7DD912971D37155E00331CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD912951D37155E00331CF3 /* LaunchScreen.storyboard */; };
-		7DD912A21D37155F00331CF3 /* FlatironGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */; };
 		8F7EC0A81D39AA9700619BC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EC0A71D39AA9700619BC1 /* Constants.swift */; };
 		8F7EC0B01D39AF5B00619BC1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EC0AF1D39AF5B00619BC1 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +32,7 @@
 /* Begin PBXFileReference section */
 		06118444AE3495A658EB2681 /* Pods_FlatironGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F98994D7097FC55A7262AF2 /* Pods-FlatironGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B8299FD1D39CC4500CFE919 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DD912891D37155E00331CF3 /* FlatironGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlatironGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD9128C1D37155E00331CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DD9128E1D37155E00331CF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		7DD912961D37155E00331CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DD912981D37155E00331CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD9129D1D37155F00331CF3 /* FlatironGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlatironGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatironGoTests.swift; sourceTree = "<group>"; };
 		7DD912A31D37155F00331CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86942FB8B1C5E2470FC68547 /* Pods-FlatironGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.debug.xcconfig"; sourceTree = "<group>"; };
 		8F7EC0A71D39AA9700619BC1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -120,6 +120,7 @@
 				7DD912931D37155E00331CF3 /* Assets.xcassets */,
 				7DD912951D37155E00331CF3 /* LaunchScreen.storyboard */,
 				7DD912981D37155E00331CF3 /* Info.plist */,
+				5B8299FD1D39CC4500CFE919 /* GoogleService-Info.plist */,
 				8F7EC0A71D39AA9700619BC1 /* Constants.swift */,
 			);
 			path = FlatironGo;
@@ -128,7 +129,6 @@
 		7DD912A01D37155F00331CF3 /* FlatironGoTests */ = {
 			isa = PBXGroup;
 			children = (
-				7DD912A11D37155F00331CF3 /* FlatironGoTests.swift */,
 				7DD912A31D37155F00331CF3 /* Info.plist */,
 			);
 			path = FlatironGoTests;
@@ -190,7 +190,6 @@
 				TargetAttributes = {
 					7DD912881D37155E00331CF3 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = WNAGBXF4G9;
 					};
 					7DD9129C1D37155F00331CF3 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -223,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DD912971D37155E00331CF3 /* LaunchScreen.storyboard in Resources */,
+				5B8299FE1D39CC4500CFE919 /* GoogleService-Info.plist in Resources */,
 				7DD912941D37155E00331CF3 /* Assets.xcassets in Resources */,
 				7DD912921D37155E00331CF3 /* Main.storyboard in Resources */,
 			);
@@ -346,7 +346,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DD912A21D37155F00331CF3 /* FlatironGoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
