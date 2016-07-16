@@ -31,6 +31,7 @@
 		3B6623D192A7E7202C544330C78191AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC427CE9B516E8415B6F60D9868A13A /* Foundation.framework */; };
 		3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A4DD63A9EF4CF9275DDB3AFA5EC2920E /* GeoFire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4513DE765C36B5121CB8AE58C6AD6995 /* Pods-FlatironGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB11DD047D73207DEC74F09A36A9AE1 /* Pods-FlatironGo-dummy.m */; };
+		4C976C341D3A7C3E008EC476 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		515424A127715254A7219178C3627C6A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0EF155D10D770A92FCDB9946E35CD /* UIImage+GIF.m */; };
 		5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A0311C6F307A792C1FABC481F571A /* GeoFire-dummy.m */; };
 		5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6229BE2EA1D03410C9FB1F2034D8F599 /* GFGeoHashQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,7 +43,6 @@
 		746B890F1CECD5326ADD05028FC0FC5C /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEAD1BF44C984BFD5CBBEC8A8139304 /* GFGeoHash.m */; };
 		75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C48D12809F896CCE87C6E6F073F6F8 /* GFGeoHashQuery.m */; };
 		78932E65378125E0FB3B1F1F461FFE99 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D965851D5C1D294F77B9282AE7849AD /* EdgeInsets.swift */; };
-		7D46F3441D39FE8400CEE43C /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 68C777C3953E8E15B051BD604179D1CD /* GFBase32Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AF44A218EA516DE43FAB48F04647C3 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CC1A98671ABBD5100241606103981 /* Constraint.swift */; };
 		87643797B8E4E1A9912B71D6A02EBAA4 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA598CB68E5C89FB7786C4FFB0AE1F3D /* ConstraintMaker.swift */; };
@@ -225,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D46F3441D39FE8400CEE43C /* FirebaseDatabase.framework in Frameworks */,
+				4C976C341D3A7C3E008EC476 /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);

@@ -54,7 +54,7 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        let image = UIImage(named: "BuzzLightyear")
+        let image = UIImage(named: "FlatironLogo")
         pokemon.contents = image?.CGImage
         pokemon.bounds = CGRectMake(100.0, 100.0, 100.0, 200.0)
         pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
