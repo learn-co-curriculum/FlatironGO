@@ -93,11 +93,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         // If there’s no reusable annotation view available, initialize a new one.
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.frame = CGRectMake(0, 0, 40, 40)
+            annotationView!.frame = CGRectMake(0, 0, 50, 50)
             
             // Set the annotation view’s background color to a value determined by its longitude.
             annotationView!.backgroundColor = UIColor.whiteColor()
             
+            // Create the Flatiron logo and stick it in the annotation's view
             let flatironLogo = UIImageView.init(image: UIImage(named: "FlatironLogo"))
             annotationView!.addSubview(flatironLogo)
             flatironLogo.snp_makeConstraints(closure: { (make) in
@@ -111,22 +112,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
-
-    
-    func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
-
-        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("Flatiron")
-        
-        if annotationImage == nil {
-
-            let image = UIImage(named: "FlatironLogo")!
-
-            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: "Flatiron")
-        }
-        
-        return annotationImage
-    }
-    
     
     func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
             // Wait for the map to load before initiating the first camera movement.
@@ -138,13 +123,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             // Animate the camera movement over 5 seconds.
             mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
     }
-    
         
 }
 
-
-
-//
 // MGLAnnotationView subclass
 class CustomAnnotationView: MGLAnnotationView {
     override func layoutSubviews() {
@@ -154,7 +135,7 @@ class CustomAnnotationView: MGLAnnotationView {
         scalesWithViewingDistance = true
         
         // Use CALayer’s corner radius to turn this view into a circle.
-        //layer.cornerRadius = frame.width / 2
+//        layer.cornerRadius = frame.width / 2
         layer.borderWidth = 2
         layer.borderColor = UIColor.whiteColor().CGColor
     }
