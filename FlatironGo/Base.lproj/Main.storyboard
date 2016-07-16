@@ -70,6 +70,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="sFV-lf-53Q" id="zHP-dp-tPm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3w-zT-eQi" sceneMemberID="firstResponder"/>
             </objects>
