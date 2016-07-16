@@ -39,6 +39,8 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("launching view controller")
         setupCaptureCameraDevice()
         setupPreviewLayer()
         setupMotionManager()

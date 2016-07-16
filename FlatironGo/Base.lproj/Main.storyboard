@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Dr6-US-MX3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,7 +22,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289.5" y="397.5"/>
+            <point key="canvasLocation" x="154.40000000000001" y="376.30000000000001"/>
+        </scene>
+        <!--Delegate-->
+        <scene sceneID="cdb-Ir-U3j">
+            <objects>
+                <viewController id="Dr6-US-MX3" customClass="MapViewController" customModule="FlatironGo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3vL-Gv-QYP"/>
+                        <viewControllerLayoutGuide type="bottom" id="vXF-mo-8G9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jf7-Mb-OOb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFV-lf-53Q" customClass="MGLMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="latitude">
+                                        <real key="value" value="40.705280000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="longitude">
+                                        <real key="value" value="-74.014099999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="zoomLevel">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsUserLocation" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsZooming" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsScrolling" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsRotating" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsTilting" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="Dr6-US-MX3" id="fHb-8w-KGw"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sFV-lf-53Q" firstAttribute="top" secondItem="jf7-Mb-OOb" secondAttribute="top" id="ENu-68-wiy"/>
+                            <constraint firstItem="vXF-mo-8G9" firstAttribute="top" secondItem="sFV-lf-53Q" secondAttribute="bottom" id="OXo-XX-RcN"/>
+                            <constraint firstAttribute="trailing" secondItem="sFV-lf-53Q" secondAttribute="trailing" id="fNP-Rl-KAA"/>
+                            <constraint firstItem="sFV-lf-53Q" firstAttribute="leading" secondItem="jf7-Mb-OOb" secondAttribute="leading" id="xWc-D1-9dx"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="sFV-lf-53Q" id="gc5-9V-8dG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N3w-zT-eQi" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-283.5" y="-323.5"/>
         </scene>
     </scenes>
 </document>
