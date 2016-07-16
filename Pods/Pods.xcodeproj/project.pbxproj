@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		0A3BF266D99AE7D196240963F9F1FDDE /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B912133DBFB60E0D2E9FFFB89205DF /* ConstraintDescription.swift */; };
 		13A6A0400ACB6873428B3A5C5925FA68 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3EC5EDEA906AEB7F8755129E1D786 /* EdgeInsets.swift */; };
+		1BFC59BE1D39E1C90015BC4C /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */; };
 		1F3F2AD2CB6A5E8CEC88C00A32FA6EAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1159654E476B277E1D950E9C0CBD4 /* Foundation.framework */; };
 		2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44634998610F2D086949FCEE0406D66 /* CoreLocation.framework */; };
 		23BAD0E5445B192185F698EB19059566 /* Pods-FlatironGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 069A100AECFBE9C6F362B2CE3B187D75 /* Pods-FlatironGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29731F92555225566D2388BB660A1AAB /* GeoFire+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = AB936A236F4912D79613220839438E07 /* GeoFire+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29D126E3FD88F7F75DCC7B80385A9434 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D2580728BA5C19C8122A017118A9024F /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ABCD61FD7F427BD3806C92902AB042E /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA6A577685DAB4C39C8F0B633005393 /* GFQuery.m */; };
-		2B89B0331D39DA8A000F463B /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */; };
 		3F01E96EBA0175E8C6B1F82B71F8B2A1 /* ViewController+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F2562E687824B4AABDD4E5D1F349C4 /* ViewController+SnapKit.swift */; };
 		3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD76FADFBFFE2AE946E2FF1296AC57D /* GeoFire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BCEE687B5A297B740EAC53CAE25441A /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7402A10B7D257B7FA6DE3C0643C0B5 /* ConstraintRelation.swift */; };
@@ -148,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B89B0331D39DA8A000F463B /* FirebaseDatabase.framework in Frameworks */,
+				1BFC59BE1D39E1C90015BC4C /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);
