@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    
+    var locations: [String] = []
+
     
     //var mapViewController = MapViewController()
     var navBarController: UINavigationController!
@@ -35,31 +36,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         // Create GeoFire reference
-        let geofireRef = FIRDatabase.database().reference()
+        let geofireRef = FIRDatabase.database().referenceWithPath("Treasures")
         let geoFire = GeoFire(firebaseRef: geofireRef)
         
         // Create test location
         let location = CLLocation.init(latitude: 40.781324, longitude: -73.973988)
         
         // Set location to Firebase DB
-//        geoFire.setLocation(location, forKey: "test4")
-        
-        // Get location for key from Firebase DB
-//        geoFire.getLocationForKey("testLocation", withCallback: { (location, error) in
-//            if (error != nil) {
-//                print("An error occurred getting the location for \"firebase-hq\": \(error.localizedDescription)")
-//            } else if (location != nil) {
-//                print("Location for \"firebase-hq\" is [\(location.coordinate.latitude), \(location.coordinate.longitude)]")
-//            } else {
-//                print("GeoFire does not contain a location for \"firebase-hq\"")
-//            }
-//        })
+//        geoFire.setLocation(location, forKey: "New York Stock Exchange")
         
         // Create radius query
-        var geoQuery = geoFire.queryAtLocation(location, withRadius: 0.4)
         
+        let geoQuery = geoFire.queryAtLocation(location, withRadius: 175.0)
         
+        //use query for getting locations in a radius
+        var queryHandle = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
         
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            
+            self.locations.append(key)
+            print(self.locations)
+
+        }
         
         return true
     }

@@ -146,12 +146,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A61D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGo" */;
 			buildPhases = (
+				3B52FA432431C58865C1BBBC /* 📦 Check Pods Manifest.lock */,
 				9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */,
 				7DD912851D37155E00331CF3 /* Sources */,
 				7DD912861D37155E00331CF3 /* Frameworks */,
 				7DD912871D37155E00331CF3 /* Resources */,
 				9BC68C01D30264D63CD8E6B0 /* [CP] Embed Pods Frameworks */,
 				160EAA9CBB4D881EC1FECC10 /* [CP] Copy Pods Resources */,
+				6B90705F888D9D859127F22B /* 📦 Embed Pods Frameworks */,
+				5F182A18EA2AA9BA8FA4AA4D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -166,12 +169,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A91D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGoTests" */;
 			buildPhases = (
+				A052E786E2B5CE9BB0C9F6F1 /* 📦 Check Pods Manifest.lock */,
 				971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */,
 				7DD912991D37155F00331CF3 /* Sources */,
 				7DD9129A1D37155F00331CF3 /* Frameworks */,
 				7DD9129B1D37155F00331CF3 /* Resources */,
 				4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */,
 				6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */,
+				B7001934D953ACFDF58D6876 /* 📦 Embed Pods Frameworks */,
+				287C95B9691062F7F8231776 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,6 +265,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		287C95B9691062F7F8231776 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B52FA432431C58865C1BBBC /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,6 +308,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F182A18EA2AA9BA8FA4AA4D /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B90705F888D9D859127F22B /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */ = {
@@ -332,6 +398,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A052E786E2B5CE9BB0C9F6F1 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B7001934D953ACFDF58D6876 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
