@@ -138,12 +138,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A61D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGo" */;
 			buildPhases = (
-				9CB50B8E4604D884C94B86E7 /* 📦 Check Pods Manifest.lock */,
+				9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */,
 				7DD912851D37155E00331CF3 /* Sources */,
 				7DD912861D37155E00331CF3 /* Frameworks */,
 				7DD912871D37155E00331CF3 /* Resources */,
-				9BC68C01D30264D63CD8E6B0 /* 📦 Embed Pods Frameworks */,
-				160EAA9CBB4D881EC1FECC10 /* 📦 Copy Pods Resources */,
+				9BC68C01D30264D63CD8E6B0 /* [CP] Embed Pods Frameworks */,
+				160EAA9CBB4D881EC1FECC10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,12 +158,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A91D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGoTests" */;
 			buildPhases = (
-				971A7E065AE5C2F5858026D9 /* 📦 Check Pods Manifest.lock */,
+				971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */,
 				7DD912991D37155F00331CF3 /* Sources */,
 				7DD9129A1D37155F00331CF3 /* Frameworks */,
 				7DD9129B1D37155F00331CF3 /* Resources */,
-				4DAC94406E284F20C9D2DE05 /* 📦 Embed Pods Frameworks */,
-				6FB2E98775064127678BF0EB /* 📦 Copy Pods Resources */,
+				4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */,
+				6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,14 +236,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		160EAA9CBB4D881EC1FECC10 /* 📦 Copy Pods Resources */ = {
+		160EAA9CBB4D881EC1FECC10 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,14 +251,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4DAC94406E284F20C9D2DE05 /* 📦 Embed Pods Frameworks */ = {
+		4DAC94406E284F20C9D2DE05 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,14 +266,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6FB2E98775064127678BF0EB /* 📦 Copy Pods Resources */ = {
+		6FB2E98775064127678BF0EB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,14 +281,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		971A7E065AE5C2F5858026D9 /* 📦 Check Pods Manifest.lock */ = {
+		971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,14 +296,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		9BC68C01D30264D63CD8E6B0 /* 📦 Embed Pods Frameworks */ = {
+		9BC68C01D30264D63CD8E6B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,14 +311,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9CB50B8E4604D884C94B86E7 /* 📦 Check Pods Manifest.lock */ = {
+		9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
