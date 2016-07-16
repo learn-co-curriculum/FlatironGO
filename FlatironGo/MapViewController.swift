@@ -15,12 +15,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MGLMapView!
     var locationManager = CLLocationManager()
     //var mapView : MGLMapView!
+class MapViewController: UIViewController, MGLMapViewDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        let mapView = MGLMapView(frame: view.bounds,
+                                 styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
 
+        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        
         let point = MGLPointAnnotation()
         point.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
         point.title = "Flatiron School"
@@ -63,24 +67,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func createConstraints(){
         self.mapView.snp_makeConstraints{(make) -> Void in
+        mapView.addAnnotation(point)
+        mapView.pitchEnabled = true
+
+        
+        // Optionally set a starting point.
+        mapView.setCenterCoordinate(point.coordinate, zoomLevel: 15, direction: 0, animated: false)
+
+        
+        view.addSubview(mapView)
+        
+        mapView.snp_makeConstraints{(make) -> Void in
             make.edges.equalTo(self.view)
-      
         }
+    }
+    
+    func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
+        // Wait for the map to load before initiating the first camera movement.
+        
+        // Create a camera that rotates around the same center point, rotating 180°.
+        // `fromDistance:` is meters above mean sea level that an eye would have to be in order to see what the map view is showing.
+        let camera = MGLMapCamera(lookingAtCenterCoordinate: mapView.centerCoordinate, fromDistance: 200, pitch: 60, heading: 180)
+        
+        // Animate the camera movement over 5 seconds.
+        mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
     }
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         // Always try to show a callout when an annotation is tapped.
         return true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

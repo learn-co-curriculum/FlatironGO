@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import GeoFire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +24,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         setupMapView()
+        
+        // Firebase Initialization
+        FIRApp.configure()
+        
+        /*
+ 
+        TESTING GEOFIRE
+ 
+        */
+        
+        // Create GeoFire reference
+        let geofireRef = FIRDatabase.database().reference()
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        // Create test location
+        let location = CLLocation.init(latitude: 40.781324, longitude: -73.973988)
+        
+        // Set location to Firebase DB
+//        geoFire.setLocation(location, forKey: "test4")
+        
+        // Get location for key from Firebase DB
+//        geoFire.getLocationForKey("testLocation", withCallback: { (location, error) in
+//            if (error != nil) {
+//                print("An error occurred getting the location for \"firebase-hq\": \(error.localizedDescription)")
+//            } else if (location != nil) {
+//                print("Location for \"firebase-hq\" is [\(location.coordinate.latitude), \(location.coordinate.longitude)]")
+//            } else {
+//                print("GeoFire does not contain a location for \"firebase-hq\"")
+//            }
+//        })
+        
+        // Create radius query
+        var geoQuery = geoFire.queryAtLocation(location, withRadius: 0.4)
+        
+        
+        
+        
         return true
     }
     
