@@ -45,7 +45,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         // Setup the mapview's constraints
         mapView.snp_makeConstraints{(make) -> Void in
-//            mapView.addAnnotation(point) // Duplicate?
+
             mapView.pitchEnabled = true
             
             mapView.setCenterCoordinate(userStartLocation, zoomLevel: 15, direction: 0, animated: false)
@@ -96,8 +96,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             annotationView!.frame = CGRectMake(0, 0, 40, 40)
             
             // Set the annotation view’s background color to a value determined by its longitude.
-            let hue = CGFloat(annotation.coordinate.longitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor.whiteColor()
+            
+            let flatironLogo = UIImageView.init(image: UIImage(named: "FlatironLogo"))
+            annotationView!.addSubview(flatironLogo)
+            flatironLogo.snp_makeConstraints(closure: { (make) in
+                make.edges.equalTo(annotationView!)
+            })
         }
         
         return annotationView
