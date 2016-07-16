@@ -15,7 +15,6 @@
 		29731F92555225566D2388BB660A1AAB /* GeoFire+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = AB936A236F4912D79613220839438E07 /* GeoFire+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29D126E3FD88F7F75DCC7B80385A9434 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D2580728BA5C19C8122A017118A9024F /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ABCD61FD7F427BD3806C92902AB042E /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA6A577685DAB4C39C8F0B633005393 /* GFQuery.m */; };
-		2B89B0331D39DA8A000F463B /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */; };
 		3F01E96EBA0175E8C6B1F82B71F8B2A1 /* ViewController+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F2562E687824B4AABDD4E5D1F349C4 /* ViewController+SnapKit.swift */; };
 		3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD76FADFBFFE2AE946E2FF1296AC57D /* GeoFire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BCEE687B5A297B740EAC53CAE25441A /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7402A10B7D257B7FA6DE3C0643C0B5 /* ConstraintRelation.swift */; };
@@ -28,6 +27,7 @@
 		746B890F1CECD5326ADD05028FC0FC5C /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6E28AEB6CED118A698CFA7FCA2A7A0 /* GFGeoHash.m */; };
 		75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 665F5D946D6E3BD49DBB8E3B3510A4BC /* GFGeoHashQuery.m */; };
 		7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = F448FB733BE943EFD291162FF4119B8B /* GFBase32Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FE334B01D39E104009398E1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB29D2BCE6DFF32FEE17ACD0CDE707E /* FirebaseDatabase.framework */; };
 		9185FA425E2ADC0C96E233B3C3284246 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079B3364E0BC4467B30811F00FD377B4 /* LayoutConstraint.swift */; };
 		964D481C6E9281081727048D7C9DA7BA /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073251B7577E2F627A42B0877F64C60B /* ConstraintItem.swift */; };
 		9B8FEC707269B27CA0CD40A36B647186 /* GFCircleQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D32B320173307CDAE8E30C7EC2E6E83 /* GFCircleQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B89B0331D39DA8A000F463B /* FirebaseDatabase.framework in Frameworks */,
+				8FE334B01D39E104009398E1 /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);
