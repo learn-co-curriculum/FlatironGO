@@ -16,7 +16,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
     var locationManager = CLLocationManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,17 +35,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         print("lanching")
         
         print(getUserLocation())
-        // Do any additional setup after loading the view.
-        
         
         mapView.snp_makeConstraints{(make) -> Void in
             mapView.addAnnotation(point)
             mapView.pitchEnabled = true
             
-            
-            // Optionally set a starting point.
             mapView.setCenterCoordinate(point.coordinate, zoomLevel: 15, direction: 0, animated: false)
-            
             
             view.addSubview(mapView)
             
