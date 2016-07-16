@@ -26,24 +26,29 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         mapView.delegate = self
         
-        let point = MGLPointAnnotation()
-        point.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
-        point.title = "Flatiron School"
-        point.subtitle = "Learn Love Code"
-        //mapView.addAnnotation(point)
-        //self.mapView.pitchEnabled = true
-        mapView.addAnnotation(point)
+        // Create Point at Flatiron Building location
+        let flatironSchool = MGLPointAnnotation()
+        flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
+        flatironSchool.title = "Flatiron School"
+        flatironSchool.subtitle = "Learn Love Code"
+
+        // Add the point to the map
+        mapView.addAnnotation(flatironSchool)
+        
+        // Make sure we follow the user's location as they move
         mapView.userTrackingMode = .Follow
-        print("lanching")
-        mapView.delegate = self
         
-        print(getUserLocation())
+        // What's the user's location?
+        let userStartLocationTuple = getUserLocation()
+        print("User location: \(userStartLocationTuple)")
+        let userStartLocation = CLLocationCoordinate2D(latitude: userStartLocationTuple.latitude, longitude: userStartLocationTuple.longitude)
         
+        // Setup the mapview's constraints
         mapView.snp_makeConstraints{(make) -> Void in
-            mapView.addAnnotation(point)
+//            mapView.addAnnotation(point) // Duplicate?
             mapView.pitchEnabled = true
             
-            mapView.setCenterCoordinate(point.coordinate, zoomLevel: 15, direction: 0, animated: false)
+            mapView.setCenterCoordinate(userStartLocation, zoomLevel: 15, direction: 0, animated: false)
             
             view.addSubview(mapView)
             
@@ -104,7 +109,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
 
     
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
-        // Try to reuse the existing ‘pisa’ annotation image, if it exists.
+
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("Flatiron")
         
         if annotationImage == nil {
