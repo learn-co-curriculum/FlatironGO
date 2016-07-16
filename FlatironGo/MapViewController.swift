@@ -15,6 +15,7 @@ import Mapbox
 class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
     
     var locationManager = CLLocationManager()
+    let backpackButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             }
             
         }
+        setUpBackpackButton()
     }
     
     func getUserLocation() -> (latitude: CLLocationDegrees, longitude: CLLocationDegrees)   {
@@ -122,6 +124,26 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             
             // Animate the camera movement over 5 seconds.
             mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+    }
+    
+    func setUpBackpackButton() {
+        backpackButton.backgroundColor = UIColor.flatironBlueColor()
+        backpackButton.setImage(UIImage(named: "backpack"), forState: .Normal)
+        view.addSubview(backpackButton)
+        backpackButton.snp_makeConstraints { (make) in
+            make.bottom.equalTo(view).offset(-10)
+            make.right.equalTo(view).offset(-10)
+            make.height.equalTo(50)
+            make.width.equalTo(backpackButton.snp_height)
+        }
+        backpackButton.layer.cornerRadius = 25
+        backpackButton.addTarget(self, action: #selector(showBackpack), forControlEvents: .TouchUpInside)
+    }
+    
+    func showBackpack() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let backpackVC = storyboard.instantiateViewControllerWithIdentifier("backpack")
+        presentViewController(backpackVC, animated: true, completion: nil)
     }
         
 }

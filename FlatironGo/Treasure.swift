@@ -11,12 +11,14 @@ import UIKit
 
 struct Treasure: CustomStringConvertible {
     let location: GPSLocation
+    var name: String
     var item = CALayer()
     var description: String { return makeDescription() }
     var image: UIImage?
     
-    init(location: GPSLocation, imageURLString: String) {
+    init(location: GPSLocation, name: String, imageURLString: String) {
         self.location = location
+        self.name = name
         image = self.makeImage(imageURLString)
         createItem()
     }

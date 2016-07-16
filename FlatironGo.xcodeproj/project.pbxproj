@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		14DABE94405B58B3F93E24D2 /* Pods_FlatironGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */; };
+		2B81D8DC1D3A935600BB3EDD /* BackpackCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */; };
+		2B81D8DF1D3A959200BB3EDD /* BackpackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */; };
+		2B81D8E01D3A959200BB3EDD /* BackpackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81D8DE1D3A959200BB3EDD /* BackpackCollectionViewCell.xib */; };
+		2B81D8E21D3AB78D00BB3EDD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8E11D3AB78D00BB3EDD /* Colors.swift */; };
 		5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983B81D39D6A000E5819C /* MapViewController.swift */; };
 		5B4983BB1D39D6A600E5819C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BA1D39D6A600E5819C /* Constants.swift */; };
 		5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BD1D39DDA000E5819C /* Treasure.swift */; };
@@ -36,6 +40,10 @@
 		0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		233D6158F5C6619D29953E36 /* Pods-FlatironGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.debug.xcconfig"; sourceTree = "<group>"; };
 		28A832C2049CC00D4A25D7FC /* Pods-FlatironGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.release.xcconfig"; sourceTree = "<group>"; };
+		2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackpackCollectionViewController.swift; sourceTree = "<group>"; };
+		2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackpackCollectionViewCell.swift; sourceTree = "<group>"; };
+		2B81D8DE1D3A959200BB3EDD /* BackpackCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackpackCollectionViewCell.xib; sourceTree = "<group>"; };
+		2B81D8E11D3AB78D00BB3EDD /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5B4983B81D39D6A000E5819C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5B4983BA1D39D6A600E5819C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B4983BD1D39DDA000E5819C /* Treasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
@@ -124,11 +132,15 @@
 			isa = PBXGroup;
 			children = (
 				7DD9128C1D37155E00331CF3 /* AppDelegate.swift */,
+				2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */,
+				2B81D8E11D3AB78D00BB3EDD /* Colors.swift */,
+				2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */,
 				7DD9128E1D37155E00331CF3 /* ViewController.swift */,
 				5B4983B81D39D6A000E5819C /* MapViewController.swift */,
 				5B4983BA1D39D6A600E5819C /* Constants.swift */,
 				5B4983BD1D39DDA000E5819C /* Treasure.swift */,
 				7DD912901D37155E00331CF3 /* Main.storyboard */,
+				2B81D8DE1D3A959200BB3EDD /* BackpackCollectionViewCell.xib */,
 				7DD912931D37155E00331CF3 /* Assets.xcassets */,
 				7DD912951D37155E00331CF3 /* LaunchScreen.storyboard */,
 				7DD912981D37155E00331CF3 /* Info.plist */,
@@ -241,6 +253,7 @@
 				7DD912971D37155E00331CF3 /* LaunchScreen.storyboard in Resources */,
 				5D6443111D39AB3500D17A2E /* GoogleService-Info.plist in Resources */,
 				7DD912941D37155E00331CF3 /* Assets.xcassets in Resources */,
+				2B81D8E01D3A959200BB3EDD /* BackpackCollectionViewCell.xib in Resources */,
 				7DD912921D37155E00331CF3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,10 +456,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DD9128F1D37155E00331CF3 /* ViewController.swift in Sources */,
+				2B81D8E21D3AB78D00BB3EDD /* Colors.swift in Sources */,
 				5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */,
+				2B81D8DC1D3A935600BB3EDD /* BackpackCollectionViewController.swift in Sources */,
 				5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */,
 				7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */,
 				5B4983BB1D39D6A600E5819C /* Constants.swift in Sources */,
+				2B81D8DF1D3A959200BB3EDD /* BackpackCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
