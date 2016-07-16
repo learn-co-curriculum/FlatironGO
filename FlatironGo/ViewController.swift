@@ -86,7 +86,6 @@ extension ViewController {
 extension UIViewController {
     
     private func setupGestureRecognizer() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: <#T##Selector#>)
         
         //        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
         //        gestureRecognizer.cancelsTouchesInView = NO;
