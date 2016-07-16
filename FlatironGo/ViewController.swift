@@ -29,8 +29,6 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("launching view controller")
         setupCaptureCameraDevice()
         setupPreviewLayer()
         setupMotionManager()
@@ -84,15 +82,19 @@ extension ViewController {
     }
 }
 
-
-extension UIViewController {
+// MARK: - Gesture Recognizer Methods
+extension ViewController {
     
     private func setupGestureRecognizer() {
-        
-        //        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-        //        gestureRecognizer.cancelsTouchesInView = NO;
-        //        [self.view addGestureRecognizer:gestureRecognizer];
-        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.viewTapped))
+        gestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func viewTapped(gesture: UITapGestureRecognizer) {
+        let location = gesture.locationInView(view)
+        print("location = \(location)")
+        print("pokemon frame = \(pokemon.center)")
     }
     
 }
@@ -126,9 +128,9 @@ extension CALayer {
 //        for (UITouch *touch in touches) {
 //            CGPoint point = [touch locationInView:[touch view]];
 //            point = [[touch view] convertPoint:point toView:nil];
-//            
+//
 //            CALayer *layer = [(CALayer *)self.view.layer.presentationLayer hitTest:point];
-//            
+//
 //            layer = layer.modelLayer;
 //            layer.opacity = 0.5;
 //        }
