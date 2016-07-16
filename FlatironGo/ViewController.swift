@@ -15,17 +15,19 @@ final class ViewController: UIViewController {
     
     let captureSession = AVCaptureSession()
     let motionManager = CMMotionManager()
+    var previewLayer: AVCaptureVideoPreviewLayer! = nil
     let pokemon = CALayer()
     var quaternionX: Double = 0.0 {
         didSet {
-            pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0
+            if !foundTreasure { pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
         }
     }
     var quaternionY: Double = 0.0 {
         didSet {
-            pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0
+            if !foundTreasure { pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
         }
     }
+    var foundTreasure = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,7 @@ extension ViewController {
     }
     
     private func setupPreviewLayer() {
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
         let image = UIImage(named: "BuzzLightyear")
@@ -93,8 +95,65 @@ extension ViewController {
     
     func viewTapped(gesture: UITapGestureRecognizer) {
         let location = gesture.locationInView(view)
-        print("location = \(location)")
-        print("pokemon frame = \(pokemon.center)")
+        let treasureCenter = pokemon.center
+        let treasureHeight = pokemon.bounds.height
+        let treasureWidth = pokemon.bounds.width
+        let treasureOrigin = CGPoint(x: treasureCenter.x - (treasureWidth / 2), y: treasureCenter.y - (treasureHeight / 2))
+        let topLeftX = Int(treasureOrigin.x)
+        let topRightX = topLeftX + Int(treasureWidth)
+        let topLeftY = Int(treasureOrigin.y)
+        let bottomLeftY = topLeftY + Int(treasureHeight)
+        
+        guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
+        
+        let xRange = topLeftX...topRightX
+        let yRange = topLeftX...bottomLeftY
+        
+        
+        if xRange.contains(Int(location.x)) && yRange.contains(Int(location.y)) {
+            motionManager.stopDeviceMotionUpdates()
+            captureSession.stopRunning()
+            
+            
+            foundTreasure = true
+            
+            let spring = CASpringAnimation(keyPath: "position.x")
+            spring.damping = 7
+            spring.fromValue = pokemon.center.x
+            spring.toValue = CGRectGetMidX(view.frame)
+            spring.duration = 2.5
+            pokemon.addAnimation(spring, forKey: nil)
+            
+            let springY = CASpringAnimation(keyPath: "position.y")
+            springY.damping = 7
+            springY.fromValue = pokemon.center.y
+            springY.toValue = CGRectGetMidY(view.frame)
+            springY.duration = 2.5
+            pokemon.addAnimation(springY, forKey: nil)
+            
+            
+            pokemon.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: CGRectGetMidY(self.view.frame))
+            
+            let animation = CABasicAnimation(keyPath: "opacity")
+            animation.beginTime = 2
+            animation.duration = 10
+            animation.fromValue = 1
+            animation.toValue = 0
+            animation.removedOnCompletion = false
+            animation.fillMode = kCAFillModeBoth
+            animation.additive = false
+            previewLayer.addAnimation(animation, forKey: "opacityOUT")
+            
+//            animation.beginTime = CMTimeGetSeconds(CMTimeAdd(img.passTimeRange.start, img.passTimeRange.duration));
+//            animation.duration = CMTimeGetSeconds(_timeline.transitionDuration);
+//            animation.fromValue = [NSNumber numberWithFloat:1.0f];
+//            animation.toValue = [NSNumber numberWithFloat:0.0f];
+//            animation.removedOnCompletion = NO;
+//            animation.fillMode = kCAFillModeBoth;
+//            animation.additive = NO;
+//            [animtingLayer addAnimation:animation forKey:@"opacityOUT"];
+        }
+        
     }
     
 }
@@ -118,21 +177,15 @@ extension CALayer {
     
 }
 
+// MARK: - CGPoint Functions
+extension CGPoint {
+    
+    func isInRangeOfTreasure(treasure: CGPoint) -> Bool {
+        return true
+    }
+    
+}
 
 
 
-// MARK: - Detect Taps on Screen
 
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    if ([touches count] == 1) {
-//        for (UITouch *touch in touches) {
-//            CGPoint point = [touch locationInView:[touch view]];
-//            point = [[touch view] convertPoint:point toView:nil];
-//
-//            CALayer *layer = [(CALayer *)self.view.layer.presentationLayer hitTest:point];
-//
-//            layer = layer.modelLayer;
-//            layer.opacity = 0.5;
-//        }
-//    }
-//}
