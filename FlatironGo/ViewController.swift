@@ -18,22 +18,12 @@ final class ViewController: UIViewController {
     let pokemon = CALayer()
     var quaternionX: Double = 0.0 {
         didSet {
-            print("xxxxxxxxxxxxxx")
-            print("quaternionX = \(quaternionX)")
-            print("pokemon.center.x = \(pokemon.center.x)")
-            pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width) * 3.0
-            print("NEW pokemon.center.x = \(pokemon.center.x)")
-            print("xxxxxxxxxxxxxx\n\n\n")
+            pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0
         }
     }
     var quaternionY: Double = 0.0 {
         didSet {
-            print("yyyyyyyyyyyyyy")
-            print("quaternionY = \(quaternionY)")
-            print("pokemon.center.y = \(pokemon.center.y)")
-            pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height) * 3.0
-            print("NEW pokemon.center.y = \(pokemon.center.y)")
-            print("yyyyyyyyyyyyyy\n\n\n")
+            pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0
         }
     }
     
@@ -42,6 +32,7 @@ final class ViewController: UIViewController {
         setupCaptureCameraDevice()
         setupPreviewLayer()
         setupMotionManager()
+        setupGestureRecognizer()
     }
     
 }
@@ -63,7 +54,7 @@ extension ViewController {
         
         let image = UIImage(named: "BuzzLightyear")
         pokemon.contents = image?.CGImage
-        pokemon.bounds = CGRectMake(0.0, 0.0, 100.0, 200.0)
+        pokemon.bounds = CGRectMake(100.0, 100.0, 100.0, 200.0)
         pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
         previewLayer.addSublayer(pokemon)
         
@@ -91,6 +82,23 @@ extension ViewController {
     }
 }
 
+
+extension UIViewController {
+    
+    private func setupGestureRecognizer() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: <#T##Selector#>)
+        
+        //        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+        //        gestureRecognizer.cancelsTouchesInView = NO;
+        //        [self.view addGestureRecognizer:gestureRecognizer];
+        
+    }
+    
+}
+
+
+
+
 // MARK: - Center Point to CALayer
 extension CALayer {
     
@@ -106,3 +114,22 @@ extension CALayer {
     }
     
 }
+
+
+
+
+// MARK: - Detect Taps on Screen
+
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    if ([touches count] == 1) {
+//        for (UITouch *touch in touches) {
+//            CGPoint point = [touch locationInView:[touch view]];
+//            point = [[touch view] convertPoint:point toView:nil];
+//            
+//            CALayer *layer = [(CALayer *)self.view.layer.presentationLayer hitTest:point];
+//            
+//            layer = layer.modelLayer;
+//            layer.opacity = 0.5;
+//        }
+//    }
+//}
