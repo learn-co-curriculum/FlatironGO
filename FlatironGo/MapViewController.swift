@@ -16,7 +16,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
     var locationManager = CLLocationManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,34 +24,33 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
+        mapView.delegate = self
+        
         let point = MGLPointAnnotation()
         point.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
         point.title = "Flatiron School"
         point.subtitle = "Learn Love Code"
         //mapView.addAnnotation(point)
         //self.mapView.pitchEnabled = true
+        mapView.addAnnotation(point)
         mapView.userTrackingMode = .Follow
         print("lanching")
         mapView.delegate = self
         
         print(getUserLocation())
-        // Do any additional setup after loading the view.
-        
         
         mapView.snp_makeConstraints{(make) -> Void in
             mapView.addAnnotation(point)
             mapView.pitchEnabled = true
             
-            
-            // Optionally set a starting point.
             mapView.setCenterCoordinate(point.coordinate, zoomLevel: 15, direction: 0, animated: false)
-            
             
             view.addSubview(mapView)
             
             mapView.snp_makeConstraints{(make) -> Void in
                 make.edges.equalTo(self.view)
             }
+            
         }
     }
    
@@ -70,8 +68,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 return (latitude,longitude)
             }
             
-            
-        } else{
+        } else {
             
         }
         
