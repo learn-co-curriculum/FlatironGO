@@ -116,24 +116,10 @@ extension ViewController {
         if xRange.contains(Int(location.x)) && yRange.contains(Int(location.y)) {
             motionManager.stopDeviceMotionUpdates()
             captureSession.stopRunning()
-            
             foundTreasure = true
             
-            let spring = CASpringAnimation(keyPath: "position.x")
-            spring.damping = 7
-            spring.fromValue = pokemon.center.x
-            spring.toValue = CGRectGetMidX(view.frame)
-            spring.duration = 2.5
-            pokemon.addAnimation(spring, forKey: nil)
-            
-            let springY = CASpringAnimation(keyPath: "position.y")
-            springY.damping = 7
-            springY.fromValue = pokemon.center.y
-            springY.toValue = CGRectGetMidY(view.frame)
-            springY.duration = 2.5
-            pokemon.addAnimation(springY, forKey: nil)
-            
-            pokemon.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: CGRectGetMidY(self.view.frame))
+            pokemon.springToMiddle(withDuration: 2.5, damping: 7, inView: view)
+            pokemon.centerInView(view)
             
             let fadeOut = CABasicAnimation(keyPath: "opacity")
             fadeOut.delegate = self
@@ -152,7 +138,30 @@ extension ViewController {
 
 
 
-
+// MARK - Spring Animations
+extension CALayer {
+    
+    func springToMiddle(withDuration duration: CFTimeInterval, damping: CGFloat, inView view: UIView) {
+        let springX = CASpringAnimation(keyPath: "position.x")
+        springX.damping = damping
+        springX.fromValue = self.center.x
+        springX.toValue = CGRectGetMidX(view.frame)
+        springX.duration = duration
+        self.addAnimation(springX, forKey: nil)
+        
+        let springY = CASpringAnimation(keyPath: "position.y")
+        springY.damping = damping
+        springY.fromValue = self.center.y
+        springY.toValue = CGRectGetMidY(view.frame)
+        springY.duration = duration
+        self.addAnimation(springY, forKey: nil)
+    }
+    
+    func centerInView(view: UIView) {
+        self.center = CGPoint(x: CGRectGetMidX(view.frame), y: CGRectGetMidY(view.frame))
+    }
+    
+}
 
 
 
