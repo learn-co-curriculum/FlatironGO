@@ -164,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A61D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGo" */;
 			buildPhases = (
+				9D981AADF644D1544283F3EF /* 📦 Check Pods Manifest.lock */,
 				3B52FA432431C58865C1BBBC /* [CP] Check Pods Manifest.lock */,
 				9CB50B8E4604D884C94B86E7 /* [CP] Check Pods Manifest.lock */,
 				7DD912851D37155E00331CF3 /* Sources */,
@@ -187,6 +188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD912A91D37155F00331CF3 /* Build configuration list for PBXNativeTarget "FlatironGoTests" */;
 			buildPhases = (
+				E61470D094C245620E2C694A /* 📦 Check Pods Manifest.lock */,
 				A052E786E2B5CE9BB0C9F6F1 /* [CP] Check Pods Manifest.lock */,
 				971A7E065AE5C2F5858026D9 /* [CP] Check Pods Manifest.lock */,
 				7DD912991D37155F00331CF3 /* Sources */,
@@ -418,6 +420,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		9D981AADF644D1544283F3EF /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		A052E786E2B5CE9BB0C9F6F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -446,6 +463,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlatironGoTests/Pods-FlatironGoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E61470D094C245620E2C694A /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -29,12 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Firebase Initialization
         FIRApp.configure()
-        
-        /*
- 
-        TESTING GEOFIRE
- 
-        */
+
+        return true
+    }
+    
+    func setNewLocationToFirebase() {
         
         // Create GeoFire reference
         let geofireRef = FIRDatabase.database().referenceWithPath("Treasures")
@@ -44,23 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let location = CLLocation.init(latitude: 40.781324, longitude: -73.973988)
         
         // Set location to Firebase DB
-//        geoFire.setLocation(location, forKey: "New York Stock Exchange")
+        geoFire.setLocation(location, forKey: "New York Stock Exchange")
         
-        // Create radius query
-        
-        let geoQuery = geoFire.queryAtLocation(location, withRadius: 175.0)
-        
-        //use query for getting locations in a radius
-        var queryHandle = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
-        
-            print("Key '\(key)' entered the search area and is at location '\(location)'")
-            
-            self.locations.append(key)
-            print(self.locations)
-
-        }
-        
-        return true
     }
     
     func setupMapView(){

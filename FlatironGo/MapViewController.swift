@@ -9,12 +9,15 @@
 import UIKit
 import SnapKit
 import Mapbox
+import FirebaseDatabase
+import GeoFire
 
 
 //var mapView : MGLMapView!
 class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
     
     var locationManager = CLLocationManager()
+    var userStartLocation = CLLocation()
     let backpackButton = UIButton()
     
     override func viewDidLoad() {
@@ -39,17 +42,32 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         // Make sure we follow the user's location as they move
         mapView.userTrackingMode = .Follow
         
-        // What's the user's location?
-        let userStartLocationTuple = getUserLocation()
-        print("User location: \(userStartLocationTuple)")
-        let userStartLocation = CLLocationCoordinate2D(latitude: userStartLocationTuple.latitude, longitude: userStartLocationTuple.longitude)
+        // Get user location
+        if let location = getUserLocation() {
+            self.userStartLocation = location
+            
+        }
+        
+        // Create GeoFire reference
+        let geofireRef = FIRDatabase.database().referenceWithPath("Treasures")
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        // Create radius query
+        let geoQuery = geoFire.queryAtLocation(self.userStartLocation, withRadius: 8.0)
+        
+        // Add observer for entry into location
+        _ = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
+            
+            print("\n\nKey:\n'\(key)'Location:\n\(location)\n\n")
+            
+        }
         
         // Setup the mapview's constraints
         mapView.snp_makeConstraints{(make) -> Void in
 
             mapView.pitchEnabled = true
             
-            mapView.setCenterCoordinate(userStartLocation, zoomLevel: 15, direction: 0, animated: false)
+            mapView.setCenterCoordinate(self.userStartLocation.coordinate, zoomLevel: 15, direction: 0, animated: false)
             
             view.addSubview(mapView)
             
@@ -61,23 +79,20 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         setUpBackpackButton()
     }
     
-    func getUserLocation() -> (latitude: CLLocationDegrees, longitude: CLLocationDegrees)   {
+    func getUserLocation() -> CLLocation?   {
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startMonitoringSignificantLocationChanges()
-        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Authorized)
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
-            if let latitude = self.locationManager.location?.coordinate.latitude, longitude = self.self.locationManager.location?.coordinate.longitude {
-                return (latitude,longitude)
-            }
+            return self.locationManager.location
             
         } else {
-            
+            return nil
         }
         
-        return (0,0)
     }
     
     func mapView(mapView: MGLMapView, viewForAnnotation annotation: MGLAnnotation) -> MGLAnnotationView? {
