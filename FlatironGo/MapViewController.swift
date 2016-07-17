@@ -150,3 +150,12 @@ class CustomAnnotationView: MGLAnnotationView {
         layer.addAnimation(animation, forKey: "borderWidth")
     }
 }
+
+     /* TODO:
+     
+     make sure flatiron logo fills annotation view
+     tapping on annotation should open up some details / a little coding challenge
+     succeeding on challenge should add reward to pack
+     we should loop through all the locations given back to us from firebase
+     
+     */
