@@ -14,3 +14,10 @@ struct Constants{
     static let styleUrl = "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"
     
 }
+
+struct FIRReferencePath {
+    static let treasureLocations = "treasureLocations"
+    static let treasureProfiles = "treasureProfiles"
+    
+    
+}
