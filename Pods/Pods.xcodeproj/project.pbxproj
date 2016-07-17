@@ -31,10 +31,10 @@
 		3B6623D192A7E7202C544330C78191AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC427CE9B516E8415B6F60D9868A13A /* Foundation.framework */; };
 		3FC9C8BAAA1D0EE36E61A9BDCF340FDE /* GeoFire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A4DD63A9EF4CF9275DDB3AFA5EC2920E /* GeoFire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4513DE765C36B5121CB8AE58C6AD6995 /* Pods-FlatironGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB11DD047D73207DEC74F09A36A9AE1 /* Pods-FlatironGo-dummy.m */; };
-		4C976C341D3A7C3E008EC476 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		515424A127715254A7219178C3627C6A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0EF155D10D770A92FCDB9946E35CD /* UIImage+GIF.m */; };
 		5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A0311C6F307A792C1FABC481F571A /* GeoFire-dummy.m */; };
 		5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6229BE2EA1D03410C9FB1F2034D8F599 /* GFGeoHashQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D4704991D3B0A33009B6ECC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BFBE381B40921BAB4859A263E6A73 /* FirebaseDatabase.framework */; };
 		635D0793F0F3860B74CD5DFE70B4D942 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DE8313B99CB6776D8F1EBD29E0F3544 /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		640E5EEA3965B393563B5CA9445986C6 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C654DB488FD44E3813F9AEB186ABF /* ConstraintRelation.swift */; };
 		6CAD4FE11C56FE3CE515AB67C46292A9 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 671B92A1AF53E1775D008CEFDAD4BA21 /* SnapKit-dummy.m */; };
@@ -225,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C976C341D3A7C3E008EC476 /* FirebaseDatabase.framework in Frameworks */,
+				5D4704991D3B0A33009B6ECC /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);
