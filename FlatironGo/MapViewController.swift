@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     var locationManager = CLLocationManager()
     var userStartLocation = CLLocation()
     let backpackButton = UIButton()
+    var treasureProfiles = [[:]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,26 +49,40 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             
         }
         
-        // Create GeoFire reference
-        let geofireRef = FIRDatabase.database().referenceWithPath("Treasures")
+        getTreasuresFor(self.userStartLocation)
+        setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
+        setUpBackpackButton()
+    }
+    
+    func getTreasuresFor(location: CLLocation) {
+    
+        let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
         let geoFire = GeoFire(firebaseRef: geofireRef)
+        let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
         
-        // Create radius query
-        let geoQuery = geoFire.queryAtLocation(self.userStartLocation, withRadius: 8.0)
-        
-        // Add observer for entry into location
         _ = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
             
-            print("\n\nKey:\n'\(key)'Location:\n\(location)\n\n")
+            let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+            
+            _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
+                
+                if let treasureProfile = snapshot.value as? [String: AnyObject] {
+                    self.treasureProfiles.append(treasureProfile)
+                    print(self.treasureProfiles)
+                }
+                
+            })
             
         }
+    }
+    
+    func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {
         
-        // Setup the mapview's constraints
         mapView.snp_makeConstraints{(make) -> Void in
-
+            
             mapView.pitchEnabled = true
             
-            mapView.setCenterCoordinate(self.userStartLocation.coordinate, zoomLevel: 15, direction: 0, animated: false)
+            mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 0, animated: false)
             
             view.addSubview(mapView)
             
@@ -76,7 +91,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             }
             
         }
-        setUpBackpackButton()
     }
     
     func getUserLocation() -> CLLocation?   {

@@ -18,32 +18,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var locations: [String] = []
 
-    
     //var mapViewController = MapViewController()
     var navBarController: UINavigationController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        setupMapView()
         
-        // Firebase Initialization
+        setupMapView()
         FIRApp.configure()
-
+        
         return true
     }
     
-    func setNewLocationToFirebase() {
+    // Set new location to Firebase
+    func setNewLocationToFirebase(lat lat: Double, long: Double, key: String) {
+        
+        // Create CLLocation
+        let location = CLLocation.init(latitude: lat, longitude: long)
         
         // Create GeoFire reference
-        let geofireRef = FIRDatabase.database().referenceWithPath("Treasures")
+        let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
         let geoFire = GeoFire(firebaseRef: geofireRef)
         
-        // Create test location
-        let location = CLLocation.init(latitude: 40.781324, longitude: -73.973988)
-        
         // Set location to Firebase DB
-        geoFire.setLocation(location, forKey: "New York Stock Exchange")
+        geoFire.setLocation(location, forKey: key)
+        
+        // Test setting locations
+        //        setNewLocationToFirebase(lat: 40.703277, long: -74.017028, key: "-KMrYXuGTcdgU0EmLla8")
+        //        setNewLocationToFirebase(lat: 40.706876, long: -74.011265, key: "-KMrYLBBgDZCoAW29j7S")
+        //        setNewLocationToFirebase(lat: 40.70528, long: -74.014025, key: "-KMrXkk5iEvaQFeyVGDp")
+        //        setNewLocationToFirebase(lat: 40.70561624671299, long: -74.01340194046497, key: "-KMrX9X2cUkICtYYjS9K")
+        //        setNewLocationToFirebase(lat: 40.704334, long: -74.013978, key: "-KMrY51C43P5X5L1ECdO")
+        
+        // Test setting profile
+        //        let ref = FIRDatabase.database().reference()
+        //        let key = ref.child(FIRReferencePath.treasureProfiles).childByAutoId().key
+        //        let post = [key: [
+        //                            "name": "Battery Park",
+        //                            "imageURL": "https://i.imgur.com/EDmhR2z.jpg"]]
+        //        
+        //        ref.child("treasureProfiles").updateChildValues(post)
         
     }
     
@@ -53,9 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window!.rootViewController = navBarController
 //        navBarController.view.backgroundColor = UIColor.whiteColor();
 //        window!.makeKeyAndVisible()
-//        
 //        navBarController.viewControllers = [MapViewController()]
-        
     }
 
     func applicationWillResignActive(application: UIApplication) {
