@@ -19,7 +19,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     var locationManager = CLLocationManager()
     var userStartLocation = CLLocation()
     let backpackButton = UIButton()
-    var treasureProfiles = [[:]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +61,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         _ = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
             
-            let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+            // NEED TO SAVE KEY AND LOCATION TO LOCAL DICT -> [key: <init object containing location>]
             
+            let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+    
             _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
                 
                 if let treasureProfile = snapshot.value as? [String: AnyObject] {
-                    self.treasureProfiles.append(treasureProfile)
-                    print(self.treasureProfiles)
+                    
+                    // NEED TO UPDATE LOCAL DICT WITH PROFILE INFORMATION FOR KEY -> [snapshot.key: <items from snapshot.value for object with location>]
+                    print("key: \(snapshot.key)\nvalue: \(treasureProfile)")
                 }
                 
             })
