@@ -16,9 +16,11 @@ import GeoFire
 //var mapView : MGLMapView!
 class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
     
+    let backpackButton = UIButton()
     var locationManager = CLLocationManager()
     var userStartLocation = CLLocation()
-    let backpackButton = UIButton()
+    var treasureLocations: [String: GPSLocation] = [:]
+    var treasures: [String: Treasure] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,23 +61,36 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         let geoFire = GeoFire(firebaseRef: geofireRef)
         let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
         
-        _ = geoQuery.observeEventType(.KeyEntered) { (key: String!, location: CLLocation!) in
+        _ = geoQuery.observeEventType(.KeyEntered) { (key: String?, location: CLLocation?) in
             
-            // NEED TO SAVE KEY AND LOCATION TO LOCAL DICT -> [key: <init object containing location>]
-            
-            let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
-    
-            _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
-                
-                if let treasureProfile = snapshot.value as? [String: AnyObject] {
-                    
-                    // NEED TO UPDATE LOCAL DICT WITH PROFILE INFORMATION FOR KEY -> [snapshot.key: <items from snapshot.value for object with location>]
-                    print("key: \(snapshot.key)\nvalue: \(treasureProfile)")
-                }
-                
-            })
-            
+            if let geoKey = key, geoLocation = location {
+                let lat = Float((geoLocation.coordinate.latitude))
+                let long = Float((geoLocation.coordinate.longitude))
+                self.treasureLocations[geoKey] = (GPSLocation.init(latitude: lat, longitude: long))
+                self.getTreasureProfileFor(geoKey)
+            }
         }
+    }
+    
+    func getTreasureProfileFor(key: String) {
+        
+        let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+        
+        _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
+            
+            if let profile = snapshot.value as? [String: AnyObject] {
+                
+                if let treasureLocation = self.treasureLocations[snapshot.key] {
+                        
+                        let name = profile["name"] as! String
+                        let imageURL = profile["imageURL"] as! String
+                        let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
+                        self.treasures[snapshot.key] = treasure
+                    
+                }
+            }
+            
+        })
     }
     
     func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {

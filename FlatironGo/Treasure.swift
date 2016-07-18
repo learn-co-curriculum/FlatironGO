@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 struct Treasure: CustomStringConvertible {
     let location: GPSLocation
@@ -48,5 +49,13 @@ struct GPSLocation {
     init(latitude: Float, longitude: Float) {
         self.latitude = latitude
         self.longitude = longitude
+    }
+}
+
+struct TreasureLocation {
+    var location: CLLocation
+    
+    init(location: CLLocation) {
+        self.location = location
     }
 }
