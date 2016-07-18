@@ -153,8 +153,8 @@ extension ViewController {
     func displayDiscoverLabel() {
         let label = UILabel(frame: CGRectZero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "AvenirNext-Regular", size: 50.0)
-        label.text = "Discovered❗️"
+        label.font = UIFont(name: "AvenirNext-Regular", size: 25.0)
+        label.text = "Caught❗️"
         label.numberOfLines = 1
         label.textAlignment = .Center
         label.adjustsFontSizeToFitWidth = true
