@@ -17,6 +17,7 @@ final class ViewController: UIViewController {
     let motionManager = CMMotionManager()
     var previewLayer: AVCaptureVideoPreviewLayer! = nil
     let pokemon = CALayer()
+    var treasure: Treasure! = nil
     var foundImageView: UIImageView! = nil
     var quaternionX: Double = 0.0 {
         didSet {
@@ -32,6 +33,9 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         view.backgroundColor = UIColor.blackColor()
         setupCaptureCameraDevice()
         setupPreviewLayer()
