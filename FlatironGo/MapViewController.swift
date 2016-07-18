@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  FlatironGo
 //
-//  Created by Johann Kerr on 7/15/16.
+//  Created by Your Mom on 7/15/16.
 //  Copyright © 2016 Gamesmith, LLC. All rights reserved.
 //
 
