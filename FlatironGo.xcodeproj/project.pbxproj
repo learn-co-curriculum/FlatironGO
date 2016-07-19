@@ -15,6 +15,7 @@
 		5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983B81D39D6A000E5819C /* MapViewController.swift */; };
 		5B4983BB1D39D6A600E5819C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BA1D39D6A600E5819C /* Constants.swift */; };
 		5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BD1D39DDA000E5819C /* Treasure.swift */; };
+		5D4704D51D3D91C0009B6ECC /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4704D41D3D91C0009B6ECC /* FirebaseAPI.swift */; };
 		5D6443111D39AB3500D17A2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */; };
 		5D6443141D39B87C00D17A2E /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443121D39B87C00D17A2E /* GeoFire.framework */; };
 		5D6443151D39B87C00D17A2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443131D39B87C00D17A2E /* CoreLocation.framework */; };
@@ -47,6 +48,7 @@
 		5B4983B81D39D6A000E5819C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5B4983BA1D39D6A600E5819C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B4983BD1D39DDA000E5819C /* Treasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
+		5D4704D41D3D91C0009B6ECC /* FirebaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPI.swift; sourceTree = "<group>"; };
 		5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5D6443121D39B87C00D17A2E /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GeoFire.framework; path = "Pods/../build/Debug-iphoneos/GeoFire/GeoFire.framework"; sourceTree = "<group>"; };
 		5D6443131D39B87C00D17A2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -137,6 +139,7 @@
 				2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */,
 				7DD9128E1D37155E00331CF3 /* ViewController.swift */,
 				5B4983B81D39D6A000E5819C /* MapViewController.swift */,
+				5D4704D41D3D91C0009B6ECC /* FirebaseAPI.swift */,
 				5B4983BA1D39D6A600E5819C /* Constants.swift */,
 				5B4983BD1D39DDA000E5819C /* Treasure.swift */,
 				7DD912901D37155E00331CF3 /* Main.storyboard */,
@@ -488,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DD9128F1D37155E00331CF3 /* ViewController.swift in Sources */,
+				5D4704D51D3D91C0009B6ECC /* FirebaseAPI.swift in Sources */,
 				2B81D8E21D3AB78D00BB3EDD /* Colors.swift in Sources */,
 				5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */,
 				2B81D8DC1D3A935600BB3EDD /* BackpackCollectionViewController.swift in Sources */,

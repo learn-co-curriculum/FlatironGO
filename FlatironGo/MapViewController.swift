@@ -86,7 +86,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                         let imageURL = profile["imageURL"] as! String
                         let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
                         self.treasures[snapshot.key] = treasure
-                    
+                        print(self.treasures)
                 }
             }
             

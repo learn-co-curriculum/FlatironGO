@@ -18,6 +18,8 @@ struct Constants{
 struct FIRReferencePath {
     static let treasureLocations = "treasureLocations"
     static let treasureProfiles = "treasureProfiles"
-    
-    
+}
+
+struct FIRStorageReference {
+    static let storageBucket = "gs://flatiron-go.appspot.com"
 }
