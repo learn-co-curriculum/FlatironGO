@@ -21,11 +21,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     var userStartLocation = CLLocation()
     var treasureLocations: [String: GPSLocation] = [:]
     var treasures: [String: Treasure] = [:]
+    var mapView: MGLMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mapView = MGLMapView(frame: view.bounds,
+        self.mapView = MGLMapView(frame: view.bounds,
                                  styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
     
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -43,16 +44,40 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         // Make sure we follow the user's location as they move
         mapView.userTrackingMode = .Follow
-        
+        // TODO: Refactor here
         // Get user location
+
+        
         if let location = getUserLocation() {
             self.userStartLocation = location
             
         }
         
+        print("\(self.userStartLocation)")
         getTreasuresFor(self.userStartLocation)
+        
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
         setUpBackpackButton()
+        
+        print("Self treasure locations \(self.treasureLocations.count)")
+        print(self.treasures.count)
+        
+    }
+    
+    func createAnnotations(){
+    
+        if let annotationArray = self.mapView.annotations{
+            self.mapView.removeAnnotations(annotationArray)
+        }
+        for annot in self.treasures{
+            let newAnnotation = MGLPointAnnotation()
+            let latitude = Double(annot.1.location.latitude)
+            let longitude = Double(annot.1.location.longitude)
+            newAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
+            newAnnotation.title = annot.0
+            self.mapView.addAnnotation(newAnnotation)
+        }
+        
     }
     
     func getTreasuresFor(location: CLLocation) {
@@ -64,12 +89,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         _ = geoQuery.observeEventType(.KeyEntered) { (key: String?, location: CLLocation?) in
             
             if let geoKey = key, geoLocation = location {
+                
                 let lat = Float((geoLocation.coordinate.latitude))
                 let long = Float((geoLocation.coordinate.longitude))
+                
                 self.treasureLocations[geoKey] = (GPSLocation.init(latitude: lat, longitude: long))
+                
                 self.getTreasureProfileFor(geoKey)
             }
         }
+     
     }
     
     func getTreasureProfileFor(key: String) {
@@ -77,6 +106,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
         
         _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
+            //TODO : Comment
             
             if let profile = snapshot.value as? [String: AnyObject] {
                 
@@ -85,6 +115,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                         let name = profile["name"] as! String
                         let imageURL = profile["imageURL"] as! String
                         let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
+                    
                         self.treasures[snapshot.key] = treasure
                     
                 }
@@ -144,7 +175,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             annotationView!.frame = CGRectMake(0, 0, 50, 50)
             
             // Set the annotation view’s background color to a value determined by its longitude.
-            annotationView!.backgroundColor = UIColor.whiteColor()
+            //annotationView!.backgroundColor = UIColor.clearColor()
             
             // Create the Flatiron logo and stick it in the annotation's view
             let flatironLogo = UIImageView.init(image: UIImage(named: "FlatironLogo"))
