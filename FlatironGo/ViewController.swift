@@ -38,11 +38,14 @@ final class ViewController: UIViewController {
         // Test - Buzz
 //        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Buzz Lightyear", imageURLString: "http://i.imgur.com/vhnh8Bw.png")
         
+        
+        let testLink = "http://pngimg.com/upload/bear_PNG1191.png"
+        
         // Test - Bull
-        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Wall St. Bull", imageURLString: "http://imgur.com/xZgu3mh.png")
+        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Wall St. Bull", imageURLString: testLink)
 
-        
-        
+        //http://i.imgur.com/1PzLL85.png
+        // https://i.imgur.com/0qILq3m.png
         if treasure.image == nil {
             treasure.makeImage { [unowned self] success in
                 dispatch_async(dispatch_get_main_queue(),{
@@ -86,7 +89,11 @@ extension ViewController {
         if let treasureImage = treasure.image {
             pokemon.contents = treasureImage.CGImage
             print(treasure.image!)
-            pokemon.bounds = CGRectMake(100.0, 100.0, 100.0, 200.0)
+            
+            let height = treasure.image!.size.height
+            let width = treasure.image!.size.height
+
+            pokemon.bounds = CGRectMake(100.0, 100.0, width, height)
             pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
             previewLayer.addSublayer(pokemon)
             view.layer.addSublayer(previewLayer)
