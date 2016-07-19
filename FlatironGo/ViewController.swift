@@ -40,9 +40,9 @@ final class ViewController: UIViewController {
         
         
         let testLink = "http://pngimg.com/upload/bear_PNG1191.png"
-        
-        // Test - Bull
-        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Wall St. Bull", imageURLString: testLink)
+//        
+//        // Test - Bull
+//        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Wall St. Bull", imageURLString: testLink)
 
         //http://i.imgur.com/1PzLL85.png
         // https://i.imgur.com/0qILq3m.png
@@ -216,7 +216,7 @@ extension ViewController {
         let label = UILabel(frame: CGRectZero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "AvenirNext-Regular", size: 30.0)
-        label.text = "Buzz Lightyear"
+        label.text = treasure.name
         label.numberOfLines = 1
         label.textAlignment = .Center
         label.adjustsFontSizeToFitWidth = true

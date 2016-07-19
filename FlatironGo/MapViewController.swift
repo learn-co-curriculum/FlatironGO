@@ -26,18 +26,20 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mapView = MGLMapView(frame: view.bounds,
+        mapView = MGLMapView(frame: view.bounds,
                                  styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
         
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
         mapView.delegate = self
+//        mapView.zoomEnabled = false
         
         // Create Point at Flatiron Building location
         let flatironSchool = MGLPointAnnotation()
         flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
         flatironSchool.title = "Flatiron School"
         flatironSchool.subtitle = "Learn Love Code"
+    
         
         // Add the point to the map
         mapView.addAnnotation(flatironSchool)
@@ -149,7 +151,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         mapView.snp_makeConstraints{(make) -> Void in
             
             mapView.pitchEnabled = true
-            mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 0, animated: false)
+            mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
             
             view.addSubview(mapView)
             
@@ -178,9 +180,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
     func mapView(mapView: MGLMapView, viewForAnnotation annotation: MGLAnnotation) -> MGLAnnotationView? {
         // This example is only concerned with point annotations.
-        guard annotation is MGLPointAnnotation else {
-            return nil
-        }
+        guard annotation is MGLPointAnnotation else { return nil }
         
         // Use the point annotation’s longitude value (as a string) as the reuse identifier for its view.
         let reuseIdentifier = "\(annotation.coordinate.longitude)"
@@ -191,20 +191,25 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         // If there’s no reusable annotation view available, initialize a new one.
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.frame = CGRectMake(0, 0, 50, 50)
+            annotationView!.frame = CGRectMake(0, 0, 100, 100)
             
-            // Set the annotation view’s background color to a value determined by its longitude.
-            //annotationView!.backgroundColor = UIColor.clearColor()
+            let imageView = UIImageView(image: UIImage(named: "treasure"))
+            imageView.contentMode = .ScaleAspectFit
+            imageView.translatesAutoresizingMaskIntoConstraints = false
             
-            // Create the Flatiron logo and stick it in the annotation's view
-            let flatironLogo = UIImageView.init(image: UIImage(named: "FlatironLogo"))
-            annotationView!.addSubview(flatironLogo)
-            flatironLogo.snp_makeConstraints(closure: { (make) in
-                make.edges.equalTo(annotationView!)
-            })
+            annotationView!.addSubview(imageView)
+            imageView.topAnchor.constraintEqualToAnchor(annotationView?.topAnchor).active = true
+            imageView.bottomAnchor.constraintEqualToAnchor(annotationView?.bottomAnchor).active = true
+            imageView.leftAnchor.constraintEqualToAnchor(annotationView?.leftAnchor).active = true
+            imageView.rightAnchor.constraintEqualToAnchor(annotationView?.rightAnchor).active = true
         }
         
         return annotationView
+    }
+    
+    func mapView(mapView: MGLMapView, didSelectAnnotationView annotationView: MGLAnnotationView) {
+        print("We selected an anootation")
+        performSegueWithIdentifier("TreasureSegue", sender: annotationView)
     }
     
     func mapView(mapView: MGLMapView, didSelectAnnotation annotation: MGLAnnotation) {
@@ -251,28 +256,50 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
 }
 
+// MARK: - Segue
+extension MapViewController {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard segue.identifier == "TreasureSegue" else { return }
+        guard let destVC = segue.destinationViewController as? ViewController else { return }
+        
+        if let annotation = sender as? MGLAnnotationView {
+            
+            print("YOOOOOO!!!! \n\n")
+            print(annotation)
+            
+        }
+        
+        let chosenTreasure = treasures["-KMrYXuGTcdgU0EmLla8"]!
+        destVC.treasure = chosenTreasure
+        print(treasures)
+        
+    }
+}
+
 // MGLAnnotationView subclass
 class CustomAnnotationView: MGLAnnotationView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
         // (NO LONGER) Force the annotation view to maintain a constant size when the map is tilted.
-        scalesWithViewingDistance = true
-        
+        scalesWithViewingDistance = false
         // Use CALayer’s corner radius to turn this view into a circle.
         //        layer.cornerRadius = frame.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.whiteColor().CGColor
+//        layer.borderWidth = 0
+//        layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+        print("Selected!")
+        
         // Animate the border width in/out, creating an iris effect.
-        let animation = CABasicAnimation(keyPath: "borderWidth")
-        animation.duration = 0.1
-        layer.borderWidth = selected ? frame.width / 4 : 2
-        layer.addAnimation(animation, forKey: "borderWidth")
+//        let animation = CABasicAnimation(keyPath: "borderWidth")
+//        animation.duration = 0.1
+//        layer.borderWidth = selected ? frame.width / 4 : 2
+//        layer.addAnimation(animation, forKey: "borderWidth")
     }
 }
 
