@@ -185,6 +185,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         // Use the point annotation’s longitude value (as a string) as the reuse identifier for its view.
         let reuseIdentifier = "\(annotation.coordinate.longitude)"
         
+        
         // For better performance, always try to reuse existing annotations.
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
         
