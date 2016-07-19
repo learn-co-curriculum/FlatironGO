@@ -34,30 +34,15 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        
-        // Test - Buzz
-//        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Buzz Lightyear", imageURLString: "http://i.imgur.com/vhnh8Bw.png")
-        
-        
-        let testLink = "http://pngimg.com/upload/bear_PNG1191.png"
-//        
-//        // Test - Bull
-//        treasure = Treasure(location: GPSLocation(latitude: 23.2, longitude: 24.21), name: "Wall St. Bull", imageURLString: testLink)
-
-        //http://i.imgur.com/1PzLL85.png
-        // https://i.imgur.com/0qILq3m.png
         if treasure.image == nil {
             treasure.makeImage { [unowned self] success in
                 dispatch_async(dispatch_get_main_queue(),{
                     self.setupCamera()
                 })
             }
-            
         } else {
             setupCamera()
         }
-        
-        
     }
     
     private func setupCamera() {
