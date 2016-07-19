@@ -80,7 +80,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 self.getTreasureProfileFor(geoKey, completion: { (result) in
                     if result {
                         completion(true)
-                        
+                        createAnnotations()
                     } else {
                         completion(false)
                     }
