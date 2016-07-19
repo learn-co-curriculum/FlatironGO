@@ -77,12 +77,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         if let annotationArray = self.mapView.annotations{
             self.mapView.removeAnnotations(annotationArray)
         }
+        
         for annot in self.treasures{
             let newAnnotation = MGLPointAnnotation()
             let latitude = Double(annot.1.location.latitude)
             let longitude = Double(annot.1.location.longitude)
             newAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
-            newAnnotation.title = annot.0
+            newAnnotation.title = annot.1.name
             self.mapView.addAnnotation(newAnnotation)
         }
         
@@ -205,6 +206,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         return annotationView
     }
+    
+    func mapView(mapView: MGLMapView, didSelectAnnotation annotation: MGLAnnotation) {
+        
+        // if treasure is within X of user location, present camera view controller
+        // else flash annotation red / show alert "too far from treasure!"
+    }
+    
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
