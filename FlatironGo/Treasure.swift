@@ -45,9 +45,8 @@ final class Treasure: CustomStringConvertible {
             
             if let image = UIImage(data: data) {
                 self.image = image
-                print("IMage is what now???? \(image)")
+                print("Image is what now???? \(image)")
             }
-          
             
             print("did we make an image dude: \(self.image)")
             

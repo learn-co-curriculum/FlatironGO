@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  FlatironGo
 //
-//  Created by Johann Kerr on 7/15/16.
+//  Created by Your Mom on 7/15/16.
 //  Copyright © 2016 Gamesmith, LLC. All rights reserved.
 //
 
@@ -28,7 +28,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         self.mapView = MGLMapView(frame: view.bounds,
                                  styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
-    
+        
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
         mapView.delegate = self
@@ -38,7 +38,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
         flatironSchool.title = "Flatiron School"
         flatironSchool.subtitle = "Learn Love Code"
-
+        
         // Add the point to the map
         mapView.addAnnotation(flatironSchool)
         
@@ -50,12 +50,20 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
         if let location = getUserLocation() {
             self.userStartLocation = location
-            
+            print("Got you, bro: \(location)")
         }
         
-        print("\(self.userStartLocation)")
-        getTreasuresFor(self.userStartLocation)
-        
+
+        getTreasuresFor(self.userStartLocation, completion: { (result) in
+            if result {
+                print("Got dem tressss: \(self.treasures)")
+            } else {
+                print("FAILURE, treaures getting error")
+            }
+            
+        })
+
+
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
         setUpBackpackButton()
         
@@ -80,8 +88,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         
     }
     
-    func getTreasuresFor(location: CLLocation) {
-    
+    func getTreasuresFor(location: CLLocation, completion: (Bool) -> ()) {
+        
+        print("Let's get some trez")
+        
         let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
         let geoFire = GeoFire(firebaseRef: geofireRef)
         let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
@@ -94,14 +104,22 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 let long = Float((geoLocation.coordinate.longitude))
                 
                 self.treasureLocations[geoKey] = (GPSLocation.init(latitude: lat, longitude: long))
-                
-                self.getTreasureProfileFor(geoKey)
+
+                self.getTreasureProfileFor(geoKey, completion: { (result) in
+                    if result {
+                        completion(true)
+                        self.createAnnotations()
+                    } else {
+                        completion(false)
+                    }
+                })
             }
+            
         }
      
     }
     
-    func getTreasureProfileFor(key: String) {
+    func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
         
         let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
         
@@ -111,16 +129,17 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             if let profile = snapshot.value as? [String: AnyObject] {
                 
                 if let treasureLocation = self.treasureLocations[snapshot.key] {
-                        
-                        let name = profile["name"] as! String
-                        let imageURL = profile["imageURL"] as! String
-                        let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
                     
-                        self.treasures[snapshot.key] = treasure
+                    let name = profile["name"] as! String
+                    let imageURL = profile["imageURL"] as! String
+                    let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
+                    self.treasures[snapshot.key] = treasure
                     
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }
-            
         })
     }
     
@@ -129,7 +148,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         mapView.snp_makeConstraints{(make) -> Void in
             
             mapView.pitchEnabled = true
-            
             mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 0, animated: false)
             
             view.addSubview(mapView)
@@ -193,14 +211,14 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     }
     
     func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
-            // Wait for the map to load before initiating the first camera movement.
-            
-            // Create a camera that rotates around the same center point, rotating 180°.
-            // `fromDistance:` is meters above mean sea level that an eye would have to be in order to see what the map view is showing.
-            let camera = MGLMapCamera(lookingAtCenterCoordinate: mapView.centerCoordinate, fromDistance: 200, pitch: 60, heading: 180)
-            
-            // Animate the camera movement over 5 seconds.
-            mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+        // Wait for the map to load before initiating the first camera movement.
+        
+        // Create a camera that rotates around the same center point, rotating 180°.
+        // `fromDistance:` is meters above mean sea level that an eye would have to be in order to see what the map view is showing.
+        let camera = MGLMapCamera(lookingAtCenterCoordinate: mapView.centerCoordinate, fromDistance: 200, pitch: 60, heading: 180)
+        
+        // Animate the camera movement over 5 seconds.
+        mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
     }
     
     func setUpBackpackButton() {
@@ -222,7 +240,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
         let backpackVC = storyboard.instantiateViewControllerWithIdentifier("backpack")
         presentViewController(backpackVC, animated: true, completion: nil)
     }
-        
+    
 }
 
 // MGLAnnotationView subclass
@@ -234,7 +252,7 @@ class CustomAnnotationView: MGLAnnotationView {
         scalesWithViewingDistance = true
         
         // Use CALayer’s corner radius to turn this view into a circle.
-//        layer.cornerRadius = frame.width / 2
+        //        layer.cornerRadius = frame.width / 2
         layer.borderWidth = 2
         layer.borderColor = UIColor.whiteColor().CGColor
     }
@@ -249,3 +267,12 @@ class CustomAnnotationView: MGLAnnotationView {
         layer.addAnimation(animation, forKey: "borderWidth")
     }
 }
+
+/* TODO:
+ 
+ make sure flatiron logo fills annotation view
+ tapping on annotation should open up some details / a little coding challenge
+ succeeding on challenge should add reward to pack
+ we should loop through all the locations given back to us from firebase
+ 
+ */
