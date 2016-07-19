@@ -80,6 +80,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 self.getTreasureProfileFor(geoKey, completion: { (result) in
                     if result {
                         completion(true)
+                        
                     } else {
                         completion(false)
                     }
@@ -87,13 +88,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             }
             
         }
-        
-        print("endo trezo: \(treasures)")
     }
     
     func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
-        
-        print("lolz trez profile: \(key)")
         
         let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
         
