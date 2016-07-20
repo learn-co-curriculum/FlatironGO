@@ -42,8 +42,8 @@
 		746B890F1CECD5326ADD05028FC0FC5C /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = F58DC59B4983332802D37004E6DC6E1C /* GFGeoHash.m */; };
 		75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 5608B93EC22DFDF67A089E26D17010CB /* GFGeoHashQuery.m */; };
 		78932E65378125E0FB3B1F1F461FFE99 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973BBD03F8882BE9134E43ADA48E6C7F /* EdgeInsets.swift */; };
-		7D2BCC391D400BA400B4CD52 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C59085203F06B7977184E3EB8A76 /* FirebaseDatabase.framework */; };
 		7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C22D187C23870C9372E44129B800967 /* GFBase32Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D9195341D40212C00ED0CFC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C59085203F06B7977184E3EB8A76 /* FirebaseDatabase.framework */; };
 		84AF44A218EA516DE43FAB48F04647C3 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC91F3DC5477A19A53D7EA4ADCD2070 /* Constraint.swift */; };
 		87643797B8E4E1A9912B71D6A02EBAA4 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A6CBEC407D33125134003B3DFAC28 /* ConstraintMaker.swift */; };
 		88E6099E26849A03ABD19B5A8FBE2754 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642ADAC438E127F7D46FA88AAAF13102 /* ConstraintItem.swift */; };
@@ -227,7 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2BCC391D400BA400B4CD52 /* FirebaseDatabase.framework in Frameworks */,
+				7D9195341D40212C00ED0CFC /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);

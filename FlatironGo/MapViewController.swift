@@ -12,140 +12,149 @@ import Mapbox
 import FirebaseDatabase
 import GeoFire
 
-final class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
+final class MapViewController: UIViewController  {
     
     let backpackButton = UIButton()
     var locationManager = CLLocationManager()
     var userStartLocation = CLLocation()
     var treasureLocations: [String: GPSLocation] = [:]
-    var treasures: [String: Treasure] = [:]
+    var treasures: [(String, Treasure)] = []
+    var annotations: [String: Treasure] = [:]
     var mapView: MGLMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMapView()
-        createPointAtFlatironLocation()
         setupCurrentLocation()
-        
-        
-        
-        
-        
-        getTreasuresFor(self.userStartLocation, completion: { (result) in
-            if result {
-                print("Got dem tressss: \(self.treasures)")
-            } else {
-                print("FAILURE, treaures getting error")
-            }
-            
-        })
-        
-        
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
         setUpBackpackButton()
-        
-        print("Self treasure locations \(self.treasureLocations.count)")
-        print(self.treasures.count)
-        
+        getTreasuresFor(self.userStartLocation) { result in
+            //TODO: Handle failure
+        }
     }
     
-    func createAnnotations(){
+}
+
+// MARK: - Treasure Methods
+extension MapViewController {
+    
+    typealias ResponseDictionary = [String: AnyObject]
+    
+    private func getTreasuresFor(location: CLLocation, completion: (Bool) -> ()) {
+        let geoQuery = setupGeoQueryWithLocation(location)
         
-        if let annotationArray = self.mapView.annotations{
-            self.mapView.removeAnnotations(annotationArray)
+        geoQuery.observeEventType(.KeyEntered) { [unowned self] key, location in
+            guard let geoKey = key,
+                geoLocation = location
+                else { print("No Key and/or No Location"); completion(false); return }
+            
+            let treasureLocation = self.generateLatAndLongFromLocation(geoLocation)
+            self.treasureLocations[geoKey] = (GPSLocation(latitude: treasureLocation.lat, longitude: treasureLocation.long))
+            self.getTreasureProfileFor(geoKey) { [unowned self] result in
+                if result == true { self.createAnnotations() }
+                completion(result)
+            }
         }
-        
-        for annot in self.treasures{
-            let newAnnotation = MGLPointAnnotation()
-            let latitude = Double(annot.1.location.latitude)
-            let longitude = Double(annot.1.location.longitude)
-            newAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
-            newAnnotation.title = annot.1.name
-            self.mapView.addAnnotation(newAnnotation)
-        }
-        
     }
     
-    func getTreasuresFor(location: CLLocation, completion: (Bool) -> ()) {
-        
-        print("Let's get some trez")
-        
+    private func generateLatAndLongFromLocation(location: CLLocation) -> (lat: Float, long: Float) {
+        return (Float((location.coordinate.latitude)), Float((location.coordinate.longitude)))
+    }
+    
+    private func setupGeoQueryWithLocation(location: CLLocation) -> GFCircleQuery {
         let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
         let geoFire = GeoFire(firebaseRef: geofireRef)
         let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
-        
-        _ = geoQuery.observeEventType(.KeyEntered) { (key: String?, location: CLLocation?) in
-            
-            if let geoKey = key, geoLocation = location {
-                
-                let lat = Float((geoLocation.coordinate.latitude))
-                let long = Float((geoLocation.coordinate.longitude))
-                
-                self.treasureLocations[geoKey] = (GPSLocation.init(latitude: lat, longitude: long))
-                
-                self.getTreasureProfileFor(geoKey, completion: { (result) in
-                    if result {
-                        completion(true)
-                        self.createAnnotations()
-                    } else {
-                        completion(false)
-                    }
-                })
-            }
-            
-        }
+        return geoQuery
         
     }
     
-   
+    private func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
+        let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+        
+        profileRef.observeEventType(FIRDataEventType.Value, withBlock: { [unowned self] snapshot in
+            guard let profile = snapshot.value as? ResponseDictionary,
+                treasureLocation = self.treasureLocations[snapshot.key]
+                else { print("Unable to produce snapshot value or key"); completion(false); return }
+            
+            self.saveTreasureLocally(withResponse: profile, key: snapshot.key, andLocation: treasureLocation)
+            completion(true)
+            })
+    }
     
-    func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {
+    private func saveTreasureLocally(withResponse response: ResponseDictionary, key: String, andLocation location: GPSLocation) {
+        let name = response["name"] as? String ?? ""
+        let imageURL = response["imageURL"] as? String ?? ""
+        let treasure = Treasure(location: location, name: name, imageURLString: imageURL)
+        let newTreasure = (key, treasure)
+        treasures.append(newTreasure)
+    }
+    
+}
+
+// MARK: - Current Location Methods
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func getUserLocation() -> CLLocation? {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startMonitoringSignificantLocationChanges()
+        
+        let weHaveAuthorization = (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
+        
+        if weHaveAuthorization { return locationManager.location } else { return nil }
+    }
+    
+    private func setupCurrentLocation() {
+        if let location = getUserLocation() {
+            self.userStartLocation = location
+        }
+    }
+    
+}
+
+// MARK: - Map View Methods
+extension MapViewController {
+    
+    private func setupMapView() {
+        mapView = MGLMapView(frame: view.bounds, styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
+        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        mapView.delegate = self
+        mapView.userTrackingMode = .Follow
+        mapView.pitchEnabled = true
+    }
+    
+    private func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {
+        mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
+        
+        view.addSubview(mapView)
         
         mapView.snp_makeConstraints{(make) -> Void in
-            
-            mapView.pitchEnabled = true
-            mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
-            
-            view.addSubview(mapView)
-            
-            mapView.snp_makeConstraints{(make) -> Void in
-                make.edges.equalTo(self.view)
-            }
-            
+            make.edges.equalTo(self.view)
         }
     }
     
-    func getUserLocation() -> CLLocation?   {
-        
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startMonitoringSignificantLocationChanges()
-        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
-        {
-            return self.locationManager.location
-            
-        } else {
-            return nil
-        }
-        
-    }
+}
+
+// MARK: - MapView Delegate Methods
+extension MapViewController: MGLMapViewDelegate {
     
     func mapView(mapView: MGLMapView, viewForAnnotation annotation: MGLAnnotation) -> MGLAnnotationView? {
-        // This example is only concerned with point annotations.
+        
         guard annotation is MGLPointAnnotation else { return nil }
         
-        // Use the point annotation’s longitude value (as a string) as the reuse identifier for its view.
-        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        let reuseIdentifier = String(annotation.coordinate.longitude)
         
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier) as? TreasureAnnotationView
+        annotationView?.scalesWithViewingDistance = false
+
         
-        // For better performance, always try to reuse existing annotations.
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
-        
-        // If there’s no reusable annotation view available, initialize a new one.
         if annotationView == nil {
-            annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.frame = CGRectMake(0, 0, 100, 100)
+            annotationView = TreasureAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView!.frame = CGRectMake(0, 0, 200, 200)
+            annotationView!.scalesWithViewingDistance = false
+            annotationView!.enabled = true
             
             let imageView = UIImageView(image: UIImage(named: "treasure"))
             imageView.contentMode = .ScaleAspectFit
@@ -158,37 +167,72 @@ final class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationM
             imageView.rightAnchor.constraintEqualToAnchor(annotationView?.rightAnchor).active = true
         }
         
+        let key = String(annotation.coordinate.latitude) + String(annotation.coordinate.longitude)
+        if let associatedTreasure = annotations[key] {
+            annotationView?.treasure = associatedTreasure
+        }
+        
         return annotationView
     }
     
     func mapView(mapView: MGLMapView, didSelectAnnotationView annotationView: MGLAnnotationView) {
-        print("We selected an anootation")
         performSegueWithIdentifier("TreasureSegue", sender: annotationView)
     }
     
     func mapView(mapView: MGLMapView, didSelectAnnotation annotation: MGLAnnotation) {
-        
-        // if treasure is within X of user location, present camera view controller
-        // else flash annotation red / show alert "too far from treasure!"
+       // TODO: User is in radius of tapped treasure.
     }
-    
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
     
     func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
-        // Wait for the map to load before initiating the first camera movement.
-        
-        // Create a camera that rotates around the same center point, rotating 180°.
-        // `fromDistance:` is meters above mean sea level that an eye would have to be in order to see what the map view is showing.
         let camera = MGLMapCamera(lookingAtCenterCoordinate: mapView.centerCoordinate, fromDistance: 200, pitch: 60, heading: 180)
-        
-        // Animate the camera movement over 5 seconds.
-        mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+        mapView.setCamera(camera, withDuration: 2, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
     }
     
-    func setUpBackpackButton() {
+}
+
+// MARK: - Annotation Methods
+extension MapViewController {
+    
+    private func createAnnotations() {
+        guard let (_, treasure) = treasures.last else { print("No last treasure"); return }
+        generateAnnotationWithTreasure(treasure)
+    }
+    
+    private func generateAnnotationWithTreasure(treasure: Treasure) {
+        let newAnnotation = MGLPointAnnotation()
+        let lat = Double(treasure.location.latitude)
+        let long = Double(treasure.location.longitude)
+        newAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        newAnnotation.title = treasure.name
+        mapView.addAnnotation(newAnnotation)
+        
+        let key = String(newAnnotation.coordinate.latitude) + String(newAnnotation.coordinate.longitude)
+        annotations[key] = treasure
+    }
+    
+}
+
+// MARK: - Segue Method
+extension MapViewController {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard segue.identifier == "TreasureSegue" else { return }
+        guard let destVC = segue.destinationViewController as? ViewController else { return }
+        
+        if let annotation = sender as? TreasureAnnotationView {
+            destVC.treasure = annotation.treasure
+        }
+
+    }
+}
+
+// MARK: - Backpack Methods
+extension MapViewController {
+    private func setUpBackpackButton() {
         backpackButton.backgroundColor = UIColor.flatironBlueColor()
         backpackButton.setImage(UIImage(named: "backpack"), forState: .Normal)
         view.addSubview(backpackButton)
@@ -208,114 +252,6 @@ final class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationM
         presentViewController(backpackVC, animated: true, completion: nil)
     }
     
-}
-
-// MARK: - Treasure Methods
-extension MapViewController {
-    private func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
-        
-        let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
-        
-        profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
-            //TODO : Comment
-            
-            if let profile = snapshot.value as? [String: AnyObject] {
-                
-                if let treasureLocation = self.treasureLocations[snapshot.key] {
-                    let name = profile["name"] as! String
-                    let imageURL = profile["imageURL"] as! String
-                    let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
-                    self.treasures[snapshot.key] = treasure
-                    
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            }
-        })
-    }
     
 }
 
-// MARK: - Current Location Methods
-extension MapViewController {
-    
-    private func setupCurrentLocation() {
-        if let location = getUserLocation() {
-            self.userStartLocation = location
-        }
-    }
-    
-}
-
-// MARK: - Map View Methods
-extension MapViewController {
-    
-    private func setupMapView() {
-        mapView = MGLMapView(frame: view.bounds, styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
-        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        mapView.delegate = self
-        mapView.userTrackingMode = .Follow
-    }
-    
-}
-
-// MARK: - Annotation Methods
-extension MapViewController {
-    
-    private func createPointAtFlatironLocation() {
-        let flatironSchool = MGLPointAnnotation()
-        flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
-        flatironSchool.title = "Flatiron School"
-        flatironSchool.subtitle = "Learn Love Code"
-        mapView.addAnnotation(flatironSchool)
-    }
-    
-}
-
-// MARK: - Segue Method
-extension MapViewController {
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard segue.identifier == "TreasureSegue" else { return }
-        guard let destVC = segue.destinationViewController as? ViewController else { return }
-        
-        if let annotation = sender as? MGLAnnotationView {
-            
-            print("YOOOOOO!!!! \n\n")
-            print(annotation)
-            
-        }
-        
-        let chosenTreasure = treasures["-KMrYXuGTcdgU0EmLla8"]!
-        destVC.treasure = chosenTreasure
-        print(treasures)
-        
-    }
-}
-
-// MGLAnnotationView subclass
-class CustomAnnotationView: MGLAnnotationView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // (NO LONGER) Force the annotation view to maintain a constant size when the map is tilted.
-        scalesWithViewingDistance = false
-        // Use CALayer’s corner radius to turn this view into a circle.
-        //        layer.cornerRadius = frame.width / 2
-        //        layer.borderWidth = 0
-        //        layer.borderColor = UIColor.whiteColor().CGColor
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        print("Selected!")
-        
-        // Animate the border width in/out, creating an iris effect.
-        //        let animation = CABasicAnimation(keyPath: "borderWidth")
-        //        animation.duration = 0.1
-        //        layer.borderWidth = selected ? frame.width / 4 : 2
-        //        layer.addAnimation(animation, forKey: "borderWidth")
-    }
-}

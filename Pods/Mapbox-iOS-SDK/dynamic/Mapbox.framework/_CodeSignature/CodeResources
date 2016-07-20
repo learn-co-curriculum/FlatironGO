@@ -108,7 +108,7 @@
 		</data>
 		<key>Headers/MGLOfflineStorage.h</key>
 		<data>
-		BNff2FcjbdSrmJwWmafJmfi9Reo=
+		v6WLOsN6Xs1zV4Sh5OO4KiyOwXY=
 		</data>
 		<key>Headers/MGLOverlay.h</key>
 		<data>
@@ -160,7 +160,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ebS/F6svP/hoXHVKupSFQkzZBZQ=
+		Dg3Rzrkt+IV43MvjDlQDAbjS1LA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -492,11 +492,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BNff2FcjbdSrmJwWmafJmfi9Reo=
+			v6WLOsN6Xs1zV4Sh5OO4KiyOwXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			0BF2dUpbVrOd29uEhku6vRuLpictk29pn8V9pXRLol8=
+			Q7m1txqUKTOPHpZQSUwy+ZaeAgzy8+Uxc0E4fxLqtJ4=
 			</data>
 		</dict>
 		<key>Headers/MGLOverlay.h</key>
