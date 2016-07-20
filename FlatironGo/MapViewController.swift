@@ -12,9 +12,7 @@ import Mapbox
 import FirebaseDatabase
 import GeoFire
 
-
-//var mapView : MGLMapView!
-class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
+final class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate  {
     
     let backpackButton = UIButton()
     var locationManager = CLLocationManager()
@@ -25,37 +23,14 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMapView()
+        createPointAtFlatironLocation()
+        setupCurrentLocation()
         
-        mapView = MGLMapView(frame: view.bounds,
-                                 styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
         
-        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
-        mapView.delegate = self
-//        mapView.zoomEnabled = false
         
-        // Create Point at Flatiron Building location
-        let flatironSchool = MGLPointAnnotation()
-        flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
-        flatironSchool.title = "Flatiron School"
-        flatironSchool.subtitle = "Learn Love Code"
-    
         
-        // Add the point to the map
-        mapView.addAnnotation(flatironSchool)
-        
-        // Make sure we follow the user's location as they move
-        mapView.userTrackingMode = .Follow
-        // TODO: Refactor here
-        // Get user location
-
-        
-        if let location = getUserLocation() {
-            self.userStartLocation = location
-            print("Got you, bro: \(location)")
-        }
-        
-
         getTreasuresFor(self.userStartLocation, completion: { (result) in
             if result {
                 print("Got dem tressss: \(self.treasures)")
@@ -64,8 +39,8 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             }
             
         })
-
-
+        
+        
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
         setUpBackpackButton()
         
@@ -75,7 +50,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     }
     
     func createAnnotations(){
-    
+        
         if let annotationArray = self.mapView.annotations{
             self.mapView.removeAnnotations(annotationArray)
         }
@@ -107,7 +82,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 let long = Float((geoLocation.coordinate.longitude))
                 
                 self.treasureLocations[geoKey] = (GPSLocation.init(latitude: lat, longitude: long))
-
+                
                 self.getTreasureProfileFor(geoKey, completion: { (result) in
                     if result {
                         completion(true)
@@ -119,31 +94,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
             }
             
         }
-     
+        
     }
     
-    func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
-        
-        let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
-        
-        _ = profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
-            //TODO : Comment
-            
-            if let profile = snapshot.value as? [String: AnyObject] {
-                
-                if let treasureLocation = self.treasureLocations[snapshot.key] {
-                    let name = profile["name"] as! String
-                    let imageURL = profile["imageURL"] as! String
-                    let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
-                    self.treasures[snapshot.key] = treasure
-                    
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            }
-        })
-    }
+   
     
     func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {
         
@@ -256,7 +210,70 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     
 }
 
-// MARK: - Segue
+// MARK: - Treasure Methods
+extension MapViewController {
+    private func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
+        
+        let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+        
+        profileRef.observeEventType(FIRDataEventType.Value, withBlock: { snapshot in
+            //TODO : Comment
+            
+            if let profile = snapshot.value as? [String: AnyObject] {
+                
+                if let treasureLocation = self.treasureLocations[snapshot.key] {
+                    let name = profile["name"] as! String
+                    let imageURL = profile["imageURL"] as! String
+                    let treasure = Treasure.init(location: treasureLocation, name: name, imageURLString: imageURL)
+                    self.treasures[snapshot.key] = treasure
+                    
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        })
+    }
+    
+}
+
+// MARK: - Current Location Methods
+extension MapViewController {
+    
+    private func setupCurrentLocation() {
+        if let location = getUserLocation() {
+            self.userStartLocation = location
+        }
+    }
+    
+}
+
+// MARK: - Map View Methods
+extension MapViewController {
+    
+    private func setupMapView() {
+        mapView = MGLMapView(frame: view.bounds, styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
+        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        mapView.delegate = self
+        mapView.userTrackingMode = .Follow
+    }
+    
+}
+
+// MARK: - Annotation Methods
+extension MapViewController {
+    
+    private func createPointAtFlatironLocation() {
+        let flatironSchool = MGLPointAnnotation()
+        flatironSchool.coordinate = CLLocationCoordinate2D(latitude: 40.70528, longitude: -74.014025)
+        flatironSchool.title = "Flatiron School"
+        flatironSchool.subtitle = "Learn Love Code"
+        mapView.addAnnotation(flatironSchool)
+    }
+    
+}
+
+// MARK: - Segue Method
 extension MapViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -286,8 +303,8 @@ class CustomAnnotationView: MGLAnnotationView {
         scalesWithViewingDistance = false
         // Use CALayer’s corner radius to turn this view into a circle.
         //        layer.cornerRadius = frame.width / 2
-//        layer.borderWidth = 0
-//        layer.borderColor = UIColor.whiteColor().CGColor
+        //        layer.borderWidth = 0
+        //        layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -296,18 +313,9 @@ class CustomAnnotationView: MGLAnnotationView {
         print("Selected!")
         
         // Animate the border width in/out, creating an iris effect.
-//        let animation = CABasicAnimation(keyPath: "borderWidth")
-//        animation.duration = 0.1
-//        layer.borderWidth = selected ? frame.width / 4 : 2
-//        layer.addAnimation(animation, forKey: "borderWidth")
+        //        let animation = CABasicAnimation(keyPath: "borderWidth")
+        //        animation.duration = 0.1
+        //        layer.borderWidth = selected ? frame.width / 4 : 2
+        //        layer.addAnimation(animation, forKey: "borderWidth")
     }
 }
-
-/* TODO:
- 
- make sure flatiron logo fills annotation view
- tapping on annotation should open up some details / a little coding challenge
- succeeding on challenge should add reward to pack
- we should loop through all the locations given back to us from firebase
- 
- */
