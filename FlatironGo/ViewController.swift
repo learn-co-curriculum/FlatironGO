@@ -41,6 +41,7 @@ final class ViewController: UIViewController {
                 })
             }
         } else {
+            print("Alredy have image jim")
             setupCamera()
         }
     }

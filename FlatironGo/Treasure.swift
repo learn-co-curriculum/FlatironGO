@@ -17,6 +17,7 @@ final class Treasure: CustomStringConvertible {
     var description: String { return makeDescription() }
     var image: UIImage?
     let imageURL: String
+    var downloadingImage: Bool = false
     
     init(location: GPSLocation, name: String, imageURLString: String) {
         self.location = location
@@ -28,30 +29,28 @@ final class Treasure: CustomStringConvertible {
         return "\(location.latitude), \(location.longitude)"
     }
     
-     func createItem() {
+    func createItem() {
         guard let image = image else {print("fix this later"); return }
         item.contents = image.CGImage
     }
     
-     func makeImage(withCompletion completion: (Bool) -> ()) {
+    func makeImage(withCompletion completion: (Bool) -> ()) {
+        guard downloadingImage == false else { print("Already downloading image."); return }
+        guard image == nil else { print("We already have image"); return }
         guard let imageURL = NSURL(string: imageURL) else { print("Couldnt convert URL"); completion(false); return }
         
-        print("Image url is \(imageURL)")
+        downloadingImage = true
         
         let session = NSURLSession.sharedSession()
         
-        session.dataTaskWithURL(imageURL) { data, response, error in
-            guard let data = data else { print("data came back nil"); completion(false); return }
-            
-            if let image = UIImage(data: data) {
-                self.image = image
-                print("Image is what now???? \(image)")
-            }
-            
-            print("did we make an image dude: \(self.image)")
-            
-            completion(true)
-        }.resume()
+        session.dataTaskWithURL(imageURL) { [unowned self] data, response, error in
+            dispatch_async(dispatch_get_main_queue(),{
+                guard let data = data else { print("data came back nil"); completion(false); return }
+                if let image = UIImage(data: data) { self.image = image }
+                self.downloadingImage = false
+                completion(true)
+            })
+            }.resume()
         
     }
 }

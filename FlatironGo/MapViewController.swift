@@ -28,7 +28,7 @@ final class MapViewController: UIViewController  {
         setupCurrentLocation()
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
         setUpBackpackButton()
-        getTreasuresFor(self.userStartLocation) { result in
+        getTreasuresFor(userStartLocation) { result in
             //TODO: Handle failure
         }
     }
@@ -88,6 +88,7 @@ extension MapViewController {
         let treasure = Treasure(location: location, name: name, imageURLString: imageURL)
         let newTreasure = (key, treasure)
         treasures.append(newTreasure)
+        treasure.makeImage { _ in }
     }
     
 }
