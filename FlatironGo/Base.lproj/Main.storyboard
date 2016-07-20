@@ -72,10 +72,13 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="TreasureSegue" id="H2D-LJ-oNK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3w-zT-eQi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-283.5" y="-323.5"/>
+            <point key="canvasLocation" x="-405.5" y="372.5"/>
         </scene>
     </scenes>
 </document>

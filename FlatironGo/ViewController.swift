@@ -17,6 +17,7 @@ final class ViewController: UIViewController {
     let motionManager = CMMotionManager()
     var previewLayer: AVCaptureVideoPreviewLayer! = nil
     let pokemon = CALayer()
+    var treasure: Treasure! = nil
     var foundImageView: UIImageView! = nil
     var quaternionX: Double = 0.0 {
         didSet {
@@ -33,6 +34,18 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
+        if treasure.image == nil {
+            treasure.makeImage { [unowned self] success in
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.setupCamera()
+                })
+            }
+        } else {
+            setupCamera()
+        }
+    }
+    
+    private func setupCamera() {
         setupCaptureCameraDevice()
         setupPreviewLayer()
         setupMotionManager()
@@ -40,6 +53,8 @@ final class ViewController: UIViewController {
     }
     
 }
+
+
 
 // MARK: - AVFoundation Methods
 extension ViewController {
@@ -56,13 +71,20 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        let image = UIImage(named: "BuzzLightyear")
-        pokemon.contents = image?.CGImage
-        pokemon.bounds = CGRectMake(100.0, 100.0, 100.0, 200.0)
-        pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-        previewLayer.addSublayer(pokemon)
+        if let treasureImage = treasure.image {
+            pokemon.contents = treasureImage.CGImage
+            print(treasure.image!)
+            
+            let height = treasure.image!.size.height
+            let width = treasure.image!.size.height
+
+            pokemon.bounds = CGRectMake(100.0, 100.0, width, height)
+            pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+            previewLayer.addSublayer(pokemon)
+            view.layer.addSublayer(previewLayer)
+            
+        }
         
-        view.layer.addSublayer(previewLayer)
     }
     
 }
@@ -139,7 +161,7 @@ extension ViewController {
     func animateInTreasure() {
         // TODO: Update this when we change pokemon with treasure
         let frame = pokemon.frame
-        let image = UIImage(named: "BuzzLightyear")
+        let image = treasure.image!
         foundImageView = UIImageView(image: image)
         foundImageView.alpha = 0.0
         foundImageView.frame = frame
@@ -179,7 +201,7 @@ extension ViewController {
         let label = UILabel(frame: CGRectZero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "AvenirNext-Regular", size: 30.0)
-        label.text = "Buzz Lightyear"
+        label.text = treasure.name
         label.numberOfLines = 1
         label.textAlignment = .Center
         label.adjustsFontSizeToFitWidth = true
