@@ -148,12 +148,10 @@ extension MapViewController: MGLMapViewDelegate {
         let reuseIdentifier = String(annotation.coordinate.longitude)
         
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier) as? TreasureAnnotationView
-        annotationView?.scalesWithViewingDistance = false
-
         
         if annotationView == nil {
             annotationView = TreasureAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.frame = CGRectMake(0, 0, 200, 200)
+            annotationView!.frame = CGRectMake(0, 0, 100, 100)
             annotationView!.scalesWithViewingDistance = false
             annotationView!.enabled = true
             

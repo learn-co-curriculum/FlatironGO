@@ -36,13 +36,6 @@ final class ViewController: UIViewController {
         view.backgroundColor = UIColor.blackColor()
     }
     
-    private func setupCamera() {
-        setupCaptureCameraDevice()
-        setupPreviewLayer()
-        setupMotionManager()
-        setupGestureRecognizer()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if treasure.image == nil {
@@ -54,8 +47,13 @@ final class ViewController: UIViewController {
         } else {
             setupCamera()
         }
-
-        
+    }
+    
+    private func setupCamera() {
+        setupCaptureCameraDevice()
+        setupPreviewLayer()
+        setupMotionManager()
+        setupGestureRecognizer()
     }
     
 }
