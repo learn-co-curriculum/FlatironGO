@@ -33,7 +33,6 @@ class FirebaseAPI {
                             
                             if success {
                                 
-                                print("Treasure created successfully")
                             }
                         })
                     }

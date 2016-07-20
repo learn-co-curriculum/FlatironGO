@@ -34,16 +34,6 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        if treasure.image == nil {
-            treasure.makeImage { [unowned self] success in
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.setupCamera()
-                })
-            }
-        } else {
-            print("Alredy have image jim")
-            setupCamera()
-        }
     }
     
     private func setupCamera() {
@@ -51,6 +41,21 @@ final class ViewController: UIViewController {
         setupPreviewLayer()
         setupMotionManager()
         setupGestureRecognizer()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if treasure.image == nil {
+            treasure.makeImage { [unowned self] success in
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.setupCamera()
+                })
+            }
+        } else {
+            setupCamera()
+        }
+
+        
     }
     
 }
@@ -83,7 +88,6 @@ extension ViewController {
             pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
             previewLayer.addSublayer(pokemon)
             view.layer.addSublayer(previewLayer)
-            
         }
         
     }
@@ -176,7 +180,7 @@ extension ViewController {
     func displayDiscoverLabel() {
         let label = UILabel(frame: CGRectZero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "AvenirNext-Regular", size: 25.0)
+        label.font = UIFont(name: "AvenirNext-Regular", size: 30.0)
         label.text = "Caught❗️"
         label.numberOfLines = 1
         label.textAlignment = .Center
@@ -201,7 +205,7 @@ extension ViewController {
     func displayNameOfTreasure() {
         let label = UILabel(frame: CGRectZero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "AvenirNext-Regular", size: 30.0)
+        label.font = UIFont(name: "AvenirNext-Regular", size: 45.0)
         label.text = treasure.name
         label.numberOfLines = 1
         label.textAlignment = .Center
@@ -257,7 +261,7 @@ extension CALayer {
         fadeOut.duration = duration
         fadeOut.autoreverses = false
         fadeOut.fromValue = 1.0
-        fadeOut.toValue = 0.2
+        fadeOut.toValue = 0.6
         fadeOut.fillMode = kCAFillModeBoth
         fadeOut.removedOnCompletion = false
         self.addAnimation(fadeOut, forKey: "myanimation")

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +17,18 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="learn_ios" translatesAutoresizingMaskIntoConstraints="NO" id="yfB-Zg-ode">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yfB-Zg-ode" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="BBH-WY-2hz"/>
+                            <constraint firstItem="yfB-Zg-ode" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="BFb-hS-oVb"/>
+                            <constraint firstItem="yfB-Zg-ode" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottomMargin" id="n2r-mU-a6d"/>
+                            <constraint firstItem="yfB-Zg-ode" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="vxg-by-zmC"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +36,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="learn_ios" width="1080" height="1920"/>
+    </resources>
 </document>

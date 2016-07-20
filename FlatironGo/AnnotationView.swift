@@ -15,7 +15,6 @@ class TreasureAnnotationView: MGLAnnotationView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        scalesWithViewingDistance = true
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
