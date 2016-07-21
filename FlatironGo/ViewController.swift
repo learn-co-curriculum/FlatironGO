@@ -212,9 +212,13 @@ extension ViewController {
         label.alpha = 0.0
         
         view.addSubview(label)
+        
         label.centerXAnchor.constraintEqualToAnchor(foundImageView.centerXAnchor).active = true
         label.topAnchor.constraintEqualToAnchor(foundImageView.bottomAnchor, constant: 14.0).active = true
         label.centerYAnchor.constraintEqualToAnchor(foundImageView.centerYAnchor).active = false
+        label.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+        label.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+
         
         let originalCenterY = label.center.y
         label.center.y += 400
