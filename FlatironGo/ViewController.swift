@@ -60,8 +60,8 @@ final class ViewController: UIViewController {
     
     private func setupDismissButton() {
         dismissButton = UIButton(type: .System)
-        dismissButton.setTitle("←", forState: .Normal)
-        dismissButton.titleLabel?.font = UIFont.systemFontOfSize(35.0)
+        dismissButton.setTitle("❌", forState: .Normal)
+        dismissButton.titleLabel?.font = UIFont.systemFontOfSize(25.0)
         dismissButton.setTitleColor(UIColor.redColor(), forState: .Normal)
         dismissButton.addTarget(self, action: #selector(dismiss), forControlEvents: .TouchUpInside)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
@@ -170,7 +170,7 @@ extension ViewController {
             animateInTreasure()
             displayNameOfTreasure()
             displayDiscoverLabel()
-            UIView.transitionWithView(dismissButton, duration: 0.8, options: .TransitionCrossDissolve, animations: { 
+            UIView.transitionWithView(dismissButton, duration: 2.5, options: .TransitionCrossDissolve, animations: {
                 self.dismissButton.alpha = 1.0
                 }, completion: nil)
         }
