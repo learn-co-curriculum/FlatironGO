@@ -5,6 +5,8 @@
 *Map, Users Location, Treasures, Camera displaying the treasure*
 
  Link to the lecture video can be found [here](https://www.youtube.com/watch?v=443Al3kKfb4).
+ 
+If you were to clone this project down to your computer, it will not run! Why? Because we have a `Constants.swift` file that is in our `.gitignore` file. In making this work in your own projects - feel free to skip ahead to the AR section below and mess around with getting **ANY** image to display on screen, then if you want to make it into a full-fledged app.. checkout the really good [Firebase documentation](https://www.firebase.com/docs/ios/) available in setting up your database/storage. 
 
 ### Setting up the Map
 
