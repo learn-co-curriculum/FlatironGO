@@ -31,6 +31,18 @@ Why YES!
 
 First things first... we need a **MAP**
 
+Here are the various steps we will go through
+
+```swift
+override func viewDidLoad() {
+     super.viewDidLoad()
+     setupMapView()
+     setupCurrentLocation()
+     setCenterCoordinateOnMapView()
+     getTreasuresFor(userStartLocation) { _ in }
+}
+```
+
 So we call on our function (we implemented) called `setupMapView()`. Don't forget, we are NOT YET on stage (nothing is displayed on screen at this point).
 
 An important line of code is run in this function:
@@ -58,6 +70,13 @@ private func setupMapView() {
      mapView.delegate = self
      mapView.userTrackingMode = .Follow
      mapView.pitchEnabled = true
+     
+     view.addSubview(mapView)
+     mapView.translatesAutoresizingMaskIntoConstraints = false
+     mapView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+     mapView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+     mapView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+     mapView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
 }
 ```
 
@@ -102,13 +121,13 @@ private func setupCurrentLocation() {
 }
 ```
 
-There's one last thing we need to do with the map. We need to set its `centerCoordinate` property to something.. well we want to center the map on the users current location, that makes sense! SOo lets do that.
-
+There's one last thing we need to do with the map. We need to set the `mapView`'s `centerCoordinate` property to something.. well we want to center the map on the users current location, and now that we have that information.. lets do that!
 ```swift
-mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
+private func setCenterCoordinateOnMapView() {
+    mapView.setCenterCoordinate(userStartLocation.coordinate, zoomLevel: 15, direction: 150, animated: false)
+}
 ```
 
-We then add the `mapView` to our `view` and constrain it to the edgs of the `view` so it fills the screen.
 
 ---
 

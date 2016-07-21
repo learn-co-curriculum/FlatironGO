@@ -25,10 +25,8 @@ final class MapViewController: UIViewController  {
         super.viewDidLoad()
         setupMapView()
         setupCurrentLocation()
-        setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
-        getTreasuresFor(userStartLocation) { result in
-            //TODO: Handle failure
-        }
+        setCenterCoordinateOnMapView()
+        getTreasuresFor(userStartLocation) { _ in }
     }
     
 }
@@ -124,15 +122,17 @@ extension MapViewController {
         mapView.delegate = self
         mapView.userTrackingMode = .Follow
         mapView.pitchEnabled = true
-    }
-    
-    private func setUpConstraintsOn(mapView: MGLMapView, withCoordinate: CLLocationCoordinate2D) {
-        mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
         
         view.addSubview(mapView)
-        mapView.snp_makeConstraints{(make) -> Void in
-            make.edges.equalTo(self.view)
-        }
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+        mapView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+        mapView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+        mapView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
+    }
+    
+    private func setCenterCoordinateOnMapView() {
+        mapView.setCenterCoordinate(userStartLocation.coordinate, zoomLevel: 15, direction: 150, animated: false)
     }
     
 }
