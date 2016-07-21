@@ -25,7 +25,7 @@ Now that our `MapViewController` is the initial view controller, we can get goin
 
 Inheriting from a `UIViewController`, we can override `viewDidLoad()`. `viewDidLoad()` is a function called by our `MapViewController`.
 
-Lets think of `MapViewController` as an individual as a stage-hand. `viewDidLoad()` is the equiavalent of the stage-hand walking up to you stating.. "HEY, we're about to show ourselves to the world (reveal the curtains), is there ANYTHING you need for me to do before we get you out on stage.
+Lets think of `MapViewController` as an individual as a stage-hand. `viewDidLoad()` is the equivalent of the stage-hand walking up to you stating.. "HEY, we're about to show ourselves to the world (reveal the curtains), is there ANYTHING you need for me to do before we get you out on stage.
 
 Why YES!
 
@@ -362,6 +362,52 @@ func viewTapped(gesture: UITapGestureRecognizer) {
 }
 ```
 
+Below is the implementation of the various methods called when a tap occurs to check to see that it's within range of where our `treasure` object currently lives on screen.
+
+```swift
+func viewTapped(gesture: UITapGestureRecognizer) {
+    let location = gesture.locationInView(view)
+        
+    let topLeftX = Int(treasure.item.origin.x)
+    let topRightX = topLeftX + Int(treasure.item.width)
+    let topLeftY = Int(treasure.item.origin.y)
+    let bottomLeftY = topLeftY + Int(treasure.item.height)
+        
+    guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
+        
+    let xRange = topLeftX...topRightX
+    let yRange = topLeftY...bottomLeftY
+         
+    checkForRange(xRange, yRange, withLocation: location)
+}
+```
+
+```swift
+private func checkForRange(xRange: Range<Int>, _ yRange: Range<Int>, withLocation location: CGPoint) {
+    guard foundTreasure == false else { return }
+        
+    let tapIsInRange = xRange.contains(Int(location.x)) && yRange.contains(Int(location.y))
+        
+    if tapIsInRange {
+            
+        foundTreasure = true
+        motionManager.stopDeviceMotionUpdates()
+        captureSession.stopRunning()
+            
+        treasure.item.springToMiddle(withDuration: 1.5, damping: 9, inView: view)
+        treasure.item.centerInView(view)
+            
+        previewLayer.fadeOutWithDuration(1.0)
+            
+        animateInTreasure()
+        animateInDismissButton()
+        displayNameOfTreasure()
+        displayDiscoverLabel()
+            
+    }
+}
+```
+
 ---
 
 Check out the Xcode project to see how the spring animations were created after tapping the treasure object on screen.
@@ -370,8 +416,6 @@ Check out the Xcode project to see how the spring animations were created after 
 
 ---
 
-
----
 
 # Firebase & Geofire Component
 
@@ -399,7 +443,7 @@ let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treas
 * Utilizing [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/) which allows us to easitly create a custom looking map (like the one being used in the app).
 * Through [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/), we're creating the custom treasure annotation.
 * Our map is customized through the various delegate methods available to us.
-* Setting up the Map View which is then added tou our `view`
+* Setting up the Map View which is then added to our `view`
 
 ```swift
 mapView = MGLMapView(frame: view.bounds,

@@ -74,6 +74,11 @@ extension ViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    private func animateInDismissButton() {
+        UIView.transitionWithView(dismissButton, duration: 2.5, options: .TransitionCrossDissolve, animations: {
+            self.dismissButton.alpha = 1.0
+            }, completion: nil)
+    }
     
 }
 
@@ -101,7 +106,6 @@ extension ViewController {
             previewLayer.addSublayer(treasure.item)
             view.layer.addSublayer(previewLayer)
         }
-        
     }
     
 }
@@ -152,7 +156,11 @@ extension ViewController {
     
     private func checkForRange(xRange: Range<Int>, _ yRange: Range<Int>, withLocation location: CGPoint) {
         guard foundTreasure == false else { return }
-        if xRange.contains(Int(location.x)) && yRange.contains(Int(location.y)) {
+        
+        let tapIsInRange = xRange.contains(Int(location.x)) && yRange.contains(Int(location.y))
+        
+        if tapIsInRange {
+            
             foundTreasure = true
             motionManager.stopDeviceMotionUpdates()
             captureSession.stopRunning()
@@ -163,15 +171,12 @@ extension ViewController {
             previewLayer.fadeOutWithDuration(1.0)
             
             animateInTreasure()
+            animateInDismissButton()
             displayNameOfTreasure()
             displayDiscoverLabel()
-            UIView.transitionWithView(dismissButton, duration: 2.5, options: .TransitionCrossDissolve, animations: {
-                self.dismissButton.alpha = 1.0
-                }, completion: nil)
+            
         }
-        
     }
-    
 }
 
 
@@ -234,7 +239,7 @@ extension ViewController {
         label.centerYAnchor.constraintEqualToAnchor(foundImageView.centerYAnchor).active = false
         label.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
         label.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
-
+        
         
         let originalCenterY = label.center.y
         label.center.y += 400
