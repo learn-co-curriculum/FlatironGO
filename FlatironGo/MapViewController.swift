@@ -40,16 +40,18 @@ extension MapViewController {
     
     private func getTreasuresFor(location: CLLocation, completion: (Bool) -> ()) {
         let geoQuery = setupGeoQueryWithLocation(location)
-        
+    
         geoQuery.observeEventType(.KeyEntered) { [unowned self] key, location in
             guard let geoKey = key,
                 geoLocation = location
                 else { print("No Key and/or No Location"); completion(false); return }
             
             let treasureLocation = self.generateLatAndLongFromLocation(geoLocation)
+            
             self.treasureLocations[geoKey] = (GPSLocation(latitude: treasureLocation.lat, longitude: treasureLocation.long))
+            
             self.getTreasureProfileFor(geoKey) { [unowned self] result in
-                if result == true { self.createAnnotations() }
+                if result { self.createAnnotations() }
                 completion(result)
             }
         }
@@ -107,7 +109,7 @@ extension MapViewController: CLLocationManagerDelegate {
     
     private func setupCurrentLocation() {
         if let location = getUserLocation() {
-            self.userStartLocation = location
+            userStartLocation = location
         }
     }
     
@@ -128,7 +130,6 @@ extension MapViewController {
         mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
         
         view.addSubview(mapView)
-        
         mapView.snp_makeConstraints{(make) -> Void in
             make.edges.equalTo(self.view)
         }
@@ -219,6 +220,7 @@ extension MapViewController {
     private func handleTapOfAnnotationView(annotationView: MGLAnnotationView) {
         if let annotation = annotationView as? TreasureAnnotationView {
             
+            // Providing a default treasure value to the annotations.treasure property if its nil (for w/e reason)
             if annotation.treasure == nil {
                 annotation.treasure = Treasure(location: GPSLocation(latitude: 40.0, longitude: 40.0), name: "Charging Bull", imageURLString: Constants.bullImage)
                 annotation.treasure.makeImage() { [unowned self] success in

@@ -4,6 +4,8 @@
 ## What components make up this iOS app?
 *Map, Users Location, Treasures, Camera displaying the treasure*
 
+ Link to the lecture video can be found [here](https://www.youtube.com/watch?v=443Al3kKfb4).
+
 ### Setting up the Map
 
 We launch an iOS app, does everything happen all at once? What code gets run first? Is it all executed at the same time?
@@ -41,13 +43,25 @@ Self here is an instance of the `MapViewController`, thats US!
 
 When the map is displayed on screen (which it isn't yet, don't get ahead of yourself), who is responding to taps, gestures, swipes, zooms, all that fun stuff? The `mapView` is handling all of that for us... but who is RESPONDING to it? Do we need to respond to it?
 
-We don't have to. This is known as the delegate pattern, you can think of it as a parent-child relationship. The child is screaming up to its parent that it wasnts candy... does the parent need to respond? YES.
+We don't have to. This is known as the delegate pattern, you can think of it as a parent-child relationship. The child is screaming up to its parent that it wants candy... does the parent need to respond? YES.
 
 Here, the parent is US (the `MapViewController`), the child is the `mapView`. So when a user drags, pinches and taps something on our `mapView`, the `mapView` is screaming up to its parent.. "HEY SOMEONE PINCHED ME!" and it sends that message to its parent (its parent in this scenario is the `MapViewController`.
 
 Ok.. our `mapView` seems to be setup.. but it's not yet on screen, our stage-hand isn't done doing its thing, we still have more instructions for him. His name is Fred.
 
+Here's the full implementation of this method - `setupMapView()`
 
+```swift
+private func setupMapView() {
+     mapView = MGLMapView(frame: view.bounds, styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
+     mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+     mapView.delegate = self
+     mapView.userTrackingMode = .Follow
+     mapView.pitchEnabled = true
+}
+```
+
+![map](https://i.imgur.com/iH0HDpt.png)
 
 ---
 
@@ -67,10 +81,41 @@ Fred has done good (so far). As of right now, we have Map in one hand and a user
 
 By the way, computers are fast.. really fast, so you can imagine Fred getting this done in less than a second.
 
+Full implementation of grabbing the users current location from `getUserLocation()`
+
+```swift
+func getUserLocation() -> CLLocation? {
+     locationManager.delegate = self
+     locationManager.desiredAccuracy = kCLLocationAccuracyBest
+     locationManager.requestWhenInUseAuthorization()
+     locationManager.startMonitoringSignificantLocationChanges()
+        
+     let weHaveAuthorization = (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
+        
+     if weHaveAuthorization { return locationManager.location } else { return nil }
+}
+    
+private func setupCurrentLocation() {
+    if let location = getUserLocation() {
+        userStartLocation = location
+    }
+}
+```
+
+There's one last thing we need to do with the map. We need to set its `centerCoordinate` property to something.. well we want to center the map on the users current location, that makes sense! SOo lets do that.
+
+```swift
+mapView.setCenterCoordinate(withCoordinate, zoomLevel: 15, direction: 150, animated: false)
+```
+
+We then add the `mapView` to our `view` and constrain it to the edgs of the `view` so it fills the screen.
 
 ---
 
 ### Treasures!
+
+![Bear](https://i.imgur.com/jWZDeRy.png)
+
 
 Next order of business for our stage-hand is to get the treasures, so we call on this method:
 
@@ -107,6 +152,46 @@ He **RUNS** back to us to let us know that he has the 5 treasure objects.
 
 These treasure objects have a latitude and longitude property associated with them.. we take that info and display treasure icons on the map at these various locations.
 
+The full implementation of the `getTreasuresFor(_:completion:)` function
+
+```swift
+private func getTreasuresFor(location: CLLocation, completion: (Bool) -> ()) {
+   let geoQuery = setupGeoQueryWithLocation(location)
+    
+   geoQuery.observeEventType(.KeyEntered) { [unowned self] key, location in
+       guard let geoKey = key,
+           geoLocation = location
+           else { print("No Key and/or No Location"); completion(false); return }
+            
+       let treasureLocation = self.generateLatAndLongFromLocation(geoLocation)
+            
+       self.treasureLocations[geoKey] = (GPSLocation(latitude: treasureLocation.lat, longitude: treasureLocation.long))
+            
+       self.getTreasureProfileFor(geoKey) { [unowned self] result in
+            if result { self.createAnnotations() }
+            completion(result)
+       }
+    }
+}
+```
+
+Full implementation of `getTreasureProfileFor(_:completion:)`
+
+```swift
+private func getTreasureProfileFor(key: String, completion: (Bool) -> ()) {
+   let profileRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureProfiles + "/" + key)
+        
+   profileRef.observeEventType(FIRDataEventType.Value, withBlock: { [unowned self] snapshot in
+       guard let profile = snapshot.value as? ResponseDictionary,
+            treasureLocation = self.treasureLocations[snapshot.key]
+            else { print("Unable to produce snapshot value or key"); completion(false); return }
+            
+       self.saveTreasureLocally(withResponse: profile, key: snapshot.key, andLocation: treasureLocation)
+       completion(true)
+       })
+}
+```
+
 ---
 
 ### Segue
@@ -127,11 +212,24 @@ This is the function that the `mapView` calls which we implement on our `MapView
 
 In our implementation of the `handleTapOfAnnotationView()` function call, we then move forward to an entirely **NEW** View Controller. In the `prepareForSegue(_:sender:)` function, we can pass forward the treasure object that was tapped. Sort of like handing the baton forward.
 
+Full implemenation of `prepareForSegue(_:sender:)`
+
+```swift
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    guard segue.identifier == "TreasureSegue" else { return }
+    guard let destVC = segue.destinationViewController as? ViewController else { return }
+        
+    if let annotation = sender as? TreasureAnnotationView {
+        destVC.treasure = annotation.treasure
+    }
+}
+```
+
 ---
 
 # AR Component
 
-![Bull](http://i.imgur.com/hvYIBsb.png)
+![OtherBear](https://i.imgur.com/wKJBOh1.png)
 
 * When the `treasure` annotation is tapped on the Map, we are presenting a new `UIViewController` - the `ViewController.swift` file. 
 * We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.

@@ -15,10 +15,13 @@ final class ViewController: UIViewController {
     
     let captureSession = AVCaptureSession()
     let motionManager = CMMotionManager()
-    var previewLayer: AVCaptureVideoPreviewLayer! = nil
-    var treasure: Treasure! = nil
-    var foundImageView: UIImageView! = nil
-    var dismissButton: UIButton! = nil
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    var treasure: Treasure!
+    
+    var foundImageView: UIImageView!
+    var dismissButton: UIButton!
+    
     var quaternionX: Double = 0.0 {
         didSet {
             if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
@@ -29,6 +32,7 @@ final class ViewController: UIViewController {
             if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
         }
     }
+    
     var foundTreasure = false
     
     override func viewDidLoad() {
