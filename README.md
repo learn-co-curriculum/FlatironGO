@@ -4,41 +4,6 @@
 ---
 
 
-## Firebase & Geofire Component
-
-```swift
-let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
-        let geoFire = GeoFire(firebaseRef: geofireRef)
-        let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
-```
-
-* We get a hold of our firebase reference.
-* Query up using GeoFire using the users current location.
-* In our callback, we receive multiple "Treasure" objects" which we parse through.
-* Receiving the coordinates of these "Treasure Objects", we create annotations and place them on the map. These annotations are selectable.
-
-
-* Our firebase database (Firebase):
-
-![http://i.imgur.com/u8UxY6X.png?1](http://i.imgur.com/u8UxY6X.png?1)
-
----
-
-
-## Custom Map w/ MapBox
-
-* Utilizing [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/) which allows us to easitly create a custom looking map (like the one being used in the app).
-* Through [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/), we're creating the custom treasure annotation.
-* Our map is customized through the various delegate methods available to us.
-* Setting up the Map View which is then added tou our `view`
-
-```swift
-mapView = MGLMapView(frame: view.bounds,
-                                 styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
-```
-
----
-
 # AR Component
 
 ![Bull](http://i.imgur.com/hvYIBsb.png)
@@ -46,11 +11,29 @@ mapView = MGLMapView(frame: view.bounds,
 * When the `treasure` annotation is tapped on the Map, we are presenting a new `UIViewController` - the `ViewController.swift` file. 
 * We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.
 * So.. now that we know what `treasure` to display, what steps do we need to take to get this `image` displayed on screen?
+* In my `viewDidLoad()` I'm calling on the following function, below is a walkthrough of the implementation of these various methods. Feel free to follow along with the Xcode project open to see more details:
 
-### **1** - Tell our `AVCaptureSession` instance to start running!
+```swift
+private func setupCamera() {
+    setupCaptureCameraDevice()
+    setupPreviewLayer()
+    setupMotionManager()
+    setupGestureRecognizer()
+    setupDismissButton()
+}
+```
 
-The `captureSession` variable being used in this code snippet is an instance of `AVCaptureSession`. The `cameraDeviceInput` is an instance of `AVCaptureDeviceInput`. Checking first that we can add the `cameraDeviceInput` to the sesion we then move forward by adding the `cameraDeviceInput` to the `captureSession`. That's a mouth full, and if you want to know more of what's going on here - I recommend option clicking the various types of these objects and reading through the documentation. 
+### **1** - Setup our AVCaptureSession & tell it to start running
 
+The `captureSession` used here is initialized in the declaration of the property on the `ViewController`
+
+```swift
+let captureSession = AVCaptureSession()
+```
+
+The `cameraDeviceInput` is an instance of `AVCaptureDeviceInput`. Checking first that we can add the `cameraDeviceInput` to the session we then move forward by adding the `cameraDeviceInput` to the `captureSession`. That's a mouth full, and if you want to know more of what's going on here - I recommend option clicking the various types of these objects and reading through the documentation. 
+
+In short, this setups our camera and tell it to begin running!
 ```swift
 let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
 let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
@@ -60,11 +43,11 @@ captureSession.startRunning()
 ```
 ---
 
-### **2** - Setup the Preview Layer!
+### **2** - Setup the Preview Layer
 
 The `previewLayer` is a property on the `ViewController`. It's an instance of `AVCaptureVideoPreviewLayer`. 
 
-![PreviewLayer](http://i.imgur.com/Pezoh71.png?1)
+![PreviewLayer](https://i.imgur.com/0k76NAV.png)
 
 We are first initializing it, then settings it's frame to equal the view's bounds (it will fill the entire screen). If the treasure object we were handed from the previous MapViewController's image is not nil, then we will move forward!
 
@@ -91,7 +74,7 @@ if treasure.image != nil {
 ---
 
 
-### **3** - Setup the `CMMotionManager`
+### **3** - Setup the Motion Manager
 
 The `motionManager` is a property on the `ViewController` which is initialized within the declaration of the property like so:
 ```swift
@@ -136,7 +119,66 @@ var quaternionY: Double = 0.0 {
 }
 ```
 
+---
+
+### **4** - Setting up our Gesture Recognizer
+
+We want to know when a user taps on the screen.. simple enough!
+
+```swift
+let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+gestureRecognizer.cancelsTouchesInView = false
+view.addGestureRecognizer(gestureRecognizer)
+```
+When a tap comes in, the `viewTapped()` method is called. One of the arguments to this method calld `gesture` is of type `UITapGestureRecognizer`. Through this object, we are able to tell where the tap occurred within the `view` and check it against where the `treasure` object is to see if their tap is within range of where the item is.
+
+```swift
+func viewTapped(gesture: UITapGestureRecognizer) {
+ 	  let location = gesture.locationInView(view)
+      // See the Xcode project for how this was implemented 
+}
+```
 
 ---
 
+Check out the Xcode project to see how the spring animations were created after tapping the treasure object on screen.
+
+![bear](http://i.imgur.com/nAwylOw.png)
+
+---
+
+# Firebase & Geofire Component
+
+```swift
+let geofireRef = FIRDatabase.database().referenceWithPath(FIRReferencePath.treasureLocations)
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        let geoQuery = geoFire.queryAtLocation(location, withRadius: 10.0)
+```
+
+* We get a hold of our firebase reference.
+* Query up using GeoFire using the users current location.
+* In our callback, we receive multiple "Treasure" objects" which we parse through.
+* Receiving the coordinates of these "Treasure Objects", we create annotations and place them on the map. These annotations are selectable.
+
+
+* Our firebase database (Firebase):
+
+![http://i.imgur.com/u8UxY6X.png?1](http://i.imgur.com/u8UxY6X.png?1)
+
+---
+
+
+# Custom Map w/ MapBox
+
+* Utilizing [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/) which allows us to easitly create a custom looking map (like the one being used in the app).
+* Through [MapBox](https://www.mapbox.com/ios-sdk/api/3.3.0/), we're creating the custom treasure annotation.
+* Our map is customized through the various delegate methods available to us.
+* Setting up the Map View which is then added tou our `view`
+
+```swift
+mapView = MGLMapView(frame: view.bounds,
+                                 styleURL: NSURL(string: "mapbox://styles/ianrahman/ciqodpgxe000681nm8xi1u1o9"))
+```
+
+---
 

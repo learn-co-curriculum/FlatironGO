@@ -133,7 +133,7 @@ extension ViewController {
 extension ViewController {
     
     private func setupGestureRecognizer() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.viewTapped))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         gestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(gestureRecognizer)
     }
