@@ -19,6 +19,7 @@ final class ViewController: UIViewController {
     let pokemon = CALayer()
     var treasure: Treasure! = nil
     var foundImageView: UIImageView! = nil
+    var dismissButton: UIButton! = nil
     var quaternionX: Double = 0.0 {
         didSet {
             if !foundTreasure { pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
@@ -54,6 +55,24 @@ final class ViewController: UIViewController {
         setupPreviewLayer()
         setupMotionManager()
         setupGestureRecognizer()
+        setupDismissButton()
+    }
+    
+    private func setupDismissButton() {
+        dismissButton = UIButton(type: .System)
+        dismissButton.setTitle("←", forState: .Normal)
+        dismissButton.titleLabel?.font = UIFont.systemFontOfSize(35.0)
+        dismissButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        dismissButton.addTarget(self, action: #selector(dismiss), forControlEvents: .TouchUpInside)
+        dismissButton.translatesAutoresizingMaskIntoConstraints = false
+        dismissButton.alpha = 0.0
+        view.addSubview(dismissButton)
+        dismissButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -14.0).active = true
+        dismissButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    }
+    
+    func dismiss() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
@@ -151,6 +170,9 @@ extension ViewController {
             animateInTreasure()
             displayNameOfTreasure()
             displayDiscoverLabel()
+            UIView.transitionWithView(dismissButton, duration: 0.8, options: .TransitionCrossDissolve, animations: { 
+                self.dismissButton.alpha = 1.0
+                }, completion: nil)
         }
         
     }
@@ -229,9 +251,6 @@ extension ViewController {
             }, completion: nil)
     }
 }
-
-
-
 
 
 // MARK: - Spring and Fade Animations
