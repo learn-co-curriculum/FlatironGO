@@ -39,7 +39,7 @@ mapView = MGLMapView(frame: view.bounds,
 
 ---
 
-## AR Component
+# AR Component
 
 ![Bull](http://i.imgur.com/hvYIBsb.png)
 
@@ -47,7 +47,7 @@ mapView = MGLMapView(frame: view.bounds,
 * We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.
 * So.. now that we know what `treasure` to display, what steps do we need to take to get this `image` displayed on screen?
 
-**1** - Tell our `AVCaptureSession` instance to start running!
+### **1** - Tell our `AVCaptureSession` instance to start running!
 
 The `captureSession` variable being used in this code snippet is an instance of `AVCaptureSession`. The `cameraDeviceInput` is an instance of `AVCaptureDeviceInput`. Checking first that we can add the `cameraDeviceInput` to the sesion we then move forward by adding the `cameraDeviceInput` to the `captureSession`. That's a mouth full, and if you want to know more of what's going on here - I recommend option clicking the various types of these objects and reading through the documentation. 
 
@@ -60,7 +60,7 @@ captureSession.startRunning()
 ```
 ---
 
-**2** - Setup the Preview Layer!
+### **2** - Setup the Preview Layer!
 
 The `previewLayer` is a property on the `ViewController`. It's an instance of `AVCaptureVideoPreviewLayer`. 
 
@@ -91,7 +91,7 @@ if treasure.image != nil {
 ---
 
 
-**3** - Setup the `CMMotionManager`
+### **3** - Setup the `CMMotionManager`
 
 The `motionManager` is a property on the `ViewController` which is initialized within the declaration of the property like so:
 ```swift
