@@ -57,7 +57,11 @@ final class ViewController: UIViewController {
         setupGestureRecognizer()
         setupDismissButton()
     }
-    
+}
+
+
+// MARK: - Dismiss Button
+extension ViewController {
     private func setupDismissButton() {
         dismissButton = UIButton(type: .System)
         dismissButton.setTitle("❌", forState: .Normal)
@@ -75,8 +79,8 @@ final class ViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
 }
-
 
 
 // MARK: - AVFoundation Methods

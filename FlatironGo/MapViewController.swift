@@ -27,7 +27,6 @@ final class MapViewController: UIViewController  {
         setupMapView()
         setupCurrentLocation()
         setUpConstraintsOn(mapView, withCoordinate: self.userStartLocation.coordinate)
-        setUpBackpackButton()
         getTreasuresFor(userStartLocation) { result in
             //TODO: Handle failure
         }
