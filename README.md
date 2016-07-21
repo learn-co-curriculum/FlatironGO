@@ -11,10 +11,10 @@
 * When the `treasure` annotation is tapped on the Map, we are presenting a new `UIViewController` - the `ViewController.swift` file. 
 * We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.
 * So.. now that we know what `treasure` to display, what steps do we need to take to get this `image` displayed on screen?
-* In my `viewDidLoad()` I'm calling on the following function, below is a walkthrough of the implementation of these various methods. Feel free to follow along with the Xcode project open to see more details:
+* In my `ViewController`, when the `view` appears,  I'm calling on the following function,`setupMainComponents()`. Following is a walkthrough of the implementation of these various methods. Feel free to follow along with the Xcode project open.
 
 ```swift
-private func setupCamera() {
+private func setupMainComponents() {
     setupCaptureCameraDevice()
     setupPreviewLayer()
     setupMotionManager()

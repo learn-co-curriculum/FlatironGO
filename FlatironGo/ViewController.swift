@@ -41,15 +41,15 @@ final class ViewController: UIViewController {
         if treasure.image == nil {
             treasure.makeImage { [unowned self] success in
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.setupCamera()
+                    self.setupMainComponents()
                 })
             }
         } else {
-            setupCamera()
+            setupMainComponents()
         }
     }
     
-    private func setupCamera() {
+    private func setupMainComponents() {
         setupCaptureCameraDevice()
         setupPreviewLayer()
         setupMotionManager()
