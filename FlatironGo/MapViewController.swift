@@ -14,7 +14,6 @@ import GeoFire
 
 final class MapViewController: UIViewController  {
     
-    let backpackButton = UIButton()
     var locationManager = CLLocationManager()
     var userStartLocation = CLLocation()
     var treasureLocations: [String: GPSLocation] = [:]
@@ -174,11 +173,11 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(mapView: MGLMapView, didSelectAnnotationView annotationView: MGLAnnotationView) {
-        performSegueWithIdentifier("TreasureSegue", sender: annotationView)
+        handleTapOfAnnotationView(annotationView)
     }
     
     func mapView(mapView: MGLMapView, didSelectAnnotation annotation: MGLAnnotation) {
-       // TODO: User is in radius of tapped treasure.
+        // TODO: User is in radius of tapped treasure.
     }
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
@@ -217,6 +216,20 @@ extension MapViewController {
 // MARK: - Segue Method
 extension MapViewController {
     
+    private func handleTapOfAnnotationView(annotationView: MGLAnnotationView) {
+        if let annotation = annotationView as? TreasureAnnotationView {
+            
+            if annotation.treasure == nil {
+                annotation.treasure = Treasure(location: GPSLocation(latitude: 40.0, longitude: 40.0), name: "Charging Bull", imageURLString: Constants.bullImage)
+                annotation.treasure.makeImage() { [unowned self] success in
+                    self.performSegueWithIdentifier("TreasureSegue", sender: annotationView)
+                }
+            } else {
+                performSegueWithIdentifier("TreasureSegue", sender: annotationView)
+            }
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard segue.identifier == "TreasureSegue" else { return }
         guard let destVC = segue.destinationViewController as? ViewController else { return }
@@ -224,32 +237,8 @@ extension MapViewController {
         if let annotation = sender as? TreasureAnnotationView {
             destVC.treasure = annotation.treasure
         }
-
     }
 }
 
-// MARK: - Backpack Methods
-extension MapViewController {
-    private func setUpBackpackButton() {
-        backpackButton.backgroundColor = UIColor.flatironBlueColor()
-        backpackButton.setImage(UIImage(named: "backpack"), forState: .Normal)
-        view.addSubview(backpackButton)
-        backpackButton.snp_makeConstraints { (make) in
-            make.bottom.equalTo(view).offset(-10)
-            make.right.equalTo(view).offset(-10)
-            make.height.equalTo(50)
-            make.width.equalTo(backpackButton.snp_height)
-        }
-        backpackButton.layer.cornerRadius = 25
-        backpackButton.addTarget(self, action: #selector(showBackpack), forControlEvents: .TouchUpInside)
-    }
-    
-    func showBackpack() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let backpackVC = storyboard.instantiateViewControllerWithIdentifier("backpack")
-        presentViewController(backpackVC, animated: true, completion: nil)
-    }
-    
-    
-}
+
 

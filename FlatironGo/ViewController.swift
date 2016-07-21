@@ -38,15 +38,7 @@ final class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if treasure.image == nil {
-            treasure.makeImage { [unowned self] success in
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.setupMainComponents()
-                })
-            }
-        } else {
-            setupMainComponents()
-        }
+        setupMainComponents()
     }
     
     private func setupMainComponents() {

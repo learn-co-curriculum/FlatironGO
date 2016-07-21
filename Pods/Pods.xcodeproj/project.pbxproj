@@ -34,6 +34,7 @@
 		515424A127715254A7219178C3627C6A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F84E6C3904BFFEA0D88A6B49AF583DD /* UIImage+GIF.m */; };
 		5A21FF462006E707E56C3B3971893BD8 /* GeoFire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A59160E5385D5E4CB1F782DCA8651984 /* GeoFire-dummy.m */; };
 		5B1DEC12EEB3CEAB8C2602E04007DD12 /* GFGeoHashQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F21D8937FB5F64005E7A27A862CCAC9 /* GFGeoHashQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BEE35E21D4105C900176D83 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C59085203F06B7977184E3EB8A76 /* FirebaseDatabase.framework */; };
 		635D0793F0F3860B74CD5DFE70B4D942 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DDACEDB67BADDAB658379AD107B74D80 /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		640E5EEA3965B393563B5CA9445986C6 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A08AF5EC9A2043706DF89EB6A60A2 /* ConstraintRelation.swift */; };
 		6CAD4FE11C56FE3CE515AB67C46292A9 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42788600AD456E0C9B5B02B4C11F3EEA /* SnapKit-dummy.m */; };
@@ -43,7 +44,6 @@
 		75F28DB38113DCB2D9121B7163C875CA /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 5608B93EC22DFDF67A089E26D17010CB /* GFGeoHashQuery.m */; };
 		78932E65378125E0FB3B1F1F461FFE99 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973BBD03F8882BE9134E43ADA48E6C7F /* EdgeInsets.swift */; };
 		7D6ED8A7FE3F654EEC63F134E383BBA7 /* GFBase32Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C22D187C23870C9372E44129B800967 /* GFBase32Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D9195341D40212C00ED0CFC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C59085203F06B7977184E3EB8A76 /* FirebaseDatabase.framework */; };
 		84AF44A218EA516DE43FAB48F04647C3 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC91F3DC5477A19A53D7EA4ADCD2070 /* Constraint.swift */; };
 		87643797B8E4E1A9912B71D6A02EBAA4 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A6CBEC407D33125134003B3DFAC28 /* ConstraintMaker.swift */; };
 		88E6099E26849A03ABD19B5A8FBE2754 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642ADAC438E127F7D46FA88AAAF13102 /* ConstraintItem.swift */; };
@@ -227,7 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D9195341D40212C00ED0CFC /* FirebaseDatabase.framework in Frameworks */,
+				5BEE35E21D4105C900176D83 /* FirebaseDatabase.framework in Frameworks */,
 				2166735050EC3CA9D824700B620B063E /* CoreLocation.framework in Frameworks */,
 				C0335D1F224EB7A3CBF79079BA17AF31 /* Foundation.framework in Frameworks */,
 			);

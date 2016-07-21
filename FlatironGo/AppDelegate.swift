@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         
-        let firebaseAPI = FirebaseAPI()
-        firebaseAPI.setTreasureProfileAndLocation(name: "test", imageName: "testImage", image: UIImage(named: "FlatironLogo")!, latitude: 0.0, longitude: 0.0)
+//        let firebaseAPI = FirebaseAPI()
+//        firebaseAPI.setTreasureProfileAndLocation(name: "test", imageName: "testImage", image: UIImage(named: "FlatironLogo")!, latitude: 0.0, longitude: 0.0)
         
         return true
     }

@@ -1,8 +1,133 @@
 
-# FLATIRON GO
+
+
+## What components make up this iOS app?
+*Map, Users Location, Treasures, Camera displaying the treasure*
+
+### Setting up the Map
+
+We launch an iOS app, does everything happen all at once? What code gets run first? Is it all executed at the same time?
+
+First things first, we need to setup our initial view controller. A `ViewController` is provided to us by Apple, it gives us an entry point to execute code of our own **BEFORE** anything is displayed on screen.
+
+![AppLaunch](https://i.imgur.com/xJZdYT7.png)
+
+
+Well, we can take advantage of this and setup our Map.
+
+That lovely arrow on the left here is setup in `Main.Storyboard`. Here, we're telling Xcode.. "HEY!, this particular View Controller is our initial one.. the one that should be first in line!"
+
+Ok... now what?
+
+Now that our `MapViewController` is the initial view controller, we can get going.
+
+Inheriting from a `UIViewController`, we can override `viewDidLoad()`. `viewDidLoad()` is a function called by our `MapViewController`.
+
+Lets think of `MapViewController` as an individual as a stage-hand. `viewDidLoad()` is the equiavalent of the stage-hand walking up to you stating.. "HEY, we're about to show ourselves to the world (reveal the curtains), is there ANYTHING you need for me to do before we get you out on stage.
+
+Why YES!
+
+First things first... we need a **MAP**
+
+So we call on our function (we implemented) called `setupMapView()`. Don't forget, we are NOT YET on stage (nothing is displayed on screen at this point).
+
+An important line of code is run in this function:
+
+```swift
+mapView.delegate = self
+```
+
+Self here is an instance of the `MapViewController`, thats US!
+
+When the map is displayed on screen (which it isn't yet, don't get ahead of yourself), who is responding to taps, gestures, swipes, zooms, all that fun stuff? The `mapView` is handling all of that for us... but who is RESPONDING to it? Do we need to respond to it?
+
+We don't have to. This is known as the delegate pattern, you can think of it as a parent-child relationship. The child is screaming up to its parent that it wasnts candy... does the parent need to respond? YES.
+
+Here, the parent is US (the `MapViewController`), the child is the `mapView`. So when a user drags, pinches and taps something on our `mapView`, the `mapView` is screaming up to its parent.. "HEY SOMEONE PINCHED ME!" and it sends that message to its parent (its parent in this scenario is the `MapViewController`.
+
+Ok.. our `mapView` seems to be setup.. but it's not yet on screen, our stage-hand isn't done doing its thing, we still have more instructions for him. His name is Fred.
+
+
 
 ---
 
+### Setting up Current Location
+
+So the `setupMapView()` function call is done doing its thing and now our stage-hand is out of breath.. but we have more instructions.
+
+Next, we call on this function `setupCurrentLocation()`, we tell it to do something else!
+
+In grabbing the users current location, we have to play nice.. we have to ask the current user of our app if we can see where they are?
+
+After the user says "YES, I'll glady show you where I am", we store the coordinates of the users current location on the `MapViewController`. Think of the various properties on the `MapViewController` as these things we can carry along in our back-pack that are available to us at all times. Now that we stored the users current location, we can pull it out of our back-pack whenever we need to.. its ours to hold onto forever.
+
+I'm pretty sure our stage-hand **hates** us as this point.. but we have even MORE tasks for Fred.
+
+Fred has done good (so far). As of right now, we have Map in one hand and a users location in the other hand.. but we haven't done naything with them (we're not on stage yet! The user still doesn't see anything.
+
+By the way, computers are fast.. really fast, so you can imagine Fred getting this done in less than a second.
+
+
+---
+
+### Treasures!
+
+Next order of business for our stage-hand is to get the treasures, so we call on this method:
+
+```swift
+getTreasuresFor(userStartLocation) { result in
+     //TODO: Handle failure
+}
+```
+
+Ok.. so this is a weird looking piece of code. In programming, tasks can be done asynchronously. Fred can do more than one thing at a time.. He can make a phone call while he's running around doing stuff for us.
+
+So while this function gets called, he tells us to get on stage!!! Why? Because the `viewDidLoad()` function has ended, there are no other tasks to be done. The `getTreasuresFor(_:)` function isn't done though.. so how can `viewDidLoad()` be done? That' show asynchornous code works, it's doing it's own thing and tells the main part of your code to carry on doing what it's doing.
+
+Ok.. we're on stage... our users can NOW SEE US. They see a map, they see our current location.. but within the bilnk of an eye (almost hard to even tell), our treasure icons show up. Lets talk about that.
+
+Stepping through the `getTreasuresFor(_:)` function using our story.
+We've asked Fred to make a phone call to get some info. Our info lives on the server somewhere (Firebase!). 
+
+We're telling him to make a phone call to firebase asking the following (with the info we now have). Here's how his phone call will go..
+
+"Hello, this is Fred! .. and I have this location (latitude and longitude), can you do me a favor and give to me all the treasure within a 10.0 mile radius of this location?"
+
+.. firebase might take a few seconds, but probably even less because it's VERY FAST.
+
+Firebase responds..and gives us back a `String`. It represents a Key... well what good is a key? We can open doors I guess.
+
+Well, we're able to take this `Key` which corresponds to a Treasure stored in Firebase. So. what happens is, Fred having wrote doesn't this particular `Key` has to make another phone call to someone else in Firebase. When Firebase answers, Fred provides this individual with the `Key`, and states... "I have this `String` value which represents a `Key`, i need you to lookup in your database the `Treasure` that lies behind the door this `Key` will open.
+
+Firebase... again operating super fast will take the `Key`, find the door associated with key, open the door and return the contents back to Fred.
+
+After Fred does this for each `Key` received, which in our demo is 5... he has 5 treasure objects in his hand.
+
+He **RUNS** back to us to let us know that he has the 5 treasure objects.
+
+These treasure objects have a latitude and longitude property associated with them.. we take that info and display treasure icons on the map at these various locations.
+
+---
+
+### Segue
+
+We have a **Map**, we have our users **Location** and we have our **Treasure** icons displayed on the map. If you remember from my earlier point, the `MapViewController` is the delegate of the `mapView`. This means that we respond to anything that happens with it.
+
+If our `mapView` cries up.. "HEY I'VE BEEN PINCHED!", we can respond to that cry.
+
+So if someone taps on an annotation on the map (our treasure icons), then we can respond to that!
+
+```swift
+func mapView(mapView: MGLMapView, didSelectAnnotationView annotationView: MGLAnnotationView) {
+     handleTapOfAnnotationView(annotationView)
+}
+```
+
+This is the function that the `mapView` calls which we implement on our `MapViewController`. This is us responding to the child crying because they were pinched.
+
+In our implementation of the `handleTapOfAnnotationView()` function call, we then move forward to an entirely **NEW** View Controller. In the `prepareForSegue(_:sender:)` function, we can pass forward the treasure object that was tapped. Sort of like handing the baton forward.
+
+---
 
 # AR Component
 
@@ -144,6 +269,9 @@ func viewTapped(gesture: UITapGestureRecognizer) {
 Check out the Xcode project to see how the spring animations were created after tapping the treasure object on screen.
 
 ![bear](http://i.imgur.com/nAwylOw.png)
+
+---
+
 
 ---
 
