@@ -41,6 +41,8 @@ mapView = MGLMapView(frame: view.bounds,
 
 ## AR Component
 
+![Bull](http://i.imgur.com/hvYIBsb.png)
+
 * When the `treasure` annotation is tapped on the Map, we are presenting a new `UIViewController` - the `ViewController.swift` file. 
 * We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.
 * So.. now that we know what `treasure` to display, what steps do we need to take to get this `image` displayed on screen?
@@ -60,75 +62,81 @@ captureSession.startRunning()
 
 **2** - Setup the Preview Layer!
 
+The `previewLayer` is a property on the `ViewController`. It's an instance of `AVCaptureVideoPreviewLayer`. 
+
+![PreviewLayer](http://i.imgur.com/Pezoh71.png?1)
+
+We are first initializing it, then settings it's frame to equal the view's bounds (it will fill the entire screen). If the treasure object we were handed from the previous MapViewController's image is not nil, then we will move forward!
+
+The item property on `treasure` is of type `CALayer`. See the `Treasure.swift` file for how this is created. We position it so it's within view when the preview layer launches.
+
+We then add this `previewLayer` to the `view`.
+
+We should now see our treasure on screen!
 
 
 ```swift
 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 previewLayer.frame = view.bounds
         
-  if let treasureImage = treasure.image {
-     pokemon.contents = treasureImage.CGImage
-     let height = treasure.image!.size.height
-     let width = treasure.image!.size.height
-     pokemon.bounds = CGRectMake(100.0, 100.0, width, height)
-     pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-     previewLayer.addSublayer(pokemon)
-     view.layer.addSublayer(previewLayer)
-    }
+if treasure.image != nil {
+    let height = treasure.image!.size.height
+    let width = treasure.image!.size.height
+    treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
+    treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+    previewLayer.addSublayer(treasure.item)
+    view.layer.addSublayer(previewLayer)
+}
  ```
-
-
- (which is what you see when you movie your camera around):
-
-```swift
-previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-previewLayer.frame = view.bounds     
-```
-
 ---
 
-**3** - Setup the position of our "Pokemon" and add it to the preview layer
 
+**3** - Setup the `CMMotionManager`
+
+The `motionManager` is a property on the `ViewController` which is initialized within the declaration of the property like so:
 ```swift
-previewLayer.addSublayer(pokemon)
-view.layer.addSublayer(previewLayer)
+let motionManager = CMMotionManager()
 ```
 
----
-
-**4** - Setup the `CMMotionManager`
+In the implementation of the block of code passed into the `startDeviceMotionUpdatesToQueue` function call, we have a `motion` object we can work with of type `CMDeviceMotion`.
 
 ```swift
-    private func setupMotionManager() {
-        
-        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
-            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
-            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
+if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
+      motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
+      motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
                 
-                if error != nil { print("wtf. \(error)"); return }
-                guard let motion = motion else { print("Couln't unwrap motion"); return }
+          if error != nil { print("wtf. \(error)"); return }
+          guard let motion = motion else { print("Couldn't unwrap motion"); return }
                 
-                self.quaternionX = motion.attitude.quaternion.x
-                self.quaternionY = motion.attitude.quaternion.y
-            }
-        }
-    }
+          self.quaternionX = motion.attitude.quaternion.x
+          self.quaternionY = motion.attitude.quaternion.y
+     }
+}
 ```
 
----
+![motion](http://i.imgur.com/n25qC0B.png)
 
-**5** - Setup property observers on the `attitude.quaternion` properties on the `motion` object which allow us to update the "Pokemon" object on screen to make it appear as if it's moving with you.
+This is getting called continuously as the iPhone is moving and there are *MANY* properties on this object to take advantage of. For now, we're utilizing the `quaternion.x` and `quaternion.y` values to update our `quaternionX` and `quaternionY` properties on our `ViewController`. 
+
+This is being done, because we have `didSet` observers on theses properties which will in turn update our `treasure` object on screen (to make it appear as if it's moving with you in real time).
+
+Here is what those `disSet` observers look like:
 
 ```swift
 var quaternionX: Double = 0.0 {
-        didSet {
-            if !foundTreasure { pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
-        }
-    }
-    var quaternionY: Double = 0.0 {
-        didSet {
-            if !foundTreasure { pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
-        }
-    }
+    didSet {
+        if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
+     }
+}
 
+var quaternionY: Double = 0.0 {
+    didSet {
+        if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
+     }
+}
 ```
+
+
+---
+
+

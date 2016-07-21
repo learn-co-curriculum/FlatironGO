@@ -120,7 +120,7 @@ extension ViewController {
             motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
                 
                 if error != nil { print("wtf. \(error)"); return }
-                guard let motion = motion else { print("Couln't unwrap motion"); return }
+                guard let motion = motion else { print("Couldn't unwrap motion"); return }
                 
                 self.quaternionX = motion.attitude.quaternion.x
                 self.quaternionY = motion.attitude.quaternion.y
