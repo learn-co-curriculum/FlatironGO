@@ -41,20 +41,44 @@ mapView = MGLMapView(frame: view.bounds,
 
 ## AR Component
 
-**1** - Setup a `AVCaptureSession` utilizing the `AVCaptureDevice`.
+* When the `treasure` annotation is tapped on the Map, we are presenting a new `UIViewController` - the `ViewController.swift` file. 
+* We know based upon what annotation was tapped, what `treasure` object should be transferred forward to display in our camera preview.
+* So.. now that we know what `treasure` to display, what steps do we need to take to get this `image` displayed on screen?
+
+**1** - Tell our `AVCaptureSession` instance to start running!
+
+The `captureSession` variable being used in this code snippet is an instance of `AVCaptureSession`. The `cameraDeviceInput` is an instance of `AVCaptureDeviceInput`. Checking first that we can add the `cameraDeviceInput` to the sesion we then move forward by adding the `cameraDeviceInput` to the `captureSession`. That's a mouth full, and if you want to know more of what's going on here - I recommend option clicking the various types of these objects and reading through the documentation. 
 
 ```swift
-private func setupCaptureCameraDevice() {
-        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
-        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) 			else { return }
-        captureSession.addInput(cameraDeviceInput)
-        captureSession.startRunning()
-    }    
+let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
+guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
+captureSession.addInput(cameraDeviceInput)
+captureSession.startRunning() 
 ```
 ---
 
-**2** - Setup the Preview Layer (which is what you see when you movie your camera around):
+**2** - Setup the Preview Layer!
+
+
+
+```swift
+previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+previewLayer.frame = view.bounds
+        
+  if let treasureImage = treasure.image {
+     pokemon.contents = treasureImage.CGImage
+     let height = treasure.image!.size.height
+     let width = treasure.image!.size.height
+     pokemon.bounds = CGRectMake(100.0, 100.0, width, height)
+     pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+     previewLayer.addSublayer(pokemon)
+     view.layer.addSublayer(previewLayer)
+    }
+ ```
+
+
+ (which is what you see when you movie your camera around):
 
 ```swift
 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)

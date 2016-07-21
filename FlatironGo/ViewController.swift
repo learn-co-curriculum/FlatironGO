@@ -16,18 +16,17 @@ final class ViewController: UIViewController {
     let captureSession = AVCaptureSession()
     let motionManager = CMMotionManager()
     var previewLayer: AVCaptureVideoPreviewLayer! = nil
-    let pokemon = CALayer()
     var treasure: Treasure! = nil
     var foundImageView: UIImageView! = nil
     var dismissButton: UIButton! = nil
     var quaternionX: Double = 0.0 {
         didSet {
-            if !foundTreasure { pokemon.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
+            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
         }
     }
     var quaternionY: Double = 0.0 {
         didSet {
-            if !foundTreasure { pokemon.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
+            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
         }
     }
     var foundTreasure = false
@@ -98,16 +97,12 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        if let treasureImage = treasure.image {
-            pokemon.contents = treasureImage.CGImage
-            print(treasure.image!)
-            
+        if treasure.image != nil {
             let height = treasure.image!.size.height
             let width = treasure.image!.size.height
-
-            pokemon.bounds = CGRectMake(100.0, 100.0, width, height)
-            pokemon.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-            previewLayer.addSublayer(pokemon)
+            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
+            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+            previewLayer.addSublayer(treasure.item)
             view.layer.addSublayer(previewLayer)
         }
         
@@ -146,10 +141,10 @@ extension ViewController {
     func viewTapped(gesture: UITapGestureRecognizer) {
         let location = gesture.locationInView(view)
         
-        let topLeftX = Int(pokemon.origin.x)
-        let topRightX = topLeftX + Int(pokemon.width)
-        let topLeftY = Int(pokemon.origin.y)
-        let bottomLeftY = topLeftY + Int(pokemon.height)
+        let topLeftX = Int(treasure.item.origin.x)
+        let topRightX = topLeftX + Int(treasure.item.width)
+        let topLeftY = Int(treasure.item.origin.y)
+        let bottomLeftY = topLeftY + Int(treasure.item.height)
         
         guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
         
@@ -166,8 +161,8 @@ extension ViewController {
             motionManager.stopDeviceMotionUpdates()
             captureSession.stopRunning()
             
-            pokemon.springToMiddle(withDuration: 1.5, damping: 9, inView: view)
-            pokemon.centerInView(view)
+            treasure.item.springToMiddle(withDuration: 1.5, damping: 9, inView: view)
+            treasure.item.centerInView(view)
             
             previewLayer.fadeOutWithDuration(1.0)
             
@@ -184,12 +179,11 @@ extension ViewController {
 }
 
 
-// MARK: - Found Pokemon
+// MARK: - Found Treasure
 extension ViewController {
     
     func animateInTreasure() {
-        // TODO: Update this when we change pokemon with treasure
-        let frame = pokemon.frame
+        let frame = treasure.item.frame
         let image = treasure.image!
         foundImageView = UIImageView(image: image)
         foundImageView.alpha = 0.0

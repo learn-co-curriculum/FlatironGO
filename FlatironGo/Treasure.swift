@@ -48,6 +48,7 @@ final class Treasure: CustomStringConvertible {
                 guard let data = data else { print("data came back nil"); completion(false); return }
                 if let image = UIImage(data: data) { self.image = image }
                 self.downloadingImage = false
+                self.createItem()
                 completion(true)
             })
             }.resume()
