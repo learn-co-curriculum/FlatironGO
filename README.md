@@ -1,7 +1,7 @@
 # Flatiron Go
 
 
-Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. With the popularity of Pokemon Go, there's a few components in the game which helps drive its appeal (Including Pokemon is obviously one of them). The idea that we can walk around with pokemon amongst us and be able to catch them is a great concept. Pokemon appear on our map, we're able to tap them to enter a screen where our camera turns on. When our camera turns on, we can see this Pokemon as if it's really in front of us.
+Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. With the popularity of Pokemon Go, there's a few components in the game which helps drive its appeal (Including Pokemon is obviously one of them). The idea that we can walk around with Pokemon amongst us and be able to catch them is a great concept. Pokemon appear on our map, we're able to tap them to enter a screen where our camera turns on. When our camera turns on, we can see this Pokemon as if it's really in front of us.
 
 This tutorial is broken down into two sections. One that relates to setting up the map and database component. In our demo project, our game doesn't work exactly like Pokemon Go. We decided to lay down some treasures in downtown Manhattan. A user can see these various treasures, when they tap one--similar to Pokemon Go they will be brought to a screen that displays the contents of that treasure on screen with the camera turned on to make it look as if this treasure is in front of them. They can then tap this treasure while it's displayed in front of them to capture it.
 
