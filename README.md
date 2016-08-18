@@ -1,4 +1,4 @@
-With the craze of Pokemon Go, it's brought a
+With the craze of Pokemon Go, I imagine many people have
 
 
 # Flatiron Go
@@ -9,7 +9,7 @@ The various components of this app consist of using:
 
 You will not be able to run this project locally if you were to clone it to your machine because of a missing `Constants.swift` file. I suggest creating your own project and tackling the augmented reality section first to get that up and running as I'm sure that's why you're here!
 
-As I'm sure you have your own app idea that will utilize the catching of something (like Pokemon) or displaying something on screen while your users camera is activated--feel free to skip the "Setting up our database and our map view:" section. That section is 
+As I'm sure you have your own app idea that will utilize the catching of something (like Pokemon) or displaying something on screen while your users camera is activated--feel free to skip the "Setting up our database and our map view:" section. The sections from `Firebase` -> `Constants file` relate to setting up a database/storage system backed by Firebase along with setting up that pretty map. This may be something you want in your app. If so, that section could be very useful to you! But, if you're just looking to work with the camera on your device and display an image that appears to be in front of the user while you move around, I suggest going straight to the "Setting up Augmented Reality:" section. This will help you setup the necessary components to make this work. Instead of first creating this an entire database/storage system to work with various images in a full-scalled app, you should make the augmented reality section work first with a `UIIimage` that you have local on your computer that you can drag into Xcode to test. Once that is up and running--well then the possibilities are endless.
 
 
 # Contents
