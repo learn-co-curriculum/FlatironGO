@@ -5,7 +5,7 @@ Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. W
 
 This tutorial includes two sections. "Setting up Augmented Reality" & "Setting up our database and our map view".
 
-To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project [here](https://s3.amazonaws.com/learn-verified/FlatironGoProject.zip).
+To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
 
 In this project file, we've already set up the Map and Treasures for you. If you were to run the app on your iPhone, you will find that the map comes up, it displays some treasures and you're even able to tap these treasure icons. But when doing so, you'll notice that we're brought to a black screen.
 
@@ -13,7 +13,7 @@ This is where you come in.
 
 Going through the "Setting up Augmented Reality" section below, you can code-along and build out this functionality to create the AR portion of our iOS app. It was fun building this as I imagine it will be fun for you to code-along. I wish you luck on your journey and hope that you're able to execute on the app idea you have in mind that involves these various concepts!
 
-Download the Xcode project to be used throughout this tutorial [here](https://s3.amazonaws.com/learn-verified/FlatironGoProject.zip).
+Download the Xcode project to be used throughout this tutorial [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
 
 ---
 
