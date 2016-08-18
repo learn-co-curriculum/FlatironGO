@@ -15,13 +15,17 @@ Going through the "Setting up Augmented Reality" section below, you can code-alo
 
 Download the Xcode project to be used throughout this tutorial [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
 
+Make sure to open the `FlatironGo.xcworkspace` file after downloading the Xcode Project to begin working!
+
+**iOS**: 9.3  
+**Xcode**: 7.3.1
+
+
 ---
 
 The various components of this demo app consist of using:
 
 [AVFoundation](https://developer.apple.com/av-foundation/), [CoreMotion](https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CoreMotion_Reference/), [UIKit](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/), [Firebase](https://www.firebase.com), [GeoFire](https://github.com/firebase/geofire-objc), [Mapbox](https://www.mapbox.com/ios-sdk/)
-
-
 
 
 # Contents
