@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  FlatironGo
 //
-//  Created by Your Mom on 7/15/16.
+//  Created by You on 7/15/16.
 //  Copyright © 2016 Gamesmith, LLC. All rights reserved.
 //
 
@@ -31,9 +31,9 @@ extension MapViewController {
     
     private func generateDummyData() {
         // let buzzLocation = GPSLocation(latitude: 40.7032775878906, longitude: -74.0170288085938)
-        let bullLocation = GPSLocation(latitude: 40.7043342590332, longitude: -74.0139770507812)
-        let funnyLocation = GPSLocation(latitude: 40.7052803039551, longitude: -74.0140228271484)
-        let nyseLocation = GPSLocation(latitude: 40.7056159973145, longitude: -74.0134048461914)
+        let bullLocation = GPSLocation(latitude: 40.7033342590332, longitude: -74.0139770507812)
+        let funnyLocation = GPSLocation(latitude: 40.7082803039551, longitude: -74.0140228271484)
+        let nyseLocation = GPSLocation(latitude: 40.7056159973145, longitude: -74.0184048461914)
         let polarLocation = GPSLocation(latitude: 40.7068748474121, longitude: -74.0112686157227)
         
         // let buzz = Treasure(location: buzzLocation, name: "Buzz Lightyear", imageURLString: "")
@@ -78,7 +78,7 @@ extension MapViewController {
     }
     
     private func setCenterCoordinateOnMapView() {
-        let lat: CLLocationDegrees = 40.705697302800182
+        let lat: CLLocationDegrees = 40.706697302800182
         let lng: CLLocationDegrees = -74.014699650804047
         let downtownManhattan = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         mapView.setCenterCoordinate(downtownManhattan, zoomLevel: 15, direction: 25.0, animated: false)

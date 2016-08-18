@@ -3,9 +3,15 @@
 
 Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. With the popularity of Pokemon Go, there's a few components in the game which helps drive its appeal (Including Pokemon is obviously one of them). The idea that we can walk around with Pokemon amongst us and be able to catch them is a great concept. Pokemon appear on our map, we're able to tap them to enter a screen where our camera turns on. When our camera turns on, we can see this Pokemon as if it's really in front of us.
 
-This tutorial is broken down into two sections. One that relates to setting up the map and database component. In our demo project, our game doesn't work exactly like Pokemon Go. We decided to lay down some treasures in downtown Manhattan. A user can see these various treasures, when they tap one--similar to Pokemon Go they will be brought to a screen that displays the contents of that treasure on screen with the camera turned on to make it look as if this treasure is in front of them. They can then tap this treasure while it's displayed in front of them to capture it.
+This tutorial includes two sections. "Setting up Augmented Reality" & "Setting up our database and our map view".
 
-I wish you luck on your journey and hope that you're able to execute on the app idea you have in mind that involves these various concepts!
+To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project here.
+
+In this project file, we've already set up the Map and Treasures for you. If you were to run the app on your iPhone, you will find that the map comes up, it displays some treasures and you're even able to tap these treasure icons. But when doing so, you'll notice that we're brought to a black screen.
+
+This is where you come in.
+
+Going through the "Setting up Augmented Reality" section below, you can code-along and build out this functionality to create the AR portion of our iOS app. It was fun building this as I imagine it will be fun for you to code-along. I wish you luck on your journey and hope that you're able to execute on the app idea you have in mind that involves these various concepts!
 
 ---
 
@@ -13,14 +19,19 @@ The various components of this demo app consist of using:
 
 [AVFoundation](https://developer.apple.com/av-foundation/), [CoreMotion](https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CoreMotion_Reference/), [UIKit](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/), [Firebase](https://www.firebase.com), [GeoFire](https://github.com/firebase/geofire-objc), [Mapbox](https://www.mapbox.com/ios-sdk/)
 
-You will not be able to run this project locally if you were to clone it to your machine because of a missing `Constants.swift` file. I suggest creating your own project and tackling the augmented reality section first to get that up and running as I'm sure that's why you're here!
 
-As I'm sure you have your own app idea that will utilize the catching of something (like Pokemon) or displaying something on screen while your users camera is activated--feel free to skip the "Setting up our database and our map view:" section. The sections from `Firebase` -> `Constants file` relate to setting up a database/storage system backed by Firebase along with setting up that pretty map. This may be something you want in your app. If so, that section could be very useful to you! But, if you're just looking to work with the camera on your device and display an image that appears to be in front of the user while you move around, I suggest going straight to the "Setting up Augmented Reality:" section. This will help you setup the necessary components to make this work. Instead of first creating this an entire database/storage system to work with various images in a full-scalled app, you should make the augmented reality section work first with a `UIIimage` that you have local on your computer that you can drag into Xcode to test. Once that is up and running--well then the possibilities are endless.
 
 
 # Contents
 
-Note: Feel free to jump right to the augmented reality section--the setting up the database and map view is not required for that section.
+### Setting up Augmented Reality:
+
+* [Augmented Reality](#augmented-reality)
+* [Brief Overview](#brief-overview)
+* [Camera Device](#setupcapturecameradevice)
+* [Preview Layer](#setuppreviewlayer)
+* [Motion Manager](#setupmotionmanager)
+* [Gesture Recognizer](#setupgesturerecognizer)
 
 ### Setting up our database and our map view:
 
@@ -35,16 +46,6 @@ Note: Feel free to jump right to the augmented reality section--the setting up t
 * [Constants file](#constants-file)
 
 
-### Setting up Augmented Reality:
-
-* [Augmented Reality](#augmented-reality)
-* [Brief Overview](#brief-overview)
-* [Camera Device](#setupcapturecameradevice)
-* [Preview Layer](#setuppreviewlayer)
-* [Motion Manager](#setupmotionmanager)
-* [Gesture Recognizer & Dismiss Button](#setupgesturerecognizer-and-setupdismissbutton)
-
-
 ![](https://i.imgur.com/iH0HDpt.png)
 
 ![](https://i.imgur.com/wKJBOh1.png) 
@@ -54,9 +55,404 @@ Note: Feel free to jump right to the augmented reality section--the setting up t
 
 
 
+---
 
+
+# Tapping the Treasure Icon
+
+Check out the extension on `MapViewController` marked "Segue Method". Here we implement the functionality to handle the tap of a a treasure icon and the segue we perform based upon that.
+
+Through the `prepareForSegue(_:sender:)` method on `MapViewController`, we're handing over to our destination view controller the `treasure` object which was tapped. The destination view controller is the `ViewController`, so in the various methods we create within our `ViewController.swift` file, we have available to us a `Treasure` object, thanks to the `MapViewController`.
 
 ---
+
+# Augmented Reality
+
+
+![OtherBear](https://i.imgur.com/jWZDeRy.pngF)
+
+We are now in our `ViewController.swift` file. How did we get here? When a treasure icon is tapped from the `MapViewController`, we segue over to this `ViewController`. In the `prepareForSegue(_:sender:)` method on the `MapViewController`, we're able to get a hold of the instance of the `ViewController` through the `segue`'s `destinationViewController` property. This segue connection was made in our `Main.storyboard` file. In that `prepareForSegue(_:sender:)` function on the `MapViewController`, we assigned a value to the following instance property on our `ViewController` (which is the `.destinationViewController`):
+
+```swift
+var treasure: Treasure!
+```
+
+That way, within our `viewDidLoad()` method on the `ViewController`, we have full access to a `treasure` object. The one that was tapped on the `MapViewController`. With this `treasure` object, we can go through with the necessary steps to displaying on screen.
+
+Recap: Our `ViewController` has an instance property called `treasure` of type `Treasure!`. It's an implicitly unwrapped optional, that way it has a default value of `nil` when our `ViewController` is loaded into memory because we don't have access to the `UIViewController`'s `init` function and we can't add a stored property to a class on a `UIViewController` without assigning it a default value. By making it an implicitly unwrapped optional, it has a default value of `nil`. We assign it a value in the `prepareForSegue(_:sender:)` method on our instance of `MapViewController` through the `segue` parameter which is of type `UIStoryboardSegue`. The `segue` object knows where we're going (because we set this up within our `Main.storyboard` file. Through that `segue` object, we get a hold of the instance of our `ViewController`. At that moment, we assign a value to the `treasure` instance property. What value? Well, it has to be of type `Treasure`--it's the `Treasure` instance that was tapped on the map. That's the value we assign to this instance property.
+
+# Brief Overview
+  
+* `viewDidLoad()` - Here the view is loaded into memory, we are just changing the `backgroundColor` property on our `view` instance.
+* `viewWillAppear(_:)` - The view is about to appear on screen so we're calling on a method called `setupMainComponents()` which will go through all the necessary steps to getting this AR component to work.
+* `setupMainComponents()` - This function calls on the following functions to get everything setup:
+	* `setupCaptureCameraDevice()` - Setting up the camera device to put the user in a mode as if they're going to take a picture.
+	* `setupPreviewLayer()` - Setting up our image to be displayed on screen.
+	* `setupMotionManager()` - Setting up an object that allows us to listen to changes in the device when the user moves the iPhone around.
+	* `setupGestureRecognizer()` - Setting up an object that listens for any tap on the screen. We want to see if a user was able to tap the image on screen.
+	* `setupDismissButton()` - Setting up a `UIButon` to appear on screen after a user is able to tap the image (this will allow the user to go back to the map).
+	
+
+```swift
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.blackColor()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setupMainComponents()
+    }
+    
+    private func setupMainComponents() {
+        setupCaptureCameraDevice()
+        setupPreviewLayer()
+        setupMotionManager()
+        setupGestureRecognizer()
+        setupDismissButton()
+    }
+```
+
+Without discussing exactly what these various instance properties do yet, I would ask that you include them above the `viewDidLoad()` for now as they will be used throughout these various methods. Some of them are already provided for you in the `ViewController.swift` file.
+
+```swift
+    let captureSession = AVCaptureSession()
+    let motionManager = CMMotionManager()
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    var treasure: Treasure!
+    var foundImageView: UIImageView!
+    var dismissButton: UIButton!
+    var foundTreasure = false
+
+    var quaternionX: Double = 0.0 {
+        didSet {
+            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
+        }
+    }
+    
+    var quaternionY: Double = 0.0 {
+        didSet {
+            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
+        }
+    }    
+```
+
+# setupCaptureCameraDevice
+
+What we will be creating:
+
+```swift
+// MARK: - AVFoundation Methods
+extension ViewController {
+    
+    private func setupCaptureCameraDevice() {
+        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
+        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
+        captureSession.addInput(camera)
+        captureSession.startRunning()
+    }
+        
+}
+```
+
+**1** - Create an extension on the `ViewController`, adding a `// MARK: - ` above the extension labeled AVFoundation Methods
+  
+**2** - Within this extension, create a function named `setupCaptureCameraDevice()`. This method will take in no arguments and return no values. In our implementation we want to do the following:  
+
+Create a constant called `cameraDevice` and assign it the value `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant, will return back to us the built in camera that is primarily used for capture and recording. We are storing this value in our `cameraDevice` constant.   
+
+
+Create a constant called `cameraDeviceInput` and assign it the value `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` takes in an argument of type `AVCaptureDevice` which is the same type of `cameraDevice`, the constant we just made. This initializer will create an instance of `AVCaptureDeviceInput` which can be used to capture data from an `AVCaptureDevice` (which is our constant `cameraDevice)` in an `AVCaptureSession` (which is our `captureSession` instance property which we haven't talked about yet). 
+
+
+Because our `cameraDeviceInput` might be nil in that we've tried initializing this object calling on an `init` function which can fail, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession`. There's a method on our `captureSession` instance property which is of type `AVCaptureSession` which allows us to check that we can indeed add this `cameraDeviceInput`  as input. If `cameraDeviceInput` is not nil, we store its value in our local constant named `camera` , check to see that we can add it as input then carryon.
+
+
+Next we want to call on the `addInput(_:)` method available to instances of `AVCaptureSession`. So we call on the `addInput(_:)` method on our `captureSession` instance property passing in the `camera` instance.
+
+
+Lastly, we call `startRunning()` on our `captureSession` instance property. This begins the flow of data from inputs to outputs connected to our `AvCaptureSession` instance. We are not handling any errors that might come of this `startRunning()` method which is something we should look into if we were to release this app.
+
+
+# setupPreviewLayer
+
+What we will be creating:
+
+```swift
+// MARK: - AVFoundation Methods
+extension ViewController {
+    
+    private func setupCaptureCameraDevice() {
+        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
+        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
+        captureSession.addInput(camera)
+        captureSession.startRunning()
+    }
+    
+    private func setupPreviewLayer() {
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.bounds
+        
+        if treasure.image != nil {
+            let height = treasure.image!.size.height
+            let width = treasure.image!.size.height
+            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
+            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+            previewLayer.addSublayer(treasure.item)
+            view.layer.addSublayer(previewLayer)
+        }
+    }
+    
+}
+```
+
+We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice` method.
+
+**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values. In our implementation we want to do the following:
+
+Above our `viewDidLoad()`, we have an instance property
+
+```swift
+var previewLayer: AVCaptureVideoPreviewLayer!
+```
+
+The `AVCaptureVideoPreviewLayer` is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer`. We need to create an instance of this class with an instance of a capture session to be previewed on screen (which we have setup!). So we initialize our `previewLayer` instance property passing in the `captureSession` object to the the `AVCaptureVideoPreviewLayer` initializer.
+
+Next you need to setup the frame of this `previewLayer` to equal the `bounds` of our `view`. This `previewLayer` will now fill the screen. We haven't though added it to the `view` yet where it would be visible.
+
+Our `treasure` instance property has an `image` property on it which can be `nil`. If it's not `nil` in that we were able to create an instance of this `Treasure` object and grab down the image correctly from firebase then we will move forward. 
+
+Our `Treasure` object has an instance method which we are utilizing here:
+
+```swift
+var item = CALayer()
+```
+
+Firebase gives us back `NSData` which represents our image. We then create a `UIImage` using this `NSData` provided to us by Firebase. With that `UIImage` instance now stored on our `Treasure` object, we need to convert that to a `CALayer` object. Why? Because we need to add this particular image to the `previewLayer` which is what is displayed on screen. It's the camera preview where you can move the iPhone around and take photos / videos (except we're not going provide any functionality that will allow anyone to take a photo or video). And we can't add a `UIImage` which is a `UIView` to a `CALayer`. We can add a `CALayer` to a `CALayer`. So the `item` property on any `Treasure` instance is of type `CALayer`.
+
+That conversion is happening in this function within `Treasure`'s implementation (if you want to take a look):
+
+```swift
+    func createItem() {
+        guard let image = image else {print("fix this later"); return }
+        item.contents = image.CGImage
+    }
+```
+
+This is why we're adding `treasure.item` to the `previewLayer` in the function `addSublayer(_:)`. After we do that, we need to now add the `previewLayer` object to our `view`'s `layer` property in the `addSublayer(_:)` method.
+
+
+# setupMotionManager
+
+What we will be creating:
+
+```swift
+// MARK: - Detect Movements
+extension ViewController {
+    
+    private func setupMotionManager() {
+        
+        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
+            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
+            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
+                
+                if error != nil { print("wtf. \(error)"); return }
+                guard let motion = motion else { print("Couldn't unwrap motion"); return }
+                
+                self.quaternionX = motion.attitude.quaternion.x
+                self.quaternionY = motion.attitude.quaternion.y
+            }
+        }
+    }
+}
+```
+
+**1** - Create another extension on the `ViewController` making it with a comment like above.
+
+**2** - Within that extension, lets create method called `setupMotionManager` which takes in no arguments and returns no values.
+
+Looking above our `viewDidLoad()` function, you will see that I asked you to copy/paste in this piece of code:
+
+```swift
+let motionManager = CMMotionManager()
+```
+
+This instance property called `motionManager` is assigned a value. The value being an instance of `CMMotionManager`. We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
+
+This `CMMotionManager` class will allow us to detect movements within our device. This is a very rich class:
+
+![](https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif)
+
+But we're not going to be utilizing all of it's functionality here.
+
+Within our `setupMotionManager()` method, before we start setting any properties on our `motionManager` object, we want to make sure that we're able to do so with the following line of code:
+
+```swift
+        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
+        
+        }
+```
+
+If the device motion and accelerometer is available, we will then enter this if statement and begin to setup our `motionManager`.
+
+```swift
+        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
+            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
+            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
+                
+                if error != nil { print("wtf. \(error)"); return }
+                guard let motion = motion else { print("Couldn't unwrap motion"); return }
+                
+                self.quaternionX = motion.attitude.quaternion.x
+                self.quaternionY = motion.attitude.quaternion.y
+            }
+        }
+    }
+```
+I've setup an interval here which  will determine how often the following block of code will be run. Imagine you're a kid in the back seat of a car and your Mom is doing her best driving you to Florida for vacation and you continue to nag her over and over and over again. This determines how often and at what interval we will nag Mom for (forever!) until we tell it to stop.  This interval is in seconds.
+
+What's going on in the `startDeviceMotionUpdatesToQueue(_:_:)` method. Well it takes in two arguments, one where we're providing the `NSOperationQueue.currentQueue()!` force un-wrapping it (might not be the best idea here, but for this demo we will force un-wrap it and move on). Next argument is a function of type `(CMDeviceMotion?, NSError?) -> Void` which means we have to provide the implementation of a function which takes in two arguments, one of type `CMDeviceMotion?`, the other of type `NSError?` which returns nothing. So we do that using closure expression syntax trailing after the first argument provided to the `startDeviceMotionUpdatesToQueue` method. So in our implementation (which will get called as often (over and over and over again)) as we dictated with the setting of the `deviceMotionUpdateInterval` property on the `motionManager` we will have access to a `CMDeviceMotion` object. That object contains a LOT of information we could utilize.
+
+First we check to see if error is not nil, meaning.. there is an error and something went wrong! so lets not move forward. We should handle errors better than that here, but lets carry on.
+
+Considering the first argument to this function is of type `CMDeviceMotion?` it means it can be nil, it's an optional `CMDeviceMotion`. So we use the guard statement to make sure it's not nil and move forward. 
+
+`CMDeviceMotion` has an incredible amount of instance properties available to it. In this scenario (through some trial & error), I found that the best one to move the image around as I moved the iPhone was 
+`attitude`. This `attitude` instance property is of type `CMAttitude` which itself has a property called `quaternion` which we will be utilizing. The `quaternion` property returns a `quaternion` representing the device's attitude.
+
+The properties available on `CMQuaternion` object are the following:
+
+```swift
+    public var x: Double
+    public var y: Double
+    public var z: Double
+    public var w: Double
+```
+
+We're most concerned with the `x` and `y` values only (for this demo) which will help us determine how the person is moving their iPhone around.
+
+The type of `x` and `y` here of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
+
+```swift
+self.quaternionX = motion.attitude.quaternion.x
+self.quaternionY = motion.attitude.quaternion.y
+```
+
+This block of code is getting called over and over and over again until we tell it stop. So it's constantly passing through a new `motion` object which has these properties available to it which we're reading and assigning to our own instance property on the `ViewController`. If we were to add `print()` statements within this block of code, we would see it being called a lot (and fast). 
+
+Ok, so we're setting a value to an instance property on our `ViewController`, lets take a look at those instance properties:
+
+
+```swift
+    var quaternionX: Double = 0.0 {
+        didSet {
+            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
+        }
+    }
+    
+    var quaternionY: Double = 0.0 {
+        didSet {
+            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
+        }
+    }
+```
+
+We setup `didSet` observers on both of these instance properties. So every time we assign a value to them (which we do often), the piece of code in that `didSet` block will get run (which again, will happen often). So what's happening in those `didSet` blocks:
+
+```swift
+if !foundTreasure { 
+	treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 
+}
+
+if !foundTreasure { 
+	treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
+}
+```
+
+We are moving the `treasure ` object around the screen dependent on the new values produced by whats on the other side of the equal sign. The math used here was done to simulate a slight movement to the object so it didn't appear static on the screen. I would argue that this might not be the best approach but it's an approach that got this working to how I liked. 
+
+We move the iPhone around and we have a slight bounce / movement to the treasure object to make it appear somewhat real-life like.
+
+`foundTreasure` is an instance property of type `Bool` which we set to `true` when someone taps on the treasure object (something we do later on). The reason we're checking to see that it's not `true` is here because after they tap the `treasure` object on screen, I want to set `foundTreasure` to `true` so that way we don't move the treasure object on screen anymore. This is more of a safety check considering that we stop the `motionManager` from doing its thing when a treasure object is tapped so these property observers would stop being called anyway as soon as an object is tapped.
+
+That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
+
+# setupGestureRecognizer
+
+Here is what we will be creating here:
+
+```swift
+// MARK: - Gesture Recognizer Methods
+extension ViewController {
+    
+    private func setupGestureRecognizer() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        gestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func viewTapped(gesture: UITapGestureRecognizer) {
+        let location = gesture.locationInView(view)
+        
+        let topLeftX = Int(treasure.item.origin.x)
+        let topRightX = topLeftX + Int(treasure.item.width)
+        let topLeftY = Int(treasure.item.origin.y)
+        let bottomLeftY = topLeftY + Int(treasure.item.height)
+        
+        guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
+        
+        let xRange = topLeftX...topRightX
+        let yRange = topLeftY...bottomLeftY
+        
+        checkForRange(xRange, yRange, withLocation: location)
+    }
+    
+    private func checkForRange(xRange: Range<Int>, _ yRange: Range<Int>, withLocation location: CGPoint) {
+        guard foundTreasure == false else { return }
+        
+        let tapIsInRange = xRange.contains(Int(location.x)) && yRange.contains(Int(location.y))
+        
+        if tapIsInRange {
+            
+            foundTreasure = true
+            motionManager.stopDeviceMotionUpdates()
+            captureSession.stopRunning()
+            
+            treasure.item.springToMiddle(withDuration: 1.5, damping: 9, inView: view)
+            treasure.item.centerInView(view)
+            
+            previewLayer.fadeOutWithDuration(1.0)
+            
+            animateInTreasure()
+            animateInDismissButton()
+            displayNameOfTreasure()
+            displayDiscoverLabel()
+            
+        }
+    }
+}
+```
+
+Ultimately, we want to setup our gesture recognizer object where the target is `self`. `self` being the current instance of the `ViewController`. This `gestureRecognizer` will call on the `viewTapped(_:)` method when tapped. 
+
+In the implementation of `viewTapped(_:)`, we will look to see through the `gesture` argument, where the user tapped within the `view` through the `locationInView(_:)` method available on any instance of `UIGestureRecognizer` which is what `gesture` is.
+
+After that, we're creating a range of where the `treasure` lives on screen (at this current moment of the tap) and passing those ranges and the tap location to another helper function we made which will check to see if that tap falls within that range.
+
+If the tap falls within range, we call on our various helper functions here to perform the various animations. These helper functions were created for you to make your life much easier with regards to the animations. Feel free to step through these methods to see how they were implemented and what's going on.
+
+
+# Congrats, you did it!
+
+![](https://media.giphy.com/media/f31DK1KpGsyMU/giphy.gif)
+
+![](https://media.giphy.com/media/3o6gEbd93QQIt61us8/giphy.gif)
+
+---
+
+# Steps Moving Forward. Building Out Maps & Firebase yourself.
 
 # Firebase 
 
@@ -471,338 +867,6 @@ override func viewDidLoad() {
 Check out the extension on `MapViewController` where we adopt the `MGLMapViewDelegate` protocol. Above this extension, we marked it as "MapView Delegate Methods":
 
 [MapViewController.swift](https://github.com/learn-co-curriculum/FlatironGO/blob/master/FlatironGo/MapViewController.swift)
-
-
-# Tapping the Treasure Icon
-
-Check out the extension on `MapViewController` marked "Segue Method". Here we implement the functionality to handle the tap of an annotation view and the segue we perform based upon this. The `TreasureAnnotationView` class has an instance property called `treasure` of type `Treasure`.
-
-[TreasureAnnotationView.swift](https://github.com/learn-co-curriculum/FlatironGO/blob/master/FlatironGo/AnnotationView.swift)
-
-Through that annotation we're able to determine the `treasure` object associated with it. If it's `nil`, then there was a problem in our setting up of this annotation so I'm creating some default value to assign to it which is the Charging Bull. This is not ideal for an app ready for the app store, so we should look to see why in fact the `treasure` might be nil and handle this problem at that point. Here, I'm assigning it a default value if it's `nil` for demo purposes. If it's not `nil` , well then everything is cool! Either way, we're performing a `segue` over to the `ViewController` handing over the `Treasure` instance which was tapped.
-
----
-
-# Augmented Reality
-
-
-![OtherBear](https://i.imgur.com/jWZDeRy.pngF)
-
-We are now in our `ViewController.swift` file. How did we get here? When a treasure icon is tapped from the `MapViewController`, we segue over to this `ViewController`. In the `prepareForSegue(_:sender:)` method on the `MapViewController`, we're able to get a hold of the instance of the `ViewController` through the `segue`'s `destinationViewController` property. This segue connection was made in our `Main.storyboard` file. In that `prepareForSegue(_:sender:)` function on the `MapViewController`, we assigned a value to the following instance property on our `ViewController` (which is the `.destinationViewController`):
-
-```swift
-var treasure: Treasure!
-```
-
-That way, within our `viewDidLoad()` method on the `ViewController`, we have full access to a `treasure` object. The one that was tapped on the `MapViewController`. With this `treasure` object, we can go through with the necessary steps to displaying on screen.
-
-Recap: Our `ViewController` has an instance property called `treasure` of type `Treasure!`. It's an implicitly unwrapped optional, that way it has a default value of `nil` when our `ViewController` is loaded into memory because we don't have access to the `UIViewController`'s `init` function and we can't add a stored property to a class on a `UIViewController` without assigning it a default value. By making it an implicitly unwrapped optional, it has a default value of `nil`. We assign it a value in the `prepareForSegue(_:sender:)` method on our instance of `MapViewController` through the `segue` parameter which is of type `UIStoryboardSegue`. The `segue` object knows where we're going (because we set this up within our `Main.storyboard` file. Through that `segue` object, we get a hold of the instance of our `ViewController`. At that moment, we assign a value to the `treasure` instance property. What value? Well, it has to be of type `Treasure`--it's the `Treasure` instance that was tapped on the map. That's the value we assign to this instance property.
-
-# Brief Overview
-  
-* `viewDidLoad()` - Here the view is loaded into memory, we are just changing the `backgroundColor` property on our `view` instance.
-* `viewWillAppear(_:)` - The view is about to appear on screen so we're calling on a method called `setupMainComponents()` which will go through all the necessary steps to getting this AR component to work.
-* `setupMainComponents()` - This function calls on the following functions to get everything setup:
-	* `setupCaptureCameraDevice()` - Setting up the camera device to put the user in a mode as if they're going to take a picture.
-	* `setupPreviewLayer()` - Setting up our image to be displayed on screen.
-	* `setupMotionManager()` - Setting up an object that allows us to listen to changes in the device when the user moves the iPhone around.
-	* `setupGestureRecognizer()` - Setting up an object that listens for any tap on the screen. We want to see if a user was able to tap the image on screen.
-	* `setupDismissButton()` - Setting up a `UIButon` to appear on screen after a user is able to tap the image (this will allow the user to go back to the map).
-	
-
-```swift
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.blackColor()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        setupMainComponents()
-    }
-    
-    private func setupMainComponents() {
-        setupCaptureCameraDevice()
-        setupPreviewLayer()
-        setupMotionManager()
-        setupGestureRecognizer()
-        setupDismissButton()
-    }
-```
-
-Without discussing exactly what these various instance properties do yet, I would ask that you include them above the `viewDidLoad()` for now as they will be used throughout these various methods.
-
-```swift
-    let captureSession = AVCaptureSession()
-    let motionManager = CMMotionManager()
-    var previewLayer: AVCaptureVideoPreviewLayer!
-    var treasure: Treasure!
-    var foundImageView: UIImageView!
-    var dismissButton: UIButton!
-    
-    var quaternionX: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
-        }
-    }
-    
-    var quaternionY: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
-        }
-    }
-    
-    var foundTreasure = false
-```
-
-# setupCaptureCameraDevice
-
-What we will be creating:
-
-```swift
-// MARK: - AVFoundation Methods
-extension ViewController {
-    
-    private func setupCaptureCameraDevice() {
-        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
-        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
-        captureSession.addInput(camera)
-        captureSession.startRunning()
-    }
-        
-}
-```
-
-**1** - Create an extension on the `ViewController`, adding a `// MARK: - ` above the extension labeled AVFoundation Methods
-  
-**2** - Within this extension, create a function named `setupCaptureCameraDevice()`. This method will take in no arguments and return no values. In our implementation we want to do the following:  
-
-Create a constant called `cameraDevice` and assign it the value `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant, will return back to us the built in camera that is primarily used for capture and recording. We are storing this value in our `cameraDevice` constant.   
-
-
-Create a constant called `cameraDeviceInput` and assign it the value `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` takes in an argument of type `AVCaptureDevice` which is the same type of `cameraDevice`, the constant we just made. This initializer will create an instance of `AVCaptureDeviceInput` which can be used to capture data from an `AVCaptureDevice` (which is our constant `cameraDevice)` in an `AVCaptureSession` (which is our `captureSession` instance property which we haven't talked about yet). 
-
-
-Because our `cameraDeviceInput` might be nil in that we've tried initializing this object calling on an `init` function which can fail, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession`. There's a method on our `captureSession` instance property which is of type `AVCaptureSession` which allows us to check that we can indeed add this `cameraDeviceInput`  as input. If `cameraDeviceInput` is not nil, we store its value in our local constant named `camera` , check to see that we can add it as input then carryon.
-
-
-Next we want to call on the `addInput(_:)` method available to instances of `AVCaptureSession`. So we call on the `addInput(_:)` method on our `captureSession` instance property passing in the `camera` instance.
-
-
-Lastly, we call `startRunning()` on our `captureSession` instance property. This begins the flow of data from inputs to outputs connected to our `AvCaptureSession` instance. We are not handling any errors that might come of this `startRunning()` method which is something we should look into if we were to release this app.
-
-
-# setupPreviewLayer
-
-What we will be creating:
-
-```swift
-// MARK: - AVFoundation Methods
-extension ViewController {
-    
-    private func setupCaptureCameraDevice() {
-        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
-        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
-        captureSession.addInput(camera)
-        captureSession.startRunning()
-    }
-    
-    private func setupPreviewLayer() {
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.bounds
-        
-        if treasure.image != nil {
-            let height = treasure.image!.size.height
-            let width = treasure.image!.size.height
-            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
-            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-            previewLayer.addSublayer(treasure.item)
-            view.layer.addSublayer(previewLayer)
-        }
-    }
-    
-}
-```
-
-We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice` method.
-
-**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values. In our implementation we want to do the following:
-
-Above our `viewDidLoad()`, we have an instance property
-
-```swift
-var previewLayer: AVCaptureVideoPreviewLayer!
-```
-
-The `AVCaptureVideoPreviewLayer` is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer`. We need to create an instance of this class with an instance of a capture session to be previewed on screen (which we have setup!). So we initialize our `previewLayer` instance property passing in the `captureSession` object to the the `AVCaptureVideoPreviewLayer` initializer.
-
-Next you need to setup the frame of this `previewLayer` to equal the `bounds` of our `view`. This `previewLayer` will now fill the screen. We haven't though added it to the `view` yet where it would be visible.
-
-Our `treasure` instance property has an `image` property on it which can be `nil`. If it's not `nil` in that we were able to create an instance of this `Treasure` object and grab down the image correctly from firebase then we will move forward. 
-
-Our `Treasure` object has an instance method which we are utilizing here:
-
-```swift
-var item = CALayer()
-```
-
-Firebase gives us back `NSData` which represents our image. We then create a `UIImage` using this `NSData` provided to us by Firebase. With that `UIImage` instance now stored on our `Treasure` object, we need to convert that to a `CALayer` object. Why? Because we need to add this particular image to the `previewLayer` which is what is displayed on screen. It's the camera preview where you can move the iPhone around and take photos / videos (except we're not going provide any functionality that will allow anyone to take a photo or video). And we can't add a `UIImage` which is a `UIView` to a `CALayer`. We can add a `CALayer` to a `CALayer`. So the `item` property on any `Treasure` instance is of type `CALayer`.
-
-That conversion is happening in this function within `Treasure`'s implementation (if you want to take a look):
-
-```swift
-    func createItem() {
-        guard let image = image else {print("fix this later"); return }
-        item.contents = image.CGImage
-    }
-```
-
-This is why we're adding `treasure.item` to the `previewLayer` in the function `addSublayer(_:)`. After we do that, we need to now add the `previewLayer` object to our `view`'s `layer` property in the `addSublayer(_:)` method.
-
-
-# setupMotionManager
-
-What we will be creating:
-
-```swift
-// MARK: - Detect Movements
-extension ViewController {
-    
-    private func setupMotionManager() {
-        
-        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
-            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
-            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
-                
-                if error != nil { print("wtf. \(error)"); return }
-                guard let motion = motion else { print("Couldn't unwrap motion"); return }
-                
-                self.quaternionX = motion.attitude.quaternion.x
-                self.quaternionY = motion.attitude.quaternion.y
-            }
-        }
-    }
-}
-```
-
-**1** - Create another extension on the `ViewController` making it with a comment like above.
-
-**2** - Within that extension, lets create method called `setupMotionManager` which takes in no arguments and returns no values.
-
-Looking above our `viewDidLoad()` function, you will see that I asked you to copy/paste in this piece of code:
-
-```swift
-let motionManager = CMMotionManager()
-```
-
-This instance property called `motionManager` is assigned a value. The value being an instance of `CMMotionManager`. We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
-
-This `CMMotionManager` class will allow us to detect movements within our device. This is a very rich class:
-
-![](https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif)
-
-But we're not going to be utilizing all of it's functionality here.
-
-Within our `setupMotionManager()` method, before we start setting any properties on our `motionManager` object, we want to make sure that we're able to do so with the following line of code:
-
-```swift
-        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
-        
-        }
-```
-
-If the device motion and accelerometer is available, we will then enter this if statement and begin to setup our `motionManager`.
-
-```swift
-        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
-            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
-            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
-                
-                if error != nil { print("wtf. \(error)"); return }
-                guard let motion = motion else { print("Couldn't unwrap motion"); return }
-                
-                self.quaternionX = motion.attitude.quaternion.x
-                self.quaternionY = motion.attitude.quaternion.y
-            }
-        }
-    }
-```
-I've setup an interval here which  will determine how often the following block of code will be run. Imagine you're a kid in the back seat of a car and your Mom is doing her best driving you to Florida for vacation and you continue to nag her over and over and over again. This determines how often and at what interval we will nag Mom for (forever!) until we tell it to stop.  This interval is in seconds.
-
-What's going on in the `startDeviceMotionUpdatesToQueue(_:_:)` method. Well it takes in two arguments, one where we're providing the `NSOperationQueue.currentQueue()!` force un-wrapping it (might not be the best idea here, but for this demo we will force un-wrap it and move on). Next argument is a function of type `(CMDeviceMotion?, NSError?) -> Void` which means we have to provide the implementation of a function which takes in two arguments, one of type `CMDeviceMotion?`, the other of type `NSError?` which returns nothing. So we do that using closure expression syntax trailing after the first argument provided to the `startDeviceMotionUpdatesToQueue` method. So in our implementation (which will get called as often (over and over and over again)) as we dictated with the setting of the `deviceMotionUpdateInterval` property on the `motionManager` we will have access to a `CMDeviceMotion` object. That object contains a LOT of information we could utilize.
-
-First we check to see if error is not nil, meaning.. there is an error and something went wrong! so lets not move forward. We should handle errors better than that here, but lets carry on.
-
-Considering the first argument to this function is of type `CMDeviceMotion?` it means it can be nil, it's an optional `CMDeviceMotion`. So we use the guard statement to make sure it's not nil and move forward. 
-
-`CMDeviceMotion` has an incredible amount of instance properties available to it. In this scenario (through some trial & error), I found that the best one to move the image around as I moved the iPhone was 
-`attitude`. This `attitude` instance property is of type `CMAttitude` which itself has a property called `quaternion` which we will be utilizing. The `quaternion` property returns a `quaternion` representing the device's attitude.
-
-The properties available on `CMQuaternion` object are the following:
-
-```swift
-    public var x: Double
-    public var y: Double
-    public var z: Double
-    public var w: Double
-```
-
-We're most concerned with the `x` and `y` values only (for this demo) which will help us determine how the person is moving their iPhone around.
-
-The type of `x` and `y` here of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
-
-```swift
-self.quaternionX = motion.attitude.quaternion.x
-self.quaternionY = motion.attitude.quaternion.y
-```
-
-This block of code is getting called over and over and over again until we tell it stop. So it's constantly passing through a new `motion` object which has these properties available to it which we're reading and assigning to our own instance property on the `ViewController`. If we were to add `print()` statements within this block of code, we would see it being called a lot (and fast). 
-
-Ok, so we're setting a value to an instance property on our `ViewController`, lets take a look at those instance properties:
-
-
-```swift
-    var quaternionX: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
-        }
-    }
-    
-    var quaternionY: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
-        }
-    }
-```
-
-We setup `didSet` observers on both of these instance properties. So every time we assign a value to them (which we do often), the piece of code in that `didSet` block will get run (which again, will happen often). So what's happening in those `didSet` blocks:
-
-```swift
-if !foundTreasure { 
-	treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 
-}
-
-if !foundTreasure { 
-	treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
-}
-```
-
-We are moving the `treasure ` object around the screen dependent on the new values produced by whats on the other side of the equal sign. The math used here was done to simulate a slight movement to the object so it didn't appear static on the screen. I would argue that this might not be the best approach but it's an approach that got this working to how I liked. 
-
-We move the iPhone around and we have a slight bounce / movement to the treasure object to make it appear somewhat real-life like.
-
-`foundTreasure` is an instance property of type `Bool` which we set to `true` when someone taps on the treasure object (something we do later on). The reason we're checking to see that it's not `true` is here because after they tap the `treasure` object on screen, I want to set `foundTreasure` to `true` so that way we don't move the treasure object on screen anymore. This is more of a safety check considering that we stop the `motionManager` from doing its thing when a treasure object is tapped so these property observers would stop being called anyway as soon as an object is tapped.
-
-That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
-
-# setupGestureRecognizer and setupDismissButton
-
-To see how we setup the gesture recognizer, animations and dismiss button - check out our source code:
-
-[ViewController.swift](https://github.com/learn-co-curriculum/FlatironGO/blob/master/FlatironGo/ViewController.swift)
-
 
 ![bear](http://i.imgur.com/nAwylOw.png)
 

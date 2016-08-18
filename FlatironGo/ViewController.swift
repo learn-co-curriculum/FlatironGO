@@ -13,26 +13,9 @@ import CoreMotion
 
 final class ViewController: UIViewController {
     
-    let captureSession = AVCaptureSession()
-    let motionManager = CMMotionManager()
-    var previewLayer: AVCaptureVideoPreviewLayer!
-    
     var treasure: Treasure!
-    
     var foundImageView: UIImageView!
     var dismissButton: UIButton!
-    
-    var quaternionX: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
-        }
-    }
-    var quaternionY: Double = 0.0 {
-        didSet {
-            if !foundTreasure { treasure.item.center.x = (CGFloat(quaternionY) * view.bounds.size.height + 100) * 4.0 }
-        }
-    }
-    
     var foundTreasure = false
     
     override func viewDidLoad() {
@@ -42,17 +25,27 @@ final class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setupMainComponents()
+        setupDismissButton()
+        
+        
+        
     }
     
-    private func setupMainComponents() {
-        setupCaptureCameraDevice()
-        setupPreviewLayer()
-        setupMotionManager()
-        setupGestureRecognizer()
-        setupDismissButton()
-    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// --------- Helper Methods Provided For you ------------
 
 
 // MARK: - Dismiss Button
@@ -81,104 +74,6 @@ extension ViewController {
     }
     
 }
-
-
-// MARK: - AVFoundation Methods
-extension ViewController {
-    
-    private func setupCaptureCameraDevice() {
-        let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
-        guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
-        captureSession.addInput(cameraDeviceInput)
-        captureSession.startRunning()
-    }
-    
-    private func setupPreviewLayer() {
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.bounds
-        
-        if treasure.image != nil {
-            let height = treasure.image!.size.height
-            let width = treasure.image!.size.height
-            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
-            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-            previewLayer.addSublayer(treasure.item)
-            view.layer.addSublayer(previewLayer)
-        }
-    }
-    
-}
-
-// MARK: - Detect Movements
-extension ViewController {
-    
-    private func setupMotionManager() {
-        
-        if motionManager.deviceMotionAvailable && motionManager.accelerometerAvailable {
-            motionManager.deviceMotionUpdateInterval = 2.0 / 60.0
-            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!) { [unowned self] motion, error in
-                
-                if error != nil { print("wtf. \(error)"); return }
-                guard let motion = motion else { print("Couldn't unwrap motion"); return }
-                
-                self.quaternionX = motion.attitude.quaternion.x
-                self.quaternionY = motion.attitude.quaternion.y
-            }
-        }
-    }
-}
-
-// MARK: - Gesture Recognizer Methods
-extension ViewController {
-    
-    private func setupGestureRecognizer() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        gestureRecognizer.cancelsTouchesInView = false
-        view.addGestureRecognizer(gestureRecognizer)
-    }
-    
-    func viewTapped(gesture: UITapGestureRecognizer) {
-        let location = gesture.locationInView(view)
-        
-        let topLeftX = Int(treasure.item.origin.x)
-        let topRightX = topLeftX + Int(treasure.item.width)
-        let topLeftY = Int(treasure.item.origin.y)
-        let bottomLeftY = topLeftY + Int(treasure.item.height)
-        
-        guard topLeftX < topRightX && topLeftX < bottomLeftY else { return }
-        
-        let xRange = topLeftX...topRightX
-        let yRange = topLeftY...bottomLeftY
-        
-        checkForRange(xRange, yRange, withLocation: location)
-    }
-    
-    private func checkForRange(xRange: Range<Int>, _ yRange: Range<Int>, withLocation location: CGPoint) {
-        guard foundTreasure == false else { return }
-        
-        let tapIsInRange = xRange.contains(Int(location.x)) && yRange.contains(Int(location.y))
-        
-        if tapIsInRange {
-            
-            foundTreasure = true
-            motionManager.stopDeviceMotionUpdates()
-            captureSession.stopRunning()
-            
-            treasure.item.springToMiddle(withDuration: 1.5, damping: 9, inView: view)
-            treasure.item.centerInView(view)
-            
-            previewLayer.fadeOutWithDuration(1.0)
-            
-            animateInTreasure()
-            animateInDismissButton()
-            displayNameOfTreasure()
-            displayDiscoverLabel()
-            
-        }
-    }
-}
-
 
 // MARK: - Found Treasure
 extension ViewController {
