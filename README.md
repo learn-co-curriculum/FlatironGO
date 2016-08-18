@@ -1,8 +1,15 @@
+With the craze of Pokemon Go, it's brought a
+
+
 # Flatiron Go
 
 The various components of this app consist of using:
 
 [AVFoundation](https://developer.apple.com/av-foundation/), [CoreMotion](https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CoreMotion_Reference/), [UIKit](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/), [Firebase](https://www.firebase.com), [GeoFire](https://github.com/firebase/geofire-objc), [Mapbox](https://www.mapbox.com/ios-sdk/)
+
+You will not be able to run this project locally if you were to clone it to your machine because of a missing `Constants.swift` file. I suggest creating your own project and tackling the augmented reality section first to get that up and running as I'm sure that's why you're here!
+
+As I'm sure you have your own app idea that will utilize the catching of something (like Pokemon) or displaying something on screen while your users camera is activated--feel free to skip the "Setting up our database and our map view:" section. That section is 
 
 
 # Contents
