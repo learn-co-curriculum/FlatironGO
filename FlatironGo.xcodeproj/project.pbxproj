@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		14DABE94405B58B3F93E24D2 /* Pods_FlatironGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */; };
-		2B81D8DC1D3A935600BB3EDD /* BackpackCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */; };
-		2B81D8DF1D3A959200BB3EDD /* BackpackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */; };
 		2B81D8E01D3A959200BB3EDD /* BackpackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81D8DE1D3A959200BB3EDD /* BackpackCollectionViewCell.xib */; };
 		2B81D8E21D3AB78D00BB3EDD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8E11D3AB78D00BB3EDD /* Colors.swift */; };
 		5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983B81D39D6A000E5819C /* MapViewController.swift */; };
@@ -42,8 +40,6 @@
 		0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlatironGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		233D6158F5C6619D29953E36 /* Pods-FlatironGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.debug.xcconfig"; sourceTree = "<group>"; };
 		28A832C2049CC00D4A25D7FC /* Pods-FlatironGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlatironGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlatironGo/Pods-FlatironGo.release.xcconfig"; sourceTree = "<group>"; };
-		2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackpackCollectionViewController.swift; sourceTree = "<group>"; };
-		2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackpackCollectionViewCell.swift; sourceTree = "<group>"; };
 		2B81D8DE1D3A959200BB3EDD /* BackpackCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackpackCollectionViewCell.xib; sourceTree = "<group>"; };
 		2B81D8E11D3AB78D00BB3EDD /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5B4983B81D39D6A000E5819C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -137,10 +133,8 @@
 			children = (
 				7DD9128C1D37155E00331CF3 /* AppDelegate.swift */,
 				7D9195351D40289400ED0CFC /* AnnotationView.swift */,
-				2B81D8DB1D3A935600BB3EDD /* BackpackCollectionViewController.swift */,
 				2B81D8E11D3AB78D00BB3EDD /* Colors.swift */,
 				5BEE35E01D4105AC00176D83 /* Constants.swift */,
-				2B81D8DD1D3A959200BB3EDD /* BackpackCollectionViewCell.swift */,
 				7DD9128E1D37155E00331CF3 /* ViewController.swift */,
 				5B4983B81D39D6A000E5819C /* MapViewController.swift */,
 				5D4704D41D3D91C0009B6ECC /* FirebaseAPI.swift */,
@@ -497,12 +491,10 @@
 				5D4704D51D3D91C0009B6ECC /* FirebaseAPI.swift in Sources */,
 				2B81D8E21D3AB78D00BB3EDD /* Colors.swift in Sources */,
 				5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */,
-				2B81D8DC1D3A935600BB3EDD /* BackpackCollectionViewController.swift in Sources */,
 				5BEE35E11D4105AC00176D83 /* Constants.swift in Sources */,
 				5B4983B91D39D6A000E5819C /* MapViewController.swift in Sources */,
 				7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */,
 				7D9195361D40289400ED0CFC /* AnnotationView.swift in Sources */,
-				2B81D8DF1D3A959200BB3EDD /* BackpackCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
