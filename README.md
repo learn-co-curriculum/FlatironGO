@@ -1,9 +1,15 @@
-With the craze of Pokemon Go, I imagine many people have
-
-
 # Flatiron Go
 
-The various components of this app consist of using:
+
+Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. With the popularity of Pokemon Go, there's a few components in the game which helps drive its appeal (Including Pokemon is obviously one of them). The idea that we can walk around with pokemon amongst us and be able to catch them is a great concept. Pokemon appear on our map, we're able to tap them to enter a screen where our camera turns on. When our camera turns on, we can see this Pokemon as if it's really in front of us.
+
+This tutorial is broken down into two sections. One that relates to setting up the map and database component. In our demo project, our game doesn't work exactly like Pokemon Go. We decided to lay down some treasures in downtown Manhattan. A user can see these various treasures, when they tap one--similar to Pokemon Go they will be brought to a screen that displays the contents of that treasure on screen with the camera turned on to make it look as if this treasure is in front of them. They can then tap this treasure while it's displayed in front of them to capture it.
+
+I wish you luck on your journey and hope that you're able to execute on the app idea you have in mind that involves these various concepts!
+
+---
+
+The various components of this demo app consist of using:
 
 [AVFoundation](https://developer.apple.com/av-foundation/), [CoreMotion](https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CoreMotion_Reference/), [UIKit](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/), [Firebase](https://www.firebase.com), [GeoFire](https://github.com/firebase/geofire-objc), [Mapbox](https://www.mapbox.com/ios-sdk/)
 
@@ -14,7 +20,7 @@ As I'm sure you have your own app idea that will utilize the catching of somethi
 
 # Contents
 
-Note: Feel free to jump right to the augmented reality section to get this up and running in your own project.
+Note: Feel free to jump right to the augmented reality section--the setting up the database and map view is not required for that section.
 
 ### Setting up our database and our map view:
 
