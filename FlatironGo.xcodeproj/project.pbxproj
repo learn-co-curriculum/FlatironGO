@@ -13,7 +13,6 @@
 		5B4983BE1D39DDA000E5819C /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4983BD1D39DDA000E5819C /* Treasure.swift */; };
 		5BEE35E11D4105AC00176D83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE35E01D4105AC00176D83 /* Constants.swift */; };
 		5D6443111D39AB3500D17A2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */; };
-		5D6443141D39B87C00D17A2E /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443121D39B87C00D17A2E /* GeoFire.framework */; };
 		5D6443151D39B87C00D17A2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6443131D39B87C00D17A2E /* CoreLocation.framework */; };
 		7D9195361D40289400ED0CFC /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9195351D40289400ED0CFC /* AnnotationView.swift */; };
 		7DD9128D1D37155E00331CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9128C1D37155E00331CF3 /* AppDelegate.swift */; };
@@ -43,7 +42,6 @@
 		5B4983BD1D39DDA000E5819C /* Treasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		5BEE35E01D4105AC00176D83 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D6443101D39AB3500D17A2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5D6443121D39B87C00D17A2E /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GeoFire.framework; path = "Pods/../build/Debug-iphoneos/GeoFire/GeoFire.framework"; sourceTree = "<group>"; };
 		5D6443131D39B87C00D17A2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7D9195351D40289400ED0CFC /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7DD912891D37155E00331CF3 /* FlatironGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlatironGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D6443141D39B87C00D17A2E /* GeoFire.framework in Frameworks */,
 				5D6443151D39B87C00D17A2E /* CoreLocation.framework in Frameworks */,
 				14DABE94405B58B3F93E24D2 /* Pods_FlatironGo.framework in Frameworks */,
 			);
@@ -85,7 +82,6 @@
 		0C290D7D975167AB2BE90991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5D6443121D39B87C00D17A2E /* GeoFire.framework */,
 				5D6443131D39B87C00D17A2E /* CoreLocation.framework */,
 				0EE81F2707E2947B532A753C /* Pods_FlatironGo.framework */,
 				9A935E3B47AAAE3FC0E6BBAF /* Pods_FlatironGoTests.framework */,

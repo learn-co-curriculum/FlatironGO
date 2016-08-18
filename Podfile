@@ -6,13 +6,8 @@ target 'FlatironGo' do
   use_frameworks!
 
   # Pods for FlatironGo
-  pod 'Firebase'
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
-  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
-  pod 'SnapKit', '~> 0.21'
+
   pod 'Mapbox-iOS-SDK', '~> 3.3'
-  pod 'SDWebImage'
 
   target 'FlatironGoTests' do
     inherit! :search_paths

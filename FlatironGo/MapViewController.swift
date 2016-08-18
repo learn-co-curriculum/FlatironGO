@@ -7,10 +7,7 @@
 //
 
 import UIKit
-import SnapKit
 import Mapbox
-import FirebaseDatabase
-import GeoFire
 
 final class MapViewController: UIViewController  {
     

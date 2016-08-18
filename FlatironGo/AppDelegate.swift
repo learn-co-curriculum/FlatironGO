@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
-import GeoFire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        FIRApp.configure()
         
 //        let firebaseAPI = FirebaseAPI()
 //        firebaseAPI.setTreasureProfileAndLocation(name: "test", imageName: "testImage", image: UIImage(named: "FlatironLogo")!, latitude: 0.0, longitude: 0.0)
