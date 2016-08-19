@@ -281,9 +281,9 @@ extension ViewController {
 }
 ```
 
-**1** - Create another extension on the `ViewController` making it with a comment like above.
+**1** - Create another extension on the `ViewController` marking it with a comment like above.
 
-**2** - Within that extension, lets create method called `setupMotionManager` which takes in no arguments and returns no values.
+**2** - Within that extension, lets create a method called `setupMotionManager()` which takes in no arguments and returns no values.
 
 Looking above our `viewDidLoad()` function, you will see that I asked you to copy/paste in this piece of code:
 
@@ -291,13 +291,10 @@ Looking above our `viewDidLoad()` function, you will see that I asked you to cop
 let motionManager = CMMotionManager()
 ```
 
-This instance property called `motionManager` is assigned a value. The value being an instance of `CMMotionManager`. We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
+We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
 
-This `CMMotionManager` class will allow us to detect movements within our device. This is a very rich class:
-
-![](https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif)
-
-But we're not going to be utilizing all of it's functionality here.
+This `CMMotionManager` class will allow us to detect movements within our device.
+But we're not going to be utilizing all of it's functionality here, there's a lot to work with. I suggest digging into the documentation to see what you have available to you, it's pretty cool stuff.
 
 Within our `setupMotionManager()` method, before we start setting any properties on our `motionManager` object, we want to make sure that we're able to do so with the following line of code:
 
@@ -325,7 +322,22 @@ If the device motion and accelerometer is available, we will then enter this if 
 ```
 I've setup an interval here which  will determine how often the following block of code will be run. Imagine you're a kid in the back seat of a car and your Mom is doing her best driving you to Florida for vacation and you continue to nag her over and over and over again. This determines how often and at what interval we will nag Mom for (forever!) until we tell it to stop.  This interval is in seconds.
 
-What's going on in the `startDeviceMotionUpdatesToQueue(_:_:)` method. Well it takes in two arguments, one where we're providing the `NSOperationQueue.currentQueue()!` force un-wrapping it (might not be the best idea here, but for this demo we will force un-wrap it and move on). Next argument is a function of type `(CMDeviceMotion?, NSError?) -> Void` which means we have to provide the implementation of a function which takes in two arguments, one of type `CMDeviceMotion?`, the other of type `NSError?` which returns nothing. So we do that using closure expression syntax trailing after the first argument provided to the `startDeviceMotionUpdatesToQueue` method. So in our implementation (which will get called as often (over and over and over again)) as we dictated with the setting of the `deviceMotionUpdateInterval` property on the `motionManager` we will have access to a `CMDeviceMotion` object. That object contains a LOT of information we could utilize.
+`startDeviceMotionUpdatesToQueue(_:withHandler:)` method is then called on our `motionManager` object. It takes in two arguments.
+
+First argument is of type `NSOperationQueue`. So we provide it with an instance of `NSOperationQueue`--the currentQueue which is a type method available on the `NSOperationQueue` class which will return back to us the current queue. As this type method returns back to us an optional `NSOperationQueue`, we're force-unwrapping it because the method we're passing this along to requires that we give it an `NSOperationQueue` not a `NSOperationQueue?`. Force-unwrapping isn't the best approach here, we should handle this properly if this winds up returning `nil`. By not handling the `nil` case--we could have a run-time error where our app crashes if indeed it returns `nil`.
+
+Second argument to this function is of type `(CMDeviceMotion?, NSError?) -> Void`. What is that? Well, it means we have to provide it with a function (without a name) that takes in two arguments itself, the first argument being of type `CMDeviceMotion?`, the second argument being of type `NSError?`--this function will return nothing. OK, how do we pass a function to another function? We can do this using closure expression syntax. Our `motion` constant here is of type `CMDeviceMotion?`. This particular object brings with it an _incredible_ amount of functionality, we will only be using one piece of what this object brings to the table.
+
+![](https://s3.amazonaws.com/learn-verified/FISGoSS.png)
+
+So here we are providing the implementation of a function, passing it along to another function which will use it whenever it likes. But when does our implementation here get called? How often does it get called?
+
+Take a look at the code I highlighted below. The highlighted code is our implementation. This gets called by the `startDeviceMotionUpdatesToQueue(_:withHandler:)` method. We're handing it over to this method and it will do with it as it pleases (and it does). It will call on this function a lot.. but how often? How often it calls on this function is dictated by the `deviceMotionUpdateInterval` property we set in the line of code above this which we set to 2.0 / 60.0. 30 times a second it will call on this block of code passing it a new `motion` object every single time.
+
+![](https://s3.amazonaws.com/learn-verified/FISGoCodeBlock.png)
+
+So if this block of code gets called that often, and each time we're given this `motion` object--what can we do with it? Well.. we will want to read the `attitude.quaternion.x` and `attitude.quaternion.y` properties on it and update our own instance property on our `ViewController` to follow along with what's going on here.
+
 
 First we check to see if error is not nil, meaning.. there is an error and something went wrong! so lets not move forward. We should handle errors better than that here, but lets carry on.
 
@@ -345,7 +357,7 @@ The properties available on `CMQuaternion` object are the following:
 
 We're most concerned with the `x` and `y` values only (for this demo) which will help us determine how the person is moving their iPhone around.
 
-The type of `x` and `y` here of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
+The type of `x` and `y` here are of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
 
 ```swift
 self.quaternionX = motion.attitude.quaternion.x
@@ -387,7 +399,7 @@ We are moving the `treasure ` object around the screen dependent on the new valu
 
 We move the iPhone around and we have a slight bounce / movement to the treasure object to make it appear somewhat real-life like.
 
-`foundTreasure` is an instance property of type `Bool` which we set to `true` when someone taps on the treasure object (something we do later on). The reason we're checking to see that it's not `true` is here because after they tap the `treasure` object on screen, I want to set `foundTreasure` to `true` so that way we don't move the treasure object on screen anymore. This is more of a safety check considering that we stop the `motionManager` from doing its thing when a treasure object is tapped so these property observers would stop being called anyway as soon as an object is tapped.
+`foundTreasure` is an instance property of type `Bool` on our `ViewController`. This instance property is only set to `true` when someone actually taps on the image displayed on screen (something we do in the `setupGestureRecognizer()` method below). When someone does "catch" this image on screen by tapping it, I want to center the image and stop it from moving around, so I don't want it to update it's values based upon the new `quaternionX` and `quaternionY` values. You might ask.. well why don't you just stop the `motionManager` from doing its thing, then it won't update these values. Well.. you're right! I am doing that though (which you will implement below), this was just a way of really making sure the image stops moving as soon as its tapped.
 
 That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
 
