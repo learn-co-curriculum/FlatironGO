@@ -1,6 +1,6 @@
 # Flatiron Go - iOS Application
 
-![](https://media.giphy.com/media/l0MYuGQoVqpr8amQ0/giphy.gif)
+![](https://media.giphy.com/media/l2SpPB4BcTqkOPn6E/giphy.gif)
 
 Pokemon GO is the biggest US mobile game ever--that's quite an accomplishment. There are various components within the game which help drive its appeal (including Pokemon is obviously one of them). We will cover some of these components in this tutorial to help you implement your own iOS app. 
 
