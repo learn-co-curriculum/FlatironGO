@@ -167,7 +167,7 @@ Create a constant called `cameraDevice` and assign it the return value of the fo
 
 Create a constant called `cameraDeviceInput` and assign it the return value of the call to `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` function takes in an argument of type `AVCaptureDevice` which matches up with the type of our `cameraDevice` constant we just created. This initializer will create an instance of `AVCaptureDeviceInput` which will be used to capture data from an `AVCaptureDevice` instance (which is what our `cameraDevice` constant is). This particular function will open up our device for capture--which is awesome! We got hold of our camera, we've now made an attempt to open it and read its data.
 
-Because our creation of the `cameraDeviceInput` constant might be nil, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession` (quick note: `capstureSession` is of type `AVCaptureSession` and we've assigned this instance property a default value above our `viewDidLoad()` function--this object handles the various inputs and outputs from the camera). There's a method on our `captureSession` instance property which allows us to check that we can indeed add this `cameraDeviceInput` as input. If `cameraDeviceInput` is not nil, we store its value in our local constant named `camera` , check to see that we can add it as input then carry on. 
+Because our creation of the `cameraDeviceInput` constant might be nil, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession` (quick note: `captureSession` is of type `AVCaptureSession` and we've assigned this instance property a default value above our `viewDidLoad()` function--this object handles the various inputs and outputs from the camera). There's a method on our `captureSession` instance property which allows us to check that we can indeed add this `cameraDeviceInput` as input. If all is OK, `camera` is a constant which is assigned the value of `cameraDeviceInput` if it's not `nil`.
 
 
 Next we want to call on the `addInput(_:)` method available to instances of `AVCaptureSession`. So we call on the `addInput(_:)` method on our `captureSession` instance property passing in the `camera` instance.
@@ -188,7 +188,7 @@ extension ViewController {
         let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
         guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
-        captureSession.addInput(camera)
+        captureSession.addInput(cameraDeviceInput)
         captureSession.startRunning()
     }
     
@@ -196,22 +196,22 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        if treasure.image != nil {
-            let height = treasure.image!.size.height
-            let width = treasure.image!.size.height
-            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
-            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-            previewLayer.addSublayer(treasure.item)
-            view.layer.addSublayer(previewLayer)
-        }
+        let height = treasure.image!.size.height
+        let width = treasure.image!.size.height
+        treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
+        treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+        previewLayer.addSublayer(treasure.item)
+        view.layer.addSublayer(previewLayer)
     }
     
 }
 ```
 
-We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice` method.
+We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice()` method.
 
-**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values. In our implementation we want to do the following:
+**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values.
+
+Before we dive into any code, lets quickly talk about this `previewLayer` instance property were about to use.
 
 Above our `viewDidLoad()`, we have an instance property
 
@@ -219,21 +219,21 @@ Above our `viewDidLoad()`, we have an instance property
 var previewLayer: AVCaptureVideoPreviewLayer!
 ```
 
-The `AVCaptureVideoPreviewLayer` is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer`. We need to create an instance of this class with an instance of a capture session to be previewed on screen (which we have setup!). So we initialize our `previewLayer` instance property passing in the `captureSession` object to the the `AVCaptureVideoPreviewLayer` initializer.
+The `AVCaptureVideoPreviewLayer` class  is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer` object. This layer instance can be initialized with a Capture Session. This means that when we hand over to it a capture session, this layer is previewing (or showing to our user) the camera input as that is what the captures session is in charge of.
 
-Next you need to setup the frame of this `previewLayer` to equal the `bounds` of our `view`. This `previewLayer` will now fill the screen. We haven't though added it to the `view` yet where it would be visible.
+Considering our `previewLayer` right now has the default value of `nil`--because it's an implicitly unwrapped optional, we want to assign it an actual value now.
 
-Our `treasure` instance property has an `image` property on it which can be `nil`. If it's not `nil` in that we were able to create an instance of this `Treasure` object and grab down the image correctly from firebase then we will move forward. 
+In assigning it a value, we call on the `AVCaptureVidePreviewLayer` initializer which takes in a session as an argument. We have a `captureSession` all setup ready to be passed into this initializer--so that's what we do!
 
-Our `Treasure` object has an instance method which we are utilizing here:
+After doing so, we setup our `previewLayer` to fit the entire screen by having the frame equal the `view`'s bounds.
+
+Next, we begin to setup the positioning of an instance property on our `treasure` object called `item`. What is this?
 
 ```swift
 var item = CALayer()
 ```
 
-Firebase gives us back `NSData` which represents our image. We then create a `UIImage` using this `NSData` provided to us by Firebase. With that `UIImage` instance now stored on our `Treasure` object, we need to convert that to a `CALayer` object. Why? Because we need to add this particular image to the `previewLayer` which is what is displayed on screen. It's the camera preview where you can move the iPhone around and take photos / videos (except we're not going provide any functionality that will allow anyone to take a photo or video). And we can't add a `UIImage` which is a `UIView` to a `CALayer`. We can add a `CALayer` to a `CALayer`. So the `item` property on any `Treasure` instance is of type `CALayer`.
-
-That conversion is happening in this function within `Treasure`'s implementation (if you want to take a look):
+Hey look! Another `CALayer` object. Our images (stored locally) are of type `UIImage`. But we can't add a `UIImage` to a `CALayer`--which is our ultimate goal here. How do we then turn a `UIImage` into a `CALayer` object which will allow us to add our lovely images to the `previewLayer`? If you were to do some digging into the `Treasure.swift` file to check out its implementation you will notice the following method:
 
 ```swift
     func createItem() {
@@ -242,7 +242,18 @@ That conversion is happening in this function within `Treasure`'s implementation
     }
 ```
 
+This is called (not by you) in our `MapViewController.swift` file when we setup our dummy data to be used within this demo. But the line of code most interesting is:
+
+```swift
+item.contents = image.CGImage
+```
+
+Taking the `CGImage` computed property on our `UIImage` instance (called `image` here), we're storing that return value to the `contents` instance property available on our `item` property. This allows us to display our image within a `CALayer` now using this `item` instance property!
+
+
 This is why we're adding `treasure.item` to the `previewLayer` in the function `addSublayer(_:)`. After we do that, we need to now add the `previewLayer` object to our `view`'s `layer` property in the `addSublayer(_:)` method.
+
+We are almost there!!
 
 
 # setupMotionManager
