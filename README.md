@@ -1,9 +1,13 @@
-# Flatiron Go
+# Flatiron Go - iOS Application
 
 
-Pokemon GO is the biggest US mobile game ever. That's quite an accomplishment. With the popularity of Pokemon Go, there's a few components in the game which helps drive its appeal (Including Pokemon is obviously one of them). The idea that we can walk around with Pokemon amongst us and be able to catch them is a great concept. Pokemon appear on our map, we're able to tap them to enter a screen where our camera turns on. When our camera turns on, we can see this Pokemon as if it's really in front of us.
+Pokemon GO is the biggest US mobile game ever--that's quite an accomplishment. There are various components within the game which help drive its appeal (including Pokemon is obviously one of them). We will cover some of these components in this tutorial to help you implement your own iOS app. 
 
-This tutorial includes two sections. "Setting up Augmented Reality" & "Setting up our database and our map view".
+The idea that we can walk around with Pokemon amongst us and be able to catch them is a great concept. When attempting to catch the various Pokemon, it appears as if they're right in front of us as we move our mobile device around--which is awesome!
+
+We created an iOS app that isn't about Pokemon. It's about various treasures that are placed throughout NYC (right now, it's just 4 treasures in downtown Manhattan). When a user taps on one of these treasure icons, they are brought to a screen which displays the contents of that treasure. Similar to Pokemon GO--the contents of this treasure will display on screen with your camera activated. As you move the iPhone around, it will appear as if this treasure is right in front of you.
+
+You will be able to "catch" this treasure by tapping on it when it's in front of you.
 
 To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
 
@@ -20,6 +24,7 @@ Make sure to open the `FlatironGo.xcworkspace` file after downloading the Xcode 
 **iOS**: 9.3  
 **Xcode**: 7.3.1
 
+As well, you will find the "Setting up our database and our map view:" portion. If you have the desire to implement maps, database and storage yourself you can follow along with that portion of the tutorial to get something up and running in your own iOS app! The project which implements Firebase can be found [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject).
 
 ---
 
@@ -59,17 +64,6 @@ The various components of this demo app consist of using:
 
 
 
-
-
----
-
-
-# Tapping the Treasure Icon
-
-Check out the extension on `MapViewController` marked "Segue Method". Here we implement the functionality to handle the tap of a a treasure icon and the segue we perform based upon that.
-
-Through the `prepareForSegue(_:sender:)` method on `MapViewController`, we're handing over to our destination view controller the `treasure` object which was tapped. The destination view controller is the `ViewController`, so in the various methods we create within our `ViewController.swift` file, we have available to us a `Treasure` object, thanks to the `MapViewController`.
-
 ---
 
 # Augmented Reality
@@ -77,19 +71,21 @@ Through the `prepareForSegue(_:sender:)` method on `MapViewController`, we're ha
 
 ![OtherBear](https://i.imgur.com/jWZDeRy.pngF)
 
-We are now in our `ViewController.swift` file. How did we get here? When a treasure icon is tapped from the `MapViewController`, we segue over to this `ViewController`. In the `prepareForSegue(_:sender:)` method on the `MapViewController`, we're able to get a hold of the instance of the `ViewController` through the `segue`'s `destinationViewController` property. This segue connection was made in our `Main.storyboard` file. In that `prepareForSegue(_:sender:)` function on the `MapViewController`, we assigned a value to the following instance property on our `ViewController` (which is the `.destinationViewController`):
+Navigate to the `ViewController.swift` file. How do we ultimately wind up at our instance of `ViewController` which now is just a black screen. When a treasure icon is tapped from the `MapViewController`, we segue over to an instance of `ViewController`. In the `prepareForSegue(_:sender:)` method on the `MapViewController`, we're able to get a hold of the instance of the `ViewController` through the `segue`'s `destinationViewController` property. This segue connection was made in our `Main.storyboard` file. In that `prepareForSegue(_:sender:)` function on the `MapViewController`, we assigned a value to the following instance property on our `ViewController` (which is the `.destinationViewController`):
 
 ```swift
 var treasure: Treasure!
 ```
 
-That way, within our `viewDidLoad()` method on the `ViewController`, we have full access to a `treasure` object. The one that was tapped on the `MapViewController`. With this `treasure` object, we can go through with the necessary steps to displaying on screen.
+That way, within our `viewDidLoad()` method on the `ViewController`, we have full access to a `treasure` object. With this `treasure` object, we can go through with the necessary steps to displaying it on screen.
 
-Recap: Our `ViewController` has an instance property called `treasure` of type `Treasure!`. It's an implicitly unwrapped optional, that way it has a default value of `nil` when our `ViewController` is loaded into memory because we don't have access to the `UIViewController`'s `init` function and we can't add a stored property to a class on a `UIViewController` without assigning it a default value. By making it an implicitly unwrapped optional, it has a default value of `nil`. We assign it a value in the `prepareForSegue(_:sender:)` method on our instance of `MapViewController` through the `segue` parameter which is of type `UIStoryboardSegue`. The `segue` object knows where we're going (because we set this up within our `Main.storyboard` file. Through that `segue` object, we get a hold of the instance of our `ViewController`. At that moment, we assign a value to the `treasure` instance property. What value? Well, it has to be of type `Treasure`--it's the `Treasure` instance that was tapped on the map. That's the value we assign to this instance property.
+Recap: Our `ViewController` has an instance property called `treasure` of type `Treasure!`. It's an implicitly unwrapped optional, that way it has a default value of `nil` when our `ViewController` is loaded into memory because we don't have access to the `ViewController`'s initializer. Because of that, we can't add a stored property to a subclass of `UIViewController` without providing a default value to it when we define it. By making it an implicitly unwrapped optional, it has a default value of `nil` which solves our problem. We assign it an actual value in the `prepareForSegue(_:sender:)` method on our instance of `MapViewController` through the `segue` argument which is of type `UIStoryboardSegue`. The `segue` object knows where we're going (because we set this up within our `Main.storyboard` file). Through that `segue` object, we get a hold of the instance of our `ViewController`. At that moment, we assign a value to the `treasure` instance property. What value? Well, it has to be of type `Treasure`--it's the `Treasure` instance that was tapped on the map.
+
+We can now move forward. Just like a chef that needs eggs to make an omelette, we've now provided the chef (you) with some eggs (the treasure). 
 
 # Brief Overview
   
-* `viewDidLoad()` - Here the view is loaded into memory, we are just changing the `backgroundColor` property on our `view` instance.
+* `viewDidLoad()` - Here the view is loaded into memory, we are just changing the `backgroundColor` property on our `view` instance property.
 * `viewWillAppear(_:)` - The view is about to appear on screen so we're calling on a method called `setupMainComponents()` which will go through all the necessary steps to getting this AR component to work.
 * `setupMainComponents()` - This function calls on the following functions to get everything setup:
 	* `setupCaptureCameraDevice()` - Setting up the camera device to put the user in a mode as if they're going to take a picture.
@@ -119,7 +115,7 @@ Recap: Our `ViewController` has an instance property called `treasure` of type `
     }
 ```
 
-Without discussing exactly what these various instance properties do yet, I would ask that you include them above the `viewDidLoad()` for now as they will be used throughout these various methods. Some of them are already provided for you in the `ViewController.swift` file.
+Without discussing exactly what these various instance properties do yet, I would ask that you include them above the `viewDidLoad()` method for now as they will be used throughout these various methods. Some of them are already provided for you in the `ViewController.swift` file.
 
 ```swift
     let captureSession = AVCaptureSession()
@@ -166,7 +162,7 @@ extension ViewController {
   
 **2** - Within this extension, create a function named `setupCaptureCameraDevice()`. This method will take in no arguments and return no values. In our implementation we want to do the following:  
 
-Create a constant called `cameraDevice` and assign it the value `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant, will return back to us the built in camera that is primarily used for capture and recording. We are storing this value in our `cameraDevice` constant.   
+Create a constant called `cameraDevice` and assign it the return value of the following function call - `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant, will return back to us the built in camera that is primarily used for capture and recording. We are storing this value in our `cameraDevice` constant.   
 
 
 Create a constant called `cameraDeviceInput` and assign it the value `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` takes in an argument of type `AVCaptureDevice` which is the same type of `cameraDevice`, the constant we just made. This initializer will create an instance of `AVCaptureDeviceInput` which can be used to capture data from an `AVCaptureDevice` (which is our constant `cameraDevice)` in an `AVCaptureSession` (which is our `captureSession` instance property which we haven't talked about yet). 
