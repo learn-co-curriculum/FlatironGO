@@ -15,6 +15,8 @@ In this project file, we've already set up the Map and Treasures for you. If you
 
 This is where you come in.
 
+![](https://media.giphy.com/media/l0HlPsJnWAOUGc74I/giphy.gif)
+
 Going through the "Setting up Augmented Reality" section below, you can code-along and build out this functionality to create the AR portion of our iOS app. It was fun building this as I imagine it will be fun for you to code-along. I wish you luck on your journey and hope that you're able to execute on the app idea you have in mind that involves these various concepts!
 
 Download the Xcode project to be used throughout this tutorial [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
@@ -473,6 +475,8 @@ If the tap falls within range, we call on our various helper functions here to p
 ![](https://media.giphy.com/media/f31DK1KpGsyMU/giphy.gif)
 
 ![](https://media.giphy.com/media/3o6gEbd93QQIt61us8/giphy.gif)
+
+![](https://media.giphy.com/media/yhfTY8JL1wIAE/giphy.gif)
 
 ---
 
