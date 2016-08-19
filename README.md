@@ -474,6 +474,8 @@ If the tap falls within range, we call on our various helper functions here to p
 
 ![](https://media.giphy.com/media/3o6gEbd93QQIt61us8/giphy.gif)
 
+![](https://media.giphy.com/media/yhfTY8JL1wIAE/giphy.gif)
+
 ---
 
 # Steps Moving Forward. Building Out Maps & Firebase yourself.
