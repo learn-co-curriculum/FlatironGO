@@ -162,13 +162,12 @@ extension ViewController {
   
 **2** - Within this extension, create a function named `setupCaptureCameraDevice()`. This method will take in no arguments and return no values. In our implementation we want to do the following:  
 
-Create a constant called `cameraDevice` and assign it the return value of the following function call - `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant, will return back to us the built in camera that is primarily used for capture and recording. We are storing this value in our `cameraDevice` constant.   
+Create a constant called `cameraDevice` and assign it the return value of the following function call - `AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)`. This `defaultDeviceWithMediaType(_:)` type method on the `AVCaptureDevice` type, when passing in the `AVMediaTypeVideo` `String` constant to it, will return back to us the built in camera on our iPhone. This is great--we can now work with this camera (but do so in a way that simulates Pokemon GO, the user isn't going to be using this camera in the traditional sense). 
 
 
-Create a constant called `cameraDeviceInput` and assign it the value `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` takes in an argument of type `AVCaptureDevice` which is the same type of `cameraDevice`, the constant we just made. This initializer will create an instance of `AVCaptureDeviceInput` which can be used to capture data from an `AVCaptureDevice` (which is our constant `cameraDevice)` in an `AVCaptureSession` (which is our `captureSession` instance property which we haven't talked about yet). 
+Create a constant called `cameraDeviceInput` and assign it the return value of the call to `try? AVCaptureDeviceInput(device: cameraDevice)`. The initializer we're calling on `AVCaptureDeviceInput` can fail, which is why we use the `try?` keyword here. We're not handling any error this might throw (something we should look to do if we want to release this app). This `init` function takes in an argument of type `AVCaptureDevice` which matches up with the type of our `cameraDevice` constant we just created. This initializer will create an instance of `AVCaptureDeviceInput` which will be used to capture data from an `AVCaptureDevice` instance (which is what our `cameraDevice` constant is). This particular function will open up our device for capture--which is awesome! We got hold of our camera, we've now made an attempt to open it and read its data.
 
-
-Because our `cameraDeviceInput` might be nil in that we've tried initializing this object calling on an `init` function which can fail, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession`. There's a method on our `captureSession` instance property which is of type `AVCaptureSession` which allows us to check that we can indeed add this `cameraDeviceInput`  as input. If `cameraDeviceInput` is not nil, we store its value in our local constant named `camera` , check to see that we can add it as input then carryon.
+Because our creation of the `cameraDeviceInput` constant might be nil, we need to check to see that `cameraDeviceInput` is not nil. We do that here by using the `guard` statement. Not only do we want to make sure the `cameraDeviceInput` is not nil, we want to make sure we can add it as input to our `captureSession` (quick note: `captureSession` is of type `AVCaptureSession` and we've assigned this instance property a default value above our `viewDidLoad()` function--this object handles the various inputs and outputs from the camera). There's a method on our `captureSession` instance property which allows us to check that we can indeed add this `cameraDeviceInput` as input. If all is OK, `camera` is a constant which is assigned the value of `cameraDeviceInput` if it's not `nil`.
 
 
 Next we want to call on the `addInput(_:)` method available to instances of `AVCaptureSession`. So we call on the `addInput(_:)` method on our `captureSession` instance property passing in the `camera` instance.
@@ -189,7 +188,7 @@ extension ViewController {
         let cameraDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         let cameraDeviceInput = try? AVCaptureDeviceInput(device: cameraDevice)
         guard let camera = cameraDeviceInput where captureSession.canAddInput(camera) else { return }
-        captureSession.addInput(camera)
+        captureSession.addInput(cameraDeviceInput)
         captureSession.startRunning()
     }
     
@@ -197,22 +196,22 @@ extension ViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.bounds
         
-        if treasure.image != nil {
-            let height = treasure.image!.size.height
-            let width = treasure.image!.size.height
-            treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
-            treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
-            previewLayer.addSublayer(treasure.item)
-            view.layer.addSublayer(previewLayer)
-        }
+        let height = treasure.image!.size.height
+        let width = treasure.image!.size.height
+        treasure.item.bounds = CGRectMake(100.0, 100.0, width, height)
+        treasure.item.position = CGPointMake(view.bounds.size.height / 2, view.bounds.size.width / 2)
+        previewLayer.addSublayer(treasure.item)
+        view.layer.addSublayer(previewLayer)
     }
     
 }
 ```
 
-We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice` method.
+We're not creating a new extension here. We're adding to the one we had created in the previous step. We're creating a new method we're adding below the `setupCaptureCameraDevice()` method.
 
-**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values. In our implementation we want to do the following:
+**1** - Create a function named `setupPreviewLayer()` which takes in no arguments and returns no values.
+
+Before we dive into any code, lets quickly talk about this `previewLayer` instance property were about to use.
 
 Above our `viewDidLoad()`, we have an instance property
 
@@ -220,21 +219,21 @@ Above our `viewDidLoad()`, we have an instance property
 var previewLayer: AVCaptureVideoPreviewLayer!
 ```
 
-The `AVCaptureVideoPreviewLayer` is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer`. We need to create an instance of this class with an instance of a capture session to be previewed on screen (which we have setup!). So we initialize our `previewLayer` instance property passing in the `captureSession` object to the the `AVCaptureVideoPreviewLayer` initializer.
+The `AVCaptureVideoPreviewLayer` class  is a sublcass of `CALayer`. It means we gain all the functionality available to us with a `CALayer` object. This layer instance can be initialized with a Capture Session. This means that when we hand over to it a capture session, this layer is previewing (or showing to our user) the camera input as that is what the captures session is in charge of.
 
-Next you need to setup the frame of this `previewLayer` to equal the `bounds` of our `view`. This `previewLayer` will now fill the screen. We haven't though added it to the `view` yet where it would be visible.
+Considering our `previewLayer` right now has the default value of `nil`--because it's an implicitly unwrapped optional, we want to assign it an actual value now.
 
-Our `treasure` instance property has an `image` property on it which can be `nil`. If it's not `nil` in that we were able to create an instance of this `Treasure` object and grab down the image correctly from firebase then we will move forward. 
+In assigning it a value, we call on the `AVCaptureVidePreviewLayer` initializer which takes in a session as an argument. We have a `captureSession` all setup ready to be passed into this initializer--so that's what we do!
 
-Our `Treasure` object has an instance method which we are utilizing here:
+After doing so, we setup our `previewLayer` to fit the entire screen by having the frame equal the `view`'s bounds.
+
+Next, we begin to setup the positioning of an instance property on our `treasure` object called `item`. What is this?
 
 ```swift
 var item = CALayer()
 ```
 
-Firebase gives us back `NSData` which represents our image. We then create a `UIImage` using this `NSData` provided to us by Firebase. With that `UIImage` instance now stored on our `Treasure` object, we need to convert that to a `CALayer` object. Why? Because we need to add this particular image to the `previewLayer` which is what is displayed on screen. It's the camera preview where you can move the iPhone around and take photos / videos (except we're not going provide any functionality that will allow anyone to take a photo or video). And we can't add a `UIImage` which is a `UIView` to a `CALayer`. We can add a `CALayer` to a `CALayer`. So the `item` property on any `Treasure` instance is of type `CALayer`.
-
-That conversion is happening in this function within `Treasure`'s implementation (if you want to take a look):
+Hey look! Another `CALayer` object. Our images (stored locally) are of type `UIImage`. But we can't add a `UIImage` to a `CALayer`--which is our ultimate goal here. How do we then turn a `UIImage` into a `CALayer` object which will allow us to add our lovely images to the `previewLayer`? If you were to do some digging into the `Treasure.swift` file to check out its implementation you will notice the following method:
 
 ```swift
     func createItem() {
@@ -243,7 +242,18 @@ That conversion is happening in this function within `Treasure`'s implementation
     }
 ```
 
+This is called (not by you) in our `MapViewController.swift` file when we setup our dummy data to be used within this demo. But the line of code most interesting is:
+
+```swift
+item.contents = image.CGImage
+```
+
+Taking the `CGImage` computed property on our `UIImage` instance (called `image` here), we're storing that return value to the `contents` instance property available on our `item` property. This allows us to display our image within a `CALayer` now using this `item` instance property!
+
+
 This is why we're adding `treasure.item` to the `previewLayer` in the function `addSublayer(_:)`. After we do that, we need to now add the `previewLayer` object to our `view`'s `layer` property in the `addSublayer(_:)` method.
+
+We are almost there!!
 
 
 # setupMotionManager
@@ -271,9 +281,9 @@ extension ViewController {
 }
 ```
 
-**1** - Create another extension on the `ViewController` making it with a comment like above.
+**1** - Create another extension on the `ViewController` marking it with a comment like above.
 
-**2** - Within that extension, lets create method called `setupMotionManager` which takes in no arguments and returns no values.
+**2** - Within that extension, lets create a method called `setupMotionManager()` which takes in no arguments and returns no values.
 
 Looking above our `viewDidLoad()` function, you will see that I asked you to copy/paste in this piece of code:
 
@@ -281,13 +291,10 @@ Looking above our `viewDidLoad()` function, you will see that I asked you to cop
 let motionManager = CMMotionManager()
 ```
 
-This instance property called `motionManager` is assigned a value. The value being an instance of `CMMotionManager`. We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
+We're calling on the default initializer on `CMMotionManager` here which will assign a default value to the `motionManager` instance property.
 
-This `CMMotionManager` class will allow us to detect movements within our device. This is a very rich class:
-
-![](https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif)
-
-But we're not going to be utilizing all of it's functionality here.
+This `CMMotionManager` class will allow us to detect movements within our device.
+But we're not going to be utilizing all of it's functionality here, there's a lot to work with. I suggest digging into the documentation to see what you have available to you, it's pretty cool stuff.
 
 Within our `setupMotionManager()` method, before we start setting any properties on our `motionManager` object, we want to make sure that we're able to do so with the following line of code:
 
@@ -315,7 +322,22 @@ If the device motion and accelerometer is available, we will then enter this if 
 ```
 I've setup an interval here which  will determine how often the following block of code will be run. Imagine you're a kid in the back seat of a car and your Mom is doing her best driving you to Florida for vacation and you continue to nag her over and over and over again. This determines how often and at what interval we will nag Mom for (forever!) until we tell it to stop.  This interval is in seconds.
 
-What's going on in the `startDeviceMotionUpdatesToQueue(_:_:)` method. Well it takes in two arguments, one where we're providing the `NSOperationQueue.currentQueue()!` force un-wrapping it (might not be the best idea here, but for this demo we will force un-wrap it and move on). Next argument is a function of type `(CMDeviceMotion?, NSError?) -> Void` which means we have to provide the implementation of a function which takes in two arguments, one of type `CMDeviceMotion?`, the other of type `NSError?` which returns nothing. So we do that using closure expression syntax trailing after the first argument provided to the `startDeviceMotionUpdatesToQueue` method. So in our implementation (which will get called as often (over and over and over again)) as we dictated with the setting of the `deviceMotionUpdateInterval` property on the `motionManager` we will have access to a `CMDeviceMotion` object. That object contains a LOT of information we could utilize.
+`startDeviceMotionUpdatesToQueue(_:withHandler:)` method is then called on our `motionManager` object. It takes in two arguments.
+
+First argument is of type `NSOperationQueue`. So we provide it with an instance of `NSOperationQueue`--the currentQueue which is a type method available on the `NSOperationQueue` class which will return back to us the current queue. As this type method returns back to us an optional `NSOperationQueue`, we're force-unwrapping it because the method we're passing this along to requires that we give it an `NSOperationQueue` not a `NSOperationQueue?`. Force-unwrapping isn't the best approach here, we should handle this properly if this winds up returning `nil`. By not handling the `nil` case--we could have a run-time error where our app crashes if indeed it returns `nil`.
+
+Second argument to this function is of type `(CMDeviceMotion?, NSError?) -> Void`. What is that? Well, it means we have to provide it with a function (without a name) that takes in two arguments itself, the first argument being of type `CMDeviceMotion?`, the second argument being of type `NSError?`--this function will return nothing. OK, how do we pass a function to another function? We can do this using closure expression syntax. Our `motion` constant here is of type `CMDeviceMotion?`. This particular object brings with it an _incredible_ amount of functionality, we will only be using one piece of what this object brings to the table.
+
+![](https://s3.amazonaws.com/learn-verified/FISGoSS.png)
+
+So here we are providing the implementation of a function, passing it along to another function which will use it whenever it likes. But when does our implementation here get called? How often does it get called?
+
+Take a look at the code I highlighted below. The highlighted code is our implementation. This gets called by the `startDeviceMotionUpdatesToQueue(_:withHandler:)` method. We're handing it over to this method and it will do with it as it pleases (and it does). It will call on this function a lot.. but how often? How often it calls on this function is dictated by the `deviceMotionUpdateInterval` property we set in the line of code above this which we set to 2.0 / 60.0. 30 times a second it will call on this block of code passing it a new `motion` object every single time.
+
+![](https://s3.amazonaws.com/learn-verified/FISGoCodeBlock.png)
+
+So if this block of code gets called that often, and each time we're given this `motion` object--what can we do with it? Well.. we will want to read the `attitude.quaternion.x` and `attitude.quaternion.y` properties on it and update our own instance property on our `ViewController` to follow along with what's going on here.
+
 
 First we check to see if error is not nil, meaning.. there is an error and something went wrong! so lets not move forward. We should handle errors better than that here, but lets carry on.
 
@@ -335,7 +357,7 @@ The properties available on `CMQuaternion` object are the following:
 
 We're most concerned with the `x` and `y` values only (for this demo) which will help us determine how the person is moving their iPhone around.
 
-The type of `x` and `y` here of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
+The type of `x` and `y` here are of type `Double` which matches our `quaternionX` & `quaternionY` instance properties on the `ViewController`, so lets assign these values to those properties like so:
 
 ```swift
 self.quaternionX = motion.attitude.quaternion.x
@@ -377,7 +399,7 @@ We are moving the `treasure ` object around the screen dependent on the new valu
 
 We move the iPhone around and we have a slight bounce / movement to the treasure object to make it appear somewhat real-life like.
 
-`foundTreasure` is an instance property of type `Bool` which we set to `true` when someone taps on the treasure object (something we do later on). The reason we're checking to see that it's not `true` is here because after they tap the `treasure` object on screen, I want to set `foundTreasure` to `true` so that way we don't move the treasure object on screen anymore. This is more of a safety check considering that we stop the `motionManager` from doing its thing when a treasure object is tapped so these property observers would stop being called anyway as soon as an object is tapped.
+`foundTreasure` is an instance property of type `Bool` on our `ViewController`. This instance property is only set to `true` when someone actually taps on the image displayed on screen (something we do in the `setupGestureRecognizer()` method below). When someone does "catch" this image on screen by tapping it, I want to center the image and stop it from moving around, so I don't want it to update it's values based upon the new `quaternionX` and `quaternionY` values. You might ask.. well why don't you just stop the `motionManager` from doing its thing, then it won't update these values. Well.. you're right! I am doing that though (which you will implement below), this was just a way of really making sure the image stops moving as soon as its tapped.
 
 That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
 
