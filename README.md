@@ -31,7 +31,7 @@ As well, you will find the "Setting up our database and our map view:" portion. 
 
 # Intro 
 
-[![Everything Is AWESOME](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Inro")
+[![](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Inro")
 
 ---
 
@@ -409,6 +409,8 @@ We move the iPhone around and we have a slight bounce / movement to the treasure
 `foundTreasure` is an instance property of type `Bool` on our `ViewController`. This instance property is only set to `true` when someone actually taps on the image displayed on screen (something we do in the `setupGestureRecognizer()` method below). When someone does "catch" this image on screen by tapping it, I want to center the image and stop it from moving around, so I don't want it to update it's values based upon the new `quaternionX` and `quaternionY` values. You might ask.. well why don't you just stop the `motionManager` from doing its thing, then it won't update these values. Well.. you're right! I am doing that though (which you will implement below), this was just a way of really making sure the image stops moving as soon as its tapped.
 
 That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
+
+[![](http://img.youtube.com/vi/LWEKbr1Lisw/0.jpg)](https://www.youtube.com/watch?v=LWEKbr1Lisw "Middle")
 
 # setupGestureRecognizer
 
