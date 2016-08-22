@@ -29,6 +29,10 @@ Make sure to open the `FlatironGo.xcworkspace` file after downloading the Xcode 
 
 As well, you will find the "Setting up our database and our map view:" portion. If you have the desire to implement maps, database and storage yourself you can follow along with that portion of the tutorial to get something up and running in your own iOS app! The project which implements Firebase can be found [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject).
 
+# Intro 
+
+[![Everything Is AWESOME](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Inro")
+
 ---
 
 The various components of this demo app consist of using:
