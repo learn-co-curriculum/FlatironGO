@@ -502,7 +502,7 @@ Puttinng this entire tutorial together has been so much fun. The idea for this p
 
 Enjoy this bloopers video--mistakes were made.
 
-[![](http://img.youtube.com/vi/2mhObSKoeE/0.jpg)](https://www.youtube.com/watch?v=2mhObSKoeE "Middle")
+[Blooper Video](https://youtu.be/-2mhObSKoeE)
 
 ---
 
