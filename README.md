@@ -55,7 +55,7 @@ The various components of this demo app consist of using:
 * [Preview Layer](#setuppreviewlayer)
 * [Motion Manager](#setupmotionmanager)
 * [Gesture Recognizer](#setupgesturerecognizer)
-* [Bloopers](#bloopers)
+* [Bloopers](#outtakes)
 
 ### Setting up our database and our map view:
 
@@ -496,13 +496,13 @@ If the tap falls within range, we call on our various helper functions here to p
 
 ---
 
-# Bloopers
+# Outtakes
 
 Puttinng this entire tutorial together has been so much fun. The idea for this particaulr app came from Avi Flombaum who has been such a great inspiration. The iOS team here at Flatiron School has grouped together to make this app happen--you're all awesome.
 
-Enjoy this bloopers video--mistakes were made.
+Enjoy this outtakes video--mistakes were made.
 
-[Blooper Video](https://youtu.be/-2mhObSKoeE)
+[Outtake Video](https://youtu.be/-2mhObSKoeE)
 
 ---
 
