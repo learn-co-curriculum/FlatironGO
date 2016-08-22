@@ -1,5 +1,12 @@
 # Flatiron Go - iOS Application
 
+
+
+[![](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Intro")
+
+
+
+
 ![](https://media.giphy.com/media/3o7TKyqT3OioraCvLi/giphy.gif)
 
 Pokemon GO is the biggest US mobile game ever--that's quite an accomplishment. There are various components within the game which help drive its appeal (including Pokemon is obviously one of them). We will cover some of these components in this tutorial to help you implement your own iOS app. 
@@ -29,9 +36,7 @@ Make sure to open the `FlatironGo.xcworkspace` file after downloading the Xcode 
 
 As well, you will find the "Setting up our database and our map view:" portion. If you have the desire to implement maps, database and storage yourself you can follow along with that portion of the tutorial to get something up and running in your own iOS app! The project which implements Firebase can be found [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject).
 
-# Intro 
 
-[![](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Inro")
 
 ---
 
