@@ -2,6 +2,21 @@
 
 ![](https://media.giphy.com/media/3o7TKyqT3OioraCvLi/giphy.gif)
 
+# Intro Video
+
+[![](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Intro")
+
+
+**Download the Xcode Project [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip)**  
+
+Instructions begin [here](#augmented-reality)
+
+[Outtakes](#outtakes) :D
+
+Fully working project [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject)
+
+## Summary
+
 Pokemon GO is the biggest US mobile game ever--that's quite an accomplishment. There are various components within the game which help drive its appeal (including Pokemon is obviously one of them). We will cover some of these components in this tutorial to help you implement your own iOS app. 
 
 The idea that we can walk around with Pokemon amongst us and be able to catch them is a great concept. When attempting to catch the various Pokemon, it appears as if they're right in front of us as we move our mobile device around--which is awesome!
@@ -29,6 +44,8 @@ Make sure to open the `FlatironGo.xcworkspace` file after downloading the Xcode 
 
 As well, you will find the "Setting up our database and our map view:" portion. If you have the desire to implement maps, database and storage yourself you can follow along with that portion of the tutorial to get something up and running in your own iOS app! The project which implements Firebase can be found [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject).
 
+
+
 ---
 
 The various components of this demo app consist of using:
@@ -40,12 +57,13 @@ The various components of this demo app consist of using:
 
 ### Setting up Augmented Reality:
 
-* [Augmented Reality](#augmented-reality)
+* [Augmented Reality](#augmented-reality) <-- where you should begin
 * [Brief Overview](#brief-overview)
 * [Camera Device](#setupcapturecameradevice)
 * [Preview Layer](#setuppreviewlayer)
 * [Motion Manager](#setupmotionmanager)
 * [Gesture Recognizer](#setupgesturerecognizer)
+* [Bloopers](#outtakes)
 
 ### Setting up our database and our map view:
 
@@ -406,6 +424,8 @@ We move the iPhone around and we have a slight bounce / movement to the treasure
 
 That should be everything to get this image displayed on screen where when you move your iPhone around it should move with you!
 
+[![](http://img.youtube.com/vi/LWEKbr1Lisw/0.jpg)](https://www.youtube.com/watch?v=LWEKbr1Lisw "Middle")
+
 # setupGestureRecognizer
 
 Here is what we will be creating here:
@@ -478,6 +498,19 @@ If the tap falls within range, we call on our various helper functions here to p
 ![](https://media.giphy.com/media/3o6gEbd93QQIt61us8/giphy.gif)
 
 ![](https://media.giphy.com/media/yhfTY8JL1wIAE/giphy.gif)
+
+
+[![](http://img.youtube.com/vi/deogww1OOR8/0.jpg)](https://www.youtube.com/watch?v=deogww1OOR8 "End")
+
+---
+
+# Outtakes
+
+Puttinng this entire tutorial together has been so much fun. The idea for this particaulr app came from Avi Flombaum who has been such a great inspiration. The iOS team here at Flatiron School has grouped together to make this app happen--you're all awesome.
+
+Enjoy this outtakes video--mistakes were made.
+
+[Outtake Video](https://youtu.be/-2mhObSKoeE)
 
 ---
 
