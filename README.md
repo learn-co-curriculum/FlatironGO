@@ -1,13 +1,19 @@
 # Flatiron Go - iOS Application
 
-
+![](https://media.giphy.com/media/3o7TKyqT3OioraCvLi/giphy.gif)
 
 [![](http://img.youtube.com/vi/ggv31MfTPBo/0.jpg)](https://www.youtube.com/watch?v=ggv31MfTPBo "Intro")
 
 
+**Download the Xcode Project [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip)**  
 
+Instructions begin [here](#augmented-reality)
 
-![](https://media.giphy.com/media/3o7TKyqT3OioraCvLi/giphy.gif)
+[Outtakes](#outtakes) :D
+
+Fully working project [here](https://github.com/learn-co-curriculum/FlatironGO/tree/WorkingProject)
+
+## Summary
 
 Pokemon GO is the biggest US mobile game ever--that's quite an accomplishment. There are various components within the game which help drive its appeal (including Pokemon is obviously one of them). We will cover some of these components in this tutorial to help you implement your own iOS app. 
 
@@ -49,7 +55,7 @@ The various components of this demo app consist of using:
 
 ### Setting up Augmented Reality:
 
-* [Augmented Reality](#augmented-reality)
+* [Augmented Reality](#augmented-reality) <-- where you should begin
 * [Brief Overview](#brief-overview)
 * [Camera Device](#setupcapturecameradevice)
 * [Preview Layer](#setuppreviewlayer)
