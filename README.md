@@ -17,7 +17,7 @@ We created an iOS app that isn't about Pokemon. It's about various treasures tha
 
 You will be able to "catch" this treasure by tapping on it when it's in front of you.
 
-To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
+**To provide you with a bit of a challenge/code-along, you can download the necessary Xcode project** [here](https://s3.amazonaws.com/learn-verified/FIS-Go-Project.zip).
 
 In this project file, we've already set up the Map and Treasures for you. If you were to run the app on your iPhone, you will find that the map comes up, it displays some treasures and you're even able to tap these treasure icons. But when doing so, you'll notice that we're brought to a black screen.
 
