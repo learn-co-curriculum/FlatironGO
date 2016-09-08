@@ -142,11 +142,14 @@ Without discussing exactly what these various instance properties do yet, I woul
     let captureSession = AVCaptureSession()
     let motionManager = CMMotionManager()
     var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    // The following four are already created for you!
     var treasure: Treasure!
     var foundImageView: UIImageView!
     var dismissButton: UIButton!
     var foundTreasure = false
 
+   // The following two are not--make sure to copy/paste them into Xcode
     var quaternionX: Double = 0.0 {
         didSet {
             if !foundTreasure { treasure.item.center.y = (CGFloat(quaternionX) * view.bounds.size.width - 180) * 4.0 }
